@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import QuemSomosHero from '../components/quem-somos/QuemSomosHero.astro';
+import QuemSomosMissionVision from '../components/quem-somos/QuemSomosMissionVision.astro';
+import WhyChooseSixTech from '../components/WhyChooseSixTech.astro';
+import QuemSomosCta from '../components/quem-somos/QuemSomosCta.astro';
+import QuemSomosWhatsappFab from '../components/quem-somos/QuemSomosWhatsappFab.astro';
+import '../styles/quem-somos.css';
+---
+
+<Layout
+	title="sixtech — Quem somos"
+	description="Somos a Six Tech — desenvolvimento de sistemas. Parceiros estratégicos em TI desde 1996, em Curitiba."
+>
+	<div class="page-hero page-quem-somos">
+		<Header active="quem-somos" />
+		<QuemSomosHero />
+	</div>
+	<main class="page-quem-somos-main">
+		<div class="qs-stack">
+			<QuemSomosMissionVision />
+			<WhyChooseSixTech sectionId="por-que-sixtech" />
+			<QuemSomosCta />
+		</div>
+	</main>
+	<Footer />
+	<QuemSomosWhatsappFab />
+</Layout>

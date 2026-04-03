@@ -1,0 +1,17 @@
+/* Página Quem somos — layout e tokens de seção (frame Figma 152:504) */
+
+.page-quem-somos-main {
+	background: var(--color-figma-secondary);
+}
+
+/* Gutter global: ver --page-gutter em global.css (.container) */
+.page-quem-somos .site-header {
+	padding: 2rem 0;
+}
+
+.qs-stack {
+	display: flex;
+	flex-direction: column;
+	gap: clamp(4rem, 8vw, 8.75rem); /* 140px */
+	padding-block: clamp(3rem, 6vw, 5.25rem) clamp(4rem, 8vw, 6rem);
+}

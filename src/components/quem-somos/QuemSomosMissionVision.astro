@@ -1,0 +1,103 @@
+---
+import HeadingAccentBar from "../HeadingAccentBar.astro";
+---
+
+<section class="qs-mv" aria-labelledby="qs-mission-heading">
+	<div class="qs-mv__grid container">
+		<div class="qs-mv__figure">
+			<img
+				class="qs-mv__img"
+				src="/images/quem-somos/missao-visao.jpg"
+				width="544"
+				height="289"
+				alt=""
+				loading="lazy"
+				decoding="async"
+			/>
+		</div>
+		<div class="qs-mv__copy">
+			<div class="qs-mv__block">
+				<h2 id="qs-mission-heading" class="qs-mv__title heading-with-accent">
+					Nossa missão<HeadingAccentBar />
+				</h2>
+				<p class="qs-mv__text">
+					Ser o aliado confiável que sugere e implementa tecnologias para impulsionar seu negócio, com foco em
+					inovação e eficiência.
+				</p>
+			</div>
+			<div class="qs-mv__block qs-mv__block--vision">
+				<h2 class="qs-mv__title heading-with-accent">
+					Nossa visão<HeadingAccentBar />
+				</h2>
+				<p class="qs-mv__text">
+					Liderar em parcerias TI, oferecendo sistemas que transformam desafios em oportunidades de crescimento.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.qs-mv__grid {
+		display: grid;
+		align-items: stretch;
+		gap: clamp(2rem, 8vw, 7.875rem); /* 126px */
+	}
+
+	@media (min-width: 960px) {
+		.qs-mv__grid {
+			grid-template-columns: minmax(0, 34rem) minmax(0, 27.9375rem); /* 544px + 447px */
+			align-items: stretch;
+		}
+	}
+
+	.qs-mv__figure {
+		position: relative;
+		width: 100%;
+		max-width: 34rem;
+		align-self: start;
+	}
+
+	.qs-mv__img {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 544 / 289;
+		border-radius: 1.5rem; /* 24px */
+		object-fit: cover;
+	}
+
+	.qs-mv__copy {
+		display: flex;
+		min-width: 0;
+		flex-direction: column;
+		justify-content: center;
+		gap: 3.75rem; /* 60px — Figma */
+	}
+
+	.qs-mv__block {
+		display: flex;
+		flex-direction: column;
+		gap: 1.1875rem; /* ~19px */
+	}
+
+	.qs-mv__block--vision {
+		gap: 1.6875rem; /* 27px */
+	}
+
+	.qs-mv__title {
+		margin: 0;
+		font-size: 2.25rem; /* 36px */
+		font-weight: 700;
+		line-height: 1.2;
+		color: var(--text-main);
+	}
+
+	.qs-mv__text {
+		margin: 0;
+		font-size: 1rem; /* 16px */
+		font-weight: 400;
+		line-height: normal;
+		color: var(--color-figma-gray);
+	}
+</style>

@@ -8,13 +8,46 @@
 	--text-muted: #a0aec0;
 	--accent-cyan: #33e8ff;
 	--accent-blue: #007bff;
-	/* Barra ao lado de títulos (h2) */
-	--heading-accent-bar-bg: #3BEDFF;
 
-	/* Layout */
+	/* Figma — variáveis do arquivo (frame Quem somos) */
+	--color-figma-secondary: #0e1213;
+	--color-figma-primary: #1e3a8a;
+	--color-figma-accent: #3b82f6;
+	--color-figma-gray: #d1d5db;
+	--color-figma-surface: #161c1d;
+	--color-figma-card: #1a2223;
+	/* Traço neon ao lado da última palavra — Figma: 15×4px, #3BEDFF */
+	--heading-accent-bar-bg: #3bedff;
+	--heading-accent-bar-width: 15px;
+	--heading-accent-bar-height: 4px;
+	--heading-accent-bar-offset-y: -0.5rem; /* 8px — sobe o traço em relação ao alinhamento base */
+	--heading-accent-gap: 0.3rem; /* 8px entre fim do texto e a barra (mais junto da palavra) */
+
+	/* Layout — Figma Home: ~80px laterais em 1280px → miolo 1120px */
 	--header-h: 5rem;
 	--container-max: 1280px;
-	--gutter: 1.5rem;
+	--gutter: 1.5rem; /* legado; preferir --page-gutter */
+	--page-gutter: clamp(1.5rem, 6.25vw, 5rem);
+
+	/**
+	 * Breakpoint único — Home mobile (Figma) vs desktop.
+	 * Uso: @media (max-width: 767px) { … } ou (min-width: 768px) { … }
+	 */
+	--bp-desktop: 768px;
+
+	/* Hero — Figma Home - Mobile */
+	--hero-mobile-line-light: 1.75rem; /* 28px */
+	--hero-mobile-line-accent: 2rem; /* 32px */
+	--hero-mobile-line-body: 1.5rem; /* 24px */
+	--hero-mobile-cta-size: 0.75rem; /* 12px */
+	/**
+	 * Altura da barra do header no mobile (padding vertical + linha logo/menu).
+	 * Manter alinhado a Header.astro: .site-header @media (max-width: 767px) padding 0.9375rem 0; botão 2.75rem.
+	 */
+	--header-h-mobile: calc(0.9375rem + 2.75rem + 0.9375rem);
+
+	/* Seções — espaçamento vertical no mobile */
+	--section-padding-y-mobile: 3.5rem;
 
 	/* Font sizes */
 	--fs-xs: 0.8125rem;   /* 13px */
@@ -50,7 +83,11 @@
 	top: 0;
 	right: 0;
 	left: 0;
-	z-index: 100;
+	width: 100%;
+	background: transparent;
+	box-shadow: none;
+	/* Acima do hero; drawer/backdrop usam z-index maior no componente */
+	z-index: 200;
 }
 
 /* Reusable container — limits content width and centers it */
@@ -58,7 +95,7 @@
 	width: 100%;
 	max-width: var(--container-max);
 	margin-inline: auto;
-	padding-inline: var(--gutter);
+	padding-inline: var(--page-gutter);
 }
 
 *,
@@ -82,6 +119,10 @@ body {
 	overflow-x: hidden;
 }
 
+body.nav-open {
+	overflow: hidden;
+}
+
 .font-roboto {
 	font-family: var(--font-roboto);
 }
@@ -98,22 +139,34 @@ body {
 	border: 0;
 }
 
-/* Barra decorativa ao lado de títulos (mesmo padrão em toda a página) */
+/*
+ * Título + traço neon: no mesmo fluxo da linha, logo após a última palavra,
+ * alinhado à base do texto (ex.: "O que fazemos ▭").
+ */
+.heading-with-accent {
+	display: block;
+	max-width: 100%;
+}
+
+.heading-with-accent--center {
+	text-align: center;
+}
+
 span.heading-accent-bar {
 	display: inline-block;
-	flex-shrink: 0;
-	width: 15px;
-	height: 4px;
-	min-width: 15px;
-	min-height: 4px;
-	/* Garante a cor sobre preflight/camadas do Tailwind */
+	width: var(--heading-accent-bar-width);
+	height: var(--heading-accent-bar-height);
+	margin-inline-start: var(--heading-accent-gap);
+	vertical-align: text-bottom;
+	transform: translateY(var(--heading-accent-bar-offset-y));
 	background: var(--heading-accent-bar-bg) !important;
 }
 
-/* 1rem após o fim do texto quando a barra vem inline no mesmo título */
+/* Legado */
 .heading-accent-bar--inline {
-	margin-left: 1rem;
-	vertical-align: baseline;
+	margin-inline-start: var(--heading-accent-gap);
+	vertical-align: text-bottom;
+	transform: translateY(var(--heading-accent-bar-offset-y));
 }
 
 /* global UI elements - Button */

@@ -5,6 +5,7 @@
  * para o ciclo coincidir com o layout mesmo com imagens de larguras variadas.
  */
 import ClientStripRow from "./ClientStripRow.astro";
+import ClientStripLogo from "./ClientStripLogo.astro";
 import { clients } from "./clientStrip";
 
 const partnersList = clients.map((c) => c.alt).join(", ");
@@ -12,10 +13,17 @@ const partnersList = clients.map((c) => c.alt).join(", ");
 
 <section class="client-strip" aria-label="Empresas parceiras">
 	<p class="visually-hidden">Empresas parceiras: {partnersList}.</p>
-	<div class="client-strip__viewport" aria-hidden="true">
+	<div class="client-strip__viewport client-strip__viewport--desktop" aria-hidden="true">
 		<div class="client-strip__track" data-client-strip-track>
 			<ClientStripRow clients={clients} />
 		</div>
+	</div>
+	<div class="client-strip__grid">
+		{clients.map((c) => (
+			<div class="client-strip__grid-cell">
+				<ClientStripLogo client={c} />
+			</div>
+		))}
 	</div>
 </section>
 
@@ -57,14 +65,19 @@ const partnersList = clients.map((c) => c.alt).join(", ");
 		const track = document.querySelector<HTMLElement>("[data-client-strip-track]");
 		if (!track) return;
 
-		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-		if (mq.matches) return;
+		const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const mqDesktop = window.matchMedia("(min-width: 768px)");
 
 		const inner = track.querySelector(".client-strip__track-inner");
 		const imgs = inner?.querySelectorAll<HTMLImageElement>("img");
 		if (!imgs?.length) return;
 
 		const run = () => {
+			track.classList.remove("client-strip__track--ready");
+			track.style.removeProperty("--marquee-distance");
+
+			if (!mqDesktop.matches || mqReduce.matches) return;
+
 			void waitImages(Array.from(imgs)).then(() => {
 				requestAnimationFrame(() => {
 					measureMarquee(track);
@@ -75,9 +88,12 @@ const partnersList = clients.map((c) => c.alt).join(", ");
 		run();
 
 		const ro = new ResizeObserver(() => {
-			measureMarquee(track);
+			run();
 		});
 		if (inner) ro.observe(inner);
+
+		mqDesktop.addEventListener("change", run);
+		mqReduce.addEventListener("change", run);
 
 		window.addEventListener("load", run, { once: true });
 	}
@@ -98,13 +114,34 @@ const partnersList = clients.map((c) => c.alt).join(", ");
 	.client-strip {
 		width: 100%;
 		overflow: hidden;
-		background-color: #448aff;
+		background-color: var(--color-figma-accent);
 		padding-block: clamp(3rem, 8vw, 5.5rem);
 	}
 
-	.client-strip__viewport {
+	.client-strip__viewport--desktop {
 		position: relative;
 		width: 100%;
+	}
+
+	.client-strip__grid {
+		display: none;
+		width: 100%;
+		max-width: var(--container-max);
+		margin-inline: auto;
+		padding-inline: var(--page-gutter);
+		box-sizing: border-box;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 2rem 1.5rem;
+		align-items: center;
+		justify-items: center;
+	}
+
+	.client-strip__grid-cell {
+		display: flex;
+		width: 100%;
+		min-height: 3rem;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.client-strip__track {
@@ -118,5 +155,21 @@ const partnersList = clients.map((c) => c.alt).join(", ");
 
 	.client-strip__track--ready {
 		animation: client-strip-marquee 90s linear infinite;
+	}
+
+	@media (max-width: 767px) {
+		.client-strip__viewport--desktop {
+			display: none;
+		}
+
+		.client-strip__grid {
+			display: grid;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.client-strip__grid {
+			display: none !important;
+		}
 	}
 </style>

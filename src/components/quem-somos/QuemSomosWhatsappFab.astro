@@ -1,0 +1,50 @@
+---
+const waHref = "https://wa.me/5541999739575";
+---
+
+<a
+	class="qs-wa"
+	href={waHref}
+	target="_blank"
+	rel="noopener noreferrer"
+	aria-label="Conversar no WhatsApp"
+>
+	<img
+		class="qs-wa__icon"
+		src="/icons/quem-somos/ri-whatsapp-fill.svg"
+		width="40"
+		height="40"
+		alt=""
+		aria-hidden="true"
+	/>
+</a>
+
+<style>
+	.qs-wa {
+		position: fixed;
+		z-index: 200;
+		right: clamp(1rem, 4vw, 3.5625rem);
+		bottom: clamp(1rem, 4vw, 2rem);
+		display: flex;
+		width: 2.5rem;
+		height: 2.5rem;
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+		align-items: center;
+		justify-content: center;
+		line-height: 0;
+	}
+
+	.qs-wa:focus-visible {
+		outline: 2px solid var(--accent-cyan);
+		outline-offset: 3px;
+		border-radius: 0.25rem;
+	}
+
+	.qs-wa__icon {
+		display: block;
+		width: 2.5rem;
+		height: 2.5rem;
+		object-fit: contain;
+	}
+</style>

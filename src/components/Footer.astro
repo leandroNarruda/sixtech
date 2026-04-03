@@ -1,10 +1,10 @@
 ---
 const links = [
-	{ href: "#", label: "Home" },
-	{ href: "#quem-somos", label: "Quem somos" },
-	{ href: "#servicos", label: "Serviços" },
-	{ href: "#portfolio", label: "Portfólio" },
-	{ href: "#contato", label: "Contato" },
+	{ href: "/", label: "Home" },
+	{ href: "/quem-somos", label: "Quem somos" },
+	{ href: "/#servicos", label: "Serviços" },
+	{ href: "/#portfolio", label: "Portfólio" },
+	{ href: "/#contato", label: "Contato" },
 ];
 ---
 
@@ -12,9 +12,9 @@ const links = [
 	<div class="container footer__grid">
 		<!-- Coluna 1: logo -->
 		<div class="footer__brand">
-			<a href="#" aria-label="sixtech — início" class="footer__logo-link">
+			<a href="/" aria-label="sixtech — início" class="footer__logo-link">
 				<img
-					src="/images/logo.png"
+					src="/images/quem-somos/logo.png"
 					alt="sixtech"
 					width="192"
 					height="36"
@@ -42,7 +42,7 @@ const links = [
 				<p class="footer__contact-row">
 					<img
 						class="footer__contact-icon"
-						src="/icons/mdi_location.svg"
+						src="/icons/quem-somos/mdi-location.svg"
 						width="24"
 						height="24"
 						alt=""
@@ -53,7 +53,7 @@ const links = [
 				<p class="footer__contact-row">
 					<img
 						class="footer__contact-icon"
-						src="/icons/tabler_phone-filled.svg"
+						src="/icons/quem-somos/tabler-phone-filled.svg"
 						width="24"
 						height="24"
 						alt=""
@@ -72,7 +72,7 @@ const links = [
 				<p class="footer__contact-row">
 					<img
 						class="footer__contact-icon"
-						src="/icons/material-symbols_mail.svg"
+						src="/icons/quem-somos/material-symbols-mail.svg"
 						width="24"
 						height="24"
 						alt=""
@@ -93,7 +93,13 @@ const links = [
 						rel="noopener noreferrer"
 						aria-label="LinkedIn"
 					>
-						<img class="footer__social-img" src="/icons/mdi_linkedin.svg" width="32" height="32" alt="" />
+						<img
+							class="footer__social-img footer__social-img--linkedin"
+							src="/icons/quem-somos/mdi-linkedin.svg"
+							width="38"
+							height="38"
+							alt=""
+						/>
 					</a>
 					<a
 						href="https://www.instagram.com/"
@@ -102,15 +108,20 @@ const links = [
 						rel="noopener noreferrer"
 						aria-label="Instagram"
 					>
-						<img class="footer__social-img" src="/icons/mdi_instagram.svg" width="32" height="32" alt="" />
+						<img
+							class="footer__social-img footer__social-img--instagram"
+							src="/icons/quem-somos/mdi-instagram.svg"
+							width="40"
+							height="40"
+							alt=""
+						/>
 					</a>
 				</div>
 				<div class="footer__lang">
 					<button type="button" class="footer__lang-btn footer__lang-btn--active">
 						PT
 					</button>
-					<span class="footer__lang-sep" aria-hidden="true">|</span>
-					<button type="button" class="footer__lang-btn">
+					<button type="button" class="footer__lang-btn footer__lang-btn--inactive">
 						EN
 					</button>
 				</div>
@@ -195,18 +206,18 @@ const links = [
 		width: 100%;
 		max-width: none;
 		flex-direction: column;
-		gap: 0.75rem;
-		font-size: 0.875rem;
-		line-height: 1.5;
-		color: #9ca3af;
+		gap: 1rem; /* 16px — Figma */
+		font-size: 1rem; /* 16px */
+		line-height: normal;
+		color: var(--color-figma-gray);
 		align-items: flex-start;
 	}
 
 	.footer__contact-row {
 		display: grid;
 		grid-template-columns: 24px 1fr;
-		align-items: start;
-		gap: 0.75rem;
+		align-items: center;
+		gap: 1.5rem; /* 24px — Figma */
 		width: 100%;
 		margin: 0;
 		text-align: left;
@@ -223,11 +234,11 @@ const links = [
 	}
 
 	.footer__contact-muted {
-		color: #9ca3af;
+		color: var(--color-figma-gray);
 	}
 
 	.footer__contact-link {
-		color: #9ca3af;
+		color: var(--color-figma-gray);
 		text-decoration: none;
 		transition: color 0.2s;
 	}
@@ -270,45 +281,100 @@ const links = [
 
 	.footer__social-img {
 		display: block;
-		width: 2rem;
-		height: 2rem;
 		object-fit: contain;
+	}
+
+	.footer__social-img--linkedin {
+		width: 2.375rem;
+		height: 2.375rem;
+	}
+
+	.footer__social-img--instagram {
+		width: 2.5rem;
+		height: 2.5rem;
 	}
 
 	.footer__lang {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 0;
 	}
 
 	.footer__lang-btn {
 		cursor: pointer;
 		border: 0;
-		padding: 0;
+		padding: 0.625rem; /* 10px — Figma */
 		background: transparent;
 		font: inherit;
-		font-size: 0.875rem;
+		font-size: 1rem;
 		font-weight: 700;
-		color: rgba(255, 255, 255, 0.9);
 		text-decoration: none;
 		transition: color 0.2s;
 	}
 
 	.footer__lang-btn:hover,
 	.footer__lang-btn:focus-visible {
-		color: #3b82f6;
+		color: var(--color-figma-accent);
 	}
 
 	.footer__lang-btn--active {
-		color: #3b82f6;
+		color: var(--color-figma-accent);
 		text-decoration: underline;
+		text-decoration-thickness: 1px;
 		text-underline-offset: 0.2em;
 	}
 
-	.footer__lang-sep {
-		user-select: none;
-		font-size: 0.875rem;
-		font-weight: 700;
-		color: rgba(255, 255, 255, 0.8);
+	.footer__lang-btn--inactive {
+		color: var(--text-main);
+	}
+
+	@media (max-width: 767px) {
+		.footer {
+			padding-block: 3rem 4rem;
+		}
+
+		.footer__grid {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			row-gap: 2.5rem;
+			text-align: center;
+		}
+
+		.footer__brand {
+			align-items: center;
+		}
+
+		.footer__nav {
+			justify-self: center;
+		}
+
+		.footer__nav-list {
+			align-items: center;
+		}
+
+		.footer__contact {
+			align-items: center;
+		}
+
+		.footer__contact-block {
+			align-items: center;
+		}
+
+		.footer__contact-block {
+			max-width: 22rem;
+		}
+
+		.footer__contact-row {
+			justify-items: start;
+			text-align: left;
+		}
+
+		.footer__social-row {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			max-width: 20rem;
+		}
 	}
 </style>

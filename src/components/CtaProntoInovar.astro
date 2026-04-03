@@ -1,11 +1,12 @@
 ---
+import HeadingAccentBar from "./HeadingAccentBar.astro";
 // CTA — "Pronto para inovar"
 ---
 
 <section class="cta-inovar" aria-labelledby="cta-inovar-heading">
 	<div class="container cta-inovar__inner">
-		<h2 id="cta-inovar-heading" class="cta-inovar__title">
-			Pronto para inovar?&nbsp;<span class="heading-accent-bar" aria-hidden="true"></span>
+		<h2 id="cta-inovar-heading" class="cta-inovar__title heading-with-accent heading-with-accent--center">
+			Pronto para inovar?<HeadingAccentBar />
 		</h2>
 		<p class="cta-inovar__sub">
 			Agende uma conversa hoje e descubra como podemos ajudar!
@@ -77,5 +78,27 @@
 	.cta-inovar__btn:focus-visible {
 		outline: 2px solid var(--accent-cyan);
 		outline-offset: 3px;
+	}
+
+	@media (max-width: 767px) {
+		.cta-inovar {
+			padding: var(--section-padding-y-mobile) 0 4rem;
+		}
+
+		.cta-inovar__title {
+			font-size: 2rem; /* 32px */
+		}
+
+		.cta-inovar__sub {
+			font-size: 1rem; /* 16px */
+		}
+
+		.cta-inovar__btn {
+			margin-top: 1.5rem;
+			font-size: 1rem;
+			font-weight: 700;
+			padding: 0.5rem 1rem;
+			border-radius: 1.9375rem;
+		}
 	}
 </style>

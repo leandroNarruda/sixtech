@@ -1,0 +1,76 @@
+---
+import HeadingAccentBar from "../HeadingAccentBar.astro";
+---
+
+<section class="qs-cta" aria-labelledby="qs-cta-heading">
+	<div class="qs-cta__inner container">
+		<div class="qs-cta__text-block">
+			<h2 id="qs-cta-heading" class="qs-cta__title heading-with-accent heading-with-accent--center">
+				Venha nos conhecer!<HeadingAccentBar />
+			</h2>
+			<p class="qs-cta__subtitle font-roboto">
+				Agende uma conversa on-line e descubra como nossa trajetória de inovação pode impulsionar suas soluções!
+			</p>
+		</div>
+		<a class="qs-cta__btn" href="/#contato">Conheça a SixTech</a>
+	</div>
+</section>
+
+<style>
+	.qs-cta__inner {
+		display: flex;
+		max-width: 33.75rem; /* 540px */
+		flex-direction: column;
+		align-items: center;
+		margin-inline: auto;
+		gap: 5rem; /* 80px entre bloco de texto e botão — Figma */
+		text-align: center;
+	}
+
+	.qs-cta__text-block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem; /* 24px */
+	}
+
+	.qs-cta__title {
+		margin: 0;
+		font-size: 2.25rem; /* 36px */
+		font-weight: 700;
+		line-height: 1.2;
+		color: var(--text-main);
+	}
+
+	.qs-cta__subtitle {
+		margin: 0;
+		max-width: 36rem;
+		font-size: 1.125rem; /* 18px */
+		font-weight: 400;
+		line-height: normal;
+		color: var(--text-main);
+	}
+
+	.qs-cta__btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem 1rem;
+		border-radius: 1.9375rem; /* 31px */
+		background: var(--color-figma-primary);
+		font-size: 1rem; /* 16px */
+		font-weight: 700;
+		line-height: normal;
+		color: var(--text-main);
+		text-decoration: none;
+		transition:
+			background 0.2s,
+			box-shadow 0.2s;
+	}
+
+	.qs-cta__btn:hover,
+	.qs-cta__btn:focus-visible {
+		background: #1e40af;
+		box-shadow: 0 4px 20px rgba(30, 58, 138, 0.35);
+	}
+</style>

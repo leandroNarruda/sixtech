@@ -1,4 +1,5 @@
 ---
+import HeadingAccentBar from "./HeadingAccentBar.astro";
 ---
 
 <section id="servicos" class="services">
@@ -7,8 +8,8 @@
 		<!-- Left column: text content -->
 		<div class="services__col-left">
 			<div class="services__title-row">
-				<h2 class="services__heading" id="services-heading">
-					O que fazemos &nbsp;<span class="heading-accent-bar" aria-hidden="true"></span>
+				<h2 class="services__heading heading-with-accent" id="services-heading">
+					O que fazemos<HeadingAccentBar />
 				</h2>
 			</div>
 
@@ -43,16 +44,18 @@
 		<!-- Right column: image showcase -->
 		<div class="services__col-right">
 			<div class="services__media">
-				<img
-					src="/images/o_que_fazemos.png"
-					alt="Integramos sistemas e IA para impulsionar sua inovação"
-					class="services__img"
-					loading="lazy"
-				/>
-				<div class="services__media-gradient" aria-hidden="true"></div>
-				<p class="services__caption">
-					Integramos sistemas e IA para impulsionar sua inovação.
-				</p>
+				<div class="services__media-frame">
+					<img
+						src="/images/o_que_fazemos.png"
+						alt="Integramos sistemas e IA para impulsionar sua inovação"
+						class="services__img"
+						loading="lazy"
+					/>
+					<div class="services__media-gradient" aria-hidden="true"></div>
+					<p class="services__caption">
+						Integramos sistemas e IA para impulsionar sua inovação.
+					</p>
+				</div>
 			</div>
 
 		</div>
@@ -179,6 +182,12 @@
 	.services__media {
 		position: relative;
 		width: 100%;
+		flex: 1 1 auto;
+		min-height: 0;
+	}
+
+	.services__media-frame {
+		position: relative;
 		overflow: hidden;
 		border-radius: 1.5rem;
 		min-height: 260px;
@@ -276,5 +285,81 @@
 
 	.services__nav-btn--next:hover {
 		background-color: #2563eb;
+	}
+
+	@media (max-width: 767px) {
+		.services {
+			position: relative;
+			z-index: 1;
+			padding-top: var(--section-padding-y-mobile);
+			padding-bottom: 1.5rem;
+		}
+
+		.services__inner {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 2.5rem;
+		}
+
+		.services__col-left {
+			flex: 1 1 auto;
+			width: 100%;
+			max-width: none;
+			gap: 2.5rem;
+		}
+
+		.services__heading {
+			font-size: 2rem; /* 32px — Figma mobile */
+		}
+
+		.services__lead {
+			font-size: 1rem; /* 16px */
+		}
+
+		.services__badge {
+			padding: 0.25rem 0.75rem;
+			font-size: 0.75rem; /* 12px */
+			font-weight: 600;
+		}
+
+		/* Evita coluna flex “esticando” e quebrando o contexto da legenda absoluta */
+		.services__col-right {
+			flex: 0 0 auto;
+		}
+
+		.services__media {
+			flex: 0 0 auto;
+			min-height: auto;
+		}
+
+		.services__media-frame {
+			border-radius: 1.5rem; /* 24px */
+			min-height: 12.9375rem; /* 207px — Figma mobile */
+		}
+
+		/* Figma 171:372 — legenda dentro do frame (mesmo CB do gradiente) */
+		.services__caption {
+			bottom: 1.5625rem; /* 25px */
+			left: 1.9375rem; /* 31px */
+			right: 1.25rem;
+			top: auto;
+			font-size: 0.75rem; /* 12px */
+			line-height: 1.3;
+			color: #fff;
+		}
+
+		.services__controls {
+			margin-top: 1.25rem;
+		}
+
+		.services__nav-btn {
+			width: 2rem;
+			height: 2rem;
+		}
+
+		.services__nav-icon {
+			width: 1rem;
+			height: 0.9375rem;
+		}
 	}
 </style>
