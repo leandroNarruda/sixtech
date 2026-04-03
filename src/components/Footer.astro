@@ -1,0 +1,314 @@
+---
+const links = [
+	{ href: "#", label: "Home" },
+	{ href: "#quem-somos", label: "Quem somos" },
+	{ href: "#servicos", label: "Serviços" },
+	{ href: "#portfolio", label: "Portfólio" },
+	{ href: "#contato", label: "Contato" },
+];
+---
+
+<footer id="contato" class="footer">
+	<div class="container footer__grid">
+		<!-- Coluna 1: logo -->
+		<div class="footer__brand">
+			<a href="#" aria-label="sixtech — início" class="footer__logo-link">
+				<img
+					src="/images/logo.png"
+					alt="sixtech"
+					width="192"
+					height="36"
+					class="footer__logo"
+					loading="lazy"
+					decoding="async"
+				/>
+			</a>
+		</div>
+
+		<nav class="footer__nav" aria-label="Rodapé">
+			<ul class="footer__nav-list">
+				{links.map(({ href, label }) => (
+					<li>
+						<a href={href} class="footer__nav-link">
+							{label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+
+		<div class="footer__contact">
+			<div class="footer__contact-block">
+				<p class="footer__contact-row">
+					<img
+						class="footer__contact-icon"
+						src="/icons/mdi_location.svg"
+						width="24"
+						height="24"
+						alt=""
+						aria-hidden="true"
+					/>
+					<span class="footer__contact-text">Rua Visconde do Rio Branco, 1488 - Centro, Curitiba-PR</span>
+				</p>
+				<p class="footer__contact-row">
+					<img
+						class="footer__contact-icon"
+						src="/icons/tabler_phone-filled.svg"
+						width="24"
+						height="24"
+						alt=""
+						aria-hidden="true"
+					/>
+					<span class="footer__contact-text">
+						<a href="tel:+554130152535" class="footer__contact-link">
+							(41) 3015-2535
+						</a>
+						<span class="footer__contact-muted"> | </span>
+						<a href="tel:+5541999739575" class="footer__contact-link">
+							(41) 9 9973.9575
+						</a>
+					</span>
+				</p>
+				<p class="footer__contact-row">
+					<img
+						class="footer__contact-icon"
+						src="/icons/material-symbols_mail.svg"
+						width="24"
+						height="24"
+						alt=""
+						aria-hidden="true"
+					/>
+					<a href="mailto:comercial@sixtech.com.br" class="footer__contact-link footer__contact-text">
+						comercial@sixtech.com.br
+					</a>
+				</p>
+			</div>
+
+			<div class="footer__social-row">
+				<div class="footer__social-icons">
+					<a
+						href="https://www.linkedin.com/"
+						class="footer__social-link"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="LinkedIn"
+					>
+						<img class="footer__social-img" src="/icons/mdi_linkedin.svg" width="32" height="32" alt="" />
+					</a>
+					<a
+						href="https://www.instagram.com/"
+						class="footer__social-link"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Instagram"
+					>
+						<img class="footer__social-img" src="/icons/mdi_instagram.svg" width="32" height="32" alt="" />
+					</a>
+				</div>
+				<div class="footer__lang">
+					<button type="button" class="footer__lang-btn footer__lang-btn--active">
+						PT
+					</button>
+					<span class="footer__lang-sep" aria-hidden="true">|</span>
+					<button type="button" class="footer__lang-btn">
+						EN
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+		background: linear-gradient(to bottom, #1a2223 0%, #0e1213 100%);
+		padding-block: 5rem;
+	}
+
+	.footer__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr);
+		align-items: start;
+		column-gap: clamp(2rem, 5vw, 4rem);
+		row-gap: 0;
+		text-align: left;
+	}
+
+	.footer__brand {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.footer__logo-link {
+		display: inline-block;
+		line-height: 0;
+	}
+
+	.footer__logo {
+		display: block;
+		height: 2.25rem;
+		width: auto;
+		max-width: min(100%, 220px);
+	}
+
+	.footer__nav {
+		justify-self: start;
+	}
+
+	.footer__nav-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+	}
+
+	.footer__nav-link {
+		font-size: 1rem;
+		font-weight: 500;
+		color: #fff;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.footer__nav-link:hover,
+	.footer__nav-link:focus-visible {
+		color: #3b82f6;
+	}
+
+	.footer__contact {
+		display: flex;
+		min-width: 0;
+		width: 100%;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2rem;
+		justify-self: start;
+	}
+
+	.footer__contact-block {
+		display: flex;
+		width: 100%;
+		max-width: none;
+		flex-direction: column;
+		gap: 0.75rem;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		color: #9ca3af;
+		align-items: flex-start;
+	}
+
+	.footer__contact-row {
+		display: grid;
+		grid-template-columns: 24px 1fr;
+		align-items: start;
+		gap: 0.75rem;
+		width: 100%;
+		margin: 0;
+		text-align: left;
+	}
+
+	.footer__contact-icon {
+		margin-top: 0.125rem;
+		flex-shrink: 0;
+		justify-self: start;
+	}
+
+	.footer__contact-text {
+		min-width: 0;
+	}
+
+	.footer__contact-muted {
+		color: #9ca3af;
+	}
+
+	.footer__contact-link {
+		color: #9ca3af;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.footer__contact-link:hover,
+	.footer__contact-link:focus-visible {
+		color: #3b82f6;
+	}
+
+	.footer__social-row {
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: flex-start;
+		column-gap: 2.5rem;
+		row-gap: 1rem;
+	}
+
+	.footer__social-icons {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.footer__social-link {
+		display: inline-flex;
+		line-height: 0;
+		opacity: 1;
+		transition:
+			opacity 0.2s,
+			transform 0.2s;
+	}
+
+	.footer__social-link:hover,
+	.footer__social-link:focus-visible {
+		transform: translateY(-1px);
+		opacity: 0.85;
+	}
+
+	.footer__social-img {
+		display: block;
+		width: 2rem;
+		height: 2rem;
+		object-fit: contain;
+	}
+
+	.footer__lang {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.footer__lang-btn {
+		cursor: pointer;
+		border: 0;
+		padding: 0;
+		background: transparent;
+		font: inherit;
+		font-size: 0.875rem;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.9);
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.footer__lang-btn:hover,
+	.footer__lang-btn:focus-visible {
+		color: #3b82f6;
+	}
+
+	.footer__lang-btn--active {
+		color: #3b82f6;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+
+	.footer__lang-sep {
+		user-select: none;
+		font-size: 0.875rem;
+		font-weight: 700;
+		color: rgba(255, 255, 255, 0.8);
+	}
+</style>

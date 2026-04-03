@@ -1,0 +1,280 @@
+---
+---
+
+<section id="servicos" class="services">
+	<div class="container">
+		<div class="services__inner">
+		<!-- Left column: text content -->
+		<div class="services__col-left">
+			<div class="services__title-row">
+				<h2 class="services__heading" id="services-heading">
+					O que fazemos &nbsp;<span class="heading-accent-bar" aria-hidden="true"></span>
+				</h2>
+			</div>
+
+			<div class="services__intro">
+				<p class="services__lead">
+					Criamos soluções tecnológicas sob medida para empresas que precisam ir além do básico.
+				</p>
+				<p class="services__lead">
+					Desenvolvemos sistemas, aplicativos e integrações inteligentes que resolvem problemas reais.
+				</p>
+			</div>
+
+			<ul class="services__list" aria-label="Nossos serviços">
+				<li>
+					<button type="button" class="services__badge active" data-index="0">
+						Integrações entre sistemas e IA.
+					</button>
+				</li>
+				<li>
+					<button type="button" class="services__badge" data-index="1">
+						Consultoria em TI para definir tecnologias ideais.
+					</button>
+				</li>
+				<li>
+					<button type="button" class="services__badge" data-index="2">
+						Apps mobile (Android/iOS) e soluções web
+					</button>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Right column: image showcase -->
+		<div class="services__col-right">
+			<div class="services__media">
+				<img
+					src="/images/o_que_fazemos.png"
+					alt="Integramos sistemas e IA para impulsionar sua inovação"
+					class="services__img"
+					loading="lazy"
+				/>
+				<div class="services__media-gradient" aria-hidden="true"></div>
+				<p class="services__caption">
+					Integramos sistemas e IA para impulsionar sua inovação.
+				</p>
+			</div>
+
+		</div>
+		</div>
+
+		<div class="services__controls" aria-label="Controles do carrossel">
+
+
+		<button
+			type="button"
+			class="services__nav-btn services__nav-btn--prev"
+			aria-label="Anterior"
+			id="services-prev"
+		>
+			<span class="services__nav-icon services__nav-icon--left" aria-hidden="true"></span>
+		</button>
+		<button
+			type="button"
+			class="services__nav-btn services__nav-btn--next"
+			aria-label="Próximo"
+			id="services-next"
+		>
+			<span class="services__nav-icon services__nav-icon--right" aria-hidden="true"></span>
+		</button>
+		</div>
+	</div>
+</section>
+
+<style>
+	.services {
+		padding-top: 9.5rem;
+		color: #fff;
+	}
+
+	.services__inner {
+		display: flex;
+		flex-direction: row;
+		align-items: stretch;
+		gap: 2.5rem;
+	}
+
+	.services__col-left {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		flex: 0 1 449px;
+		flex-shrink: 0;
+		width: auto;
+		align-self: flex-start;
+	}
+
+	.services__title-row {
+		display: flex;
+		align-items: flex-end;
+		gap: 1rem;
+	}
+
+	.services__heading {
+		margin: 0;
+		font-family: "Inter", system-ui, sans-serif;
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: #fff;
+	}
+
+	.services__intro {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.services__lead {
+		margin: 0;
+		font-family: "Roboto", system-ui, sans-serif;
+		font-size: 1.25rem;
+		font-weight: 400;
+		color: #fff;
+	}
+
+	.services__list {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.75rem;
+		list-style: none;
+	}
+
+	.services__badge {
+		display: inline-flex;
+		align-items: center;
+		cursor: pointer;
+		border-radius: 9999px;
+		border: 1px solid #d1d5db;
+		background: transparent;
+		padding: 0.5rem 18px;
+		text-align: left;
+		font-family: "Inter", system-ui, sans-serif;
+		font-size: 1rem;
+		font-weight: 600;
+		color: #d1d5db;
+	}
+
+	.services__badge:hover {
+		border-color: #fff;
+		color: #fff;
+	}
+
+	.services__badge.active {
+		border-color: #3b82f6;
+		background-color: #3b82f6;
+		color: #fff;
+	}
+
+	.services__col-right {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		min-height: 0;
+		width: 100%;
+		flex: 1 1 0;
+	}
+
+	.services__media {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		border-radius: 1.5rem;
+		min-height: 260px;
+		flex: 1 1 auto;
+		min-height: 0;
+	}
+
+	.services__img {
+		display: block;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+
+	.services__media-gradient {
+		pointer-events: none;
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.85) 100%);
+	}
+
+	.services__caption {
+		position: absolute;
+		bottom: 1.75rem;
+		left: 1.75rem;
+		right: 1.75rem;
+		z-index: 2;
+		margin: 0;
+		font-family: var(--font-heading, "Inter", system-ui, sans-serif);
+		font-size: 1.125rem;
+		font-weight: 400;
+		line-height: 1.3;
+		color: #fff;
+	}
+
+	.services__controls {
+		margin-top: 40px;
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.625rem;
+	}
+
+	.services__nav-btn {
+		display: flex;
+		height: 2.25rem;
+		width: 2.25rem;
+		cursor: pointer;
+		align-items: center;
+		justify-content: center;
+		border-radius: 9999px;
+		border: none;
+		transition:
+			transform 0.2s ease-in-out,
+			background-color 0.2s ease-in-out;
+	}
+
+	/* Ícones de /public/icons/ — máscara para herdar `color` do botão */
+	.services__nav-icon {
+		display: block;
+		width: 1.25rem;
+		height: 1.171875rem; /* 16×15 */
+		flex-shrink: 0;
+		background-color: currentColor;
+		-webkit-mask-size: contain;
+		mask-size: contain;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-position: center;
+		mask-position: center;
+	}
+
+	.services__nav-icon--left {
+		-webkit-mask-image: url('/icons/arrow-left.svg');
+		mask-image: url('/icons/arrow-left.svg');
+	}
+
+	.services__nav-icon--right {
+		-webkit-mask-image: url('/icons/arrow-right.svg');
+		mask-image: url('/icons/arrow-right.svg');
+	}
+
+	.services__nav-btn:hover {
+		transform: scale(1.08);
+	}
+
+	.services__nav-btn--prev {
+		background-color: #d1d5db;
+		color: #0e1213;
+	}
+
+	.services__nav-btn--next {
+		background-color: #3b82f6;
+		color: #0e1213;
+	}
+
+	.services__nav-btn--next:hover {
+		background-color: #2563eb;
+	}
+</style>

@@ -1,0 +1,122 @@
+---
+/**
+ * Faixa azul com logos — marquee contínuo.
+ * O deslocamento do loop é medido em pixels (largura real dos logos + gaps),
+ * para o ciclo coincidir com o layout mesmo com imagens de larguras variadas.
+ */
+import ClientStripRow from "./ClientStripRow.astro";
+import { clients } from "./clientStrip";
+
+const partnersList = clients.map((c) => c.alt).join(", ");
+---
+
+<section class="client-strip" aria-label="Empresas parceiras">
+	<p class="visually-hidden">Empresas parceiras: {partnersList}.</p>
+	<div class="client-strip__viewport" aria-hidden="true">
+		<div class="client-strip__track" data-client-strip-track>
+			<ClientStripRow clients={clients} />
+		</div>
+	</div>
+</section>
+
+<script>
+	function waitImages(imgs: HTMLImageElement[]) {
+		return Promise.all(
+			imgs.map(
+				(img) =>
+					new Promise<void>((resolve) => {
+						if (img.complete) resolve();
+						else {
+							img.addEventListener("load", () => resolve(), { once: true });
+							img.addEventListener("error", () => resolve(), { once: true });
+						}
+					}),
+			),
+		);
+	}
+
+	function measureMarquee(track: HTMLElement) {
+		const inner = track.querySelector<HTMLElement>(".client-strip__track-inner");
+		if (!inner) return;
+
+		const imgs = Array.from(inner.querySelectorAll<HTMLImageElement>("img"));
+		const half = imgs.length / 2;
+		if (!Number.isInteger(half) || half === 0) return;
+
+		const a = imgs[0]?.getBoundingClientRect().left ?? 0;
+		const b = imgs[half]?.getBoundingClientRect().left ?? 0;
+		/* Diferença na viewport é invariante ao transform do track (ambos os logos movem igual). */
+		const repeat = Math.round((b - a) * 1000) / 1000;
+		if (repeat <= 0) return;
+
+		track.style.setProperty("--marquee-distance", `${repeat}px`);
+		track.classList.add("client-strip__track--ready");
+	}
+
+	function init() {
+		const track = document.querySelector<HTMLElement>("[data-client-strip-track]");
+		if (!track) return;
+
+		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+		if (mq.matches) return;
+
+		const inner = track.querySelector(".client-strip__track-inner");
+		const imgs = inner?.querySelectorAll<HTMLImageElement>("img");
+		if (!imgs?.length) return;
+
+		const run = () => {
+			void waitImages(Array.from(imgs)).then(() => {
+				requestAnimationFrame(() => {
+					measureMarquee(track);
+				});
+			});
+		};
+
+		run();
+
+		const ro = new ResizeObserver(() => {
+			measureMarquee(track);
+		});
+		if (inner) ro.observe(inner);
+
+		window.addEventListener("load", run, { once: true });
+	}
+
+	init();
+</script>
+
+<style>
+	@keyframes client-strip-marquee {
+		from {
+			transform: translate3d(0, 0, 0);
+		}
+		to {
+			transform: translate3d(calc(-1 * var(--marquee-distance, 0px)), 0, 0);
+		}
+	}
+
+	.client-strip {
+		width: 100%;
+		overflow: hidden;
+		background-color: #448aff;
+		padding-block: clamp(3rem, 8vw, 5.5rem);
+	}
+
+	.client-strip__viewport {
+		position: relative;
+		width: 100%;
+	}
+
+	.client-strip__track {
+		--marquee-distance: 0px;
+		display: flex;
+		width: max-content;
+		animation: none;
+		backface-visibility: hidden;
+		will-change: transform;
+	}
+
+	.client-strip__track--ready {
+		animation: client-strip-marquee 90s linear infinite;
+	}
+</style>

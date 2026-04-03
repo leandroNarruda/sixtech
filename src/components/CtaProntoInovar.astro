@@ -1,0 +1,81 @@
+---
+// CTA — "Pronto para inovar"
+---
+
+<section class="cta-inovar" aria-labelledby="cta-inovar-heading">
+	<div class="container cta-inovar__inner">
+		<h2 id="cta-inovar-heading" class="cta-inovar__title">
+			Pronto para inovar?&nbsp;<span class="heading-accent-bar" aria-hidden="true"></span>
+		</h2>
+		<p class="cta-inovar__sub">
+			Agende uma conversa hoje e descubra como podemos ajudar!
+		</p>
+		<a class="cta-inovar__btn" href="#contato">Agende uma conversa</a>
+	</div>
+</section>
+
+<style>
+	.cta-inovar {
+		padding: 10rem 0 7rem 0;
+		text-align: center;
+	}
+
+	.cta-inovar__inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		max-width: 42rem;
+		margin-inline: auto;
+	}
+
+	.cta-inovar__title {
+		margin: 0 0 1rem;
+		font-size: clamp(1.75rem, 4vw, 2.5rem);
+		font-weight: 700;
+		line-height: 1.2;
+		color: var(--text-main);
+		letter-spacing: -0.02em;
+	}
+
+	.cta-inovar__underscore {
+		color: var(--accent-cyan);
+		font-weight: 700;
+	}
+
+	.cta-inovar__sub {
+		margin: 0 0 1.875rem;
+		font-size: clamp(1rem, 2vw, 1.125rem);
+		line-height: 1.5;
+	}
+
+	.cta-inovar__btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem 1rem;
+		border-radius: 999px;
+		background: #1e3a8a;
+		color: #ffffff;
+		font-size: var(--fs-sm);
+		font-weight: 500;
+		text-decoration: none;
+		font-family: inherit;
+		margin-top: 5rem;
+		transition:
+			background 0.2s,
+			box-shadow 0.2s,
+			transform 0.15s;
+	}
+
+	.cta-inovar__btn:hover,
+	.cta-inovar__btn:focus-visible {
+		background: #1e40af;
+		box-shadow: 0 8px 24px rgba(30, 58, 138, 0.35);
+	}
+
+	.cta-inovar__btn:focus-visible {
+		outline: 2px solid var(--accent-cyan);
+		outline-offset: 3px;
+	}
+</style>

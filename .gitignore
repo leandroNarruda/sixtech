@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# MCP local (pode conter token Figma)
+.vscode/mcp.json

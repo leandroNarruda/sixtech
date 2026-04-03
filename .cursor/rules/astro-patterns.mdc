@@ -1,0 +1,23 @@
+---
+description: Padrões Astro — layouts, páginas e componentes
+globs: "**/*.astro"
+alwaysApply: false
+---
+
+# Padrões Astro
+
+- **Estilos globais**: importar `../styles/global.css` **apenas** em [Layout.astro](src/layouts/Layout.astro) (ou outro layout raiz), não em cada componente.
+- **Páginas novas**: envolver conteúdo com `Layout` (título, meta); usar `<main>` para o corpo e importar seções de `src/components/`.
+- **Componentes**: preferir `.astro` nativo. O projeto não usa React no `package.json` — não adicionar React sem decisão explícita.
+- **Props**: tipar com `interface Props` no frontmatter quando fizer sentido.
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+<Layout title="…">
+  <Header />
+  <main><!-- seções --></main>
+</Layout>
+```

@@ -1,0 +1,51 @@
+{
+	"files.associations": {
+		"*.css": "css",
+		"*.scss": "scss",
+		"*.sass": "sass",
+		"*.less": "less",
+		"*.html": "html",
+		"*.htm": "html",
+		"*.jsx": "javascriptreact",
+		"*.tsx": "typescriptreact",
+		"*.astro": "astro",
+		"*.vue": "vue",
+		"*.mdx": "mdx",
+		"*.mjs": "javascript",
+		"*.cjs": "javascript"
+	},
+	"emmet.includeLanguages": {
+		"astro": "html"
+	},
+	"[astro]": {
+		"editor.defaultFormatter": "astro-build.astro-vscode"
+	},
+	"[css]": {
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true
+		}
+	},
+	"[html]": {
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true
+		}
+	},
+	"[javascriptreact]": {
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true
+		}
+	},
+	"[typescriptreact]": {
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": true
+		}
+	}
+}

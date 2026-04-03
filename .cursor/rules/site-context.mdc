@@ -1,0 +1,34 @@
+---
+description: Contexto do site sixtech — stack, pastas e comandos
+alwaysApply: true
+---
+
+# Site sixtech (institucional)
+
+- **Stack**: Astro 6, Tailwind CSS v4 (`@tailwindcss/vite`), ESM, Node.js ≥ 22.12.
+- **Idioma**: UI e copy em **pt-BR** (`lang="pt-BR"` no layout).
+
+## Estrutura
+
+| Caminho | Uso |
+|---------|-----|
+| `src/pages/` | Rotas e páginas Astro |
+| `src/layouts/` | Shell HTML (`Layout.astro` importa estilos globais) |
+| `src/components/` | Blocos reutilizáveis (`.astro`) |
+| `src/styles/` | CSS global e tokens (`global.css`) |
+| `public/` | Assets estáticos servidos na raiz (`/logo.svg`, etc.) |
+
+## Comandos
+
+- `npm run dev` — desenvolvimento
+- `npm run build` — build de produção
+- `npm run preview` — pré-visualizar o build
+
+## Testes visuais e navegador
+
+- **Não** abrir o navegador (MCP/browser integrado) nem automatizar preview só para validar layout ou UI — quem testa no browser é o humano no ambiente local.
+- Usar `npm run build` (e lints) quando precisar de verificação automática de código.
+
+## Figma
+
+Quando houver URL do Figma (`figma.com/design/...`), usar o MCP Figma: extrair `fileKey` e `node-id` (trocar `-` por `:` no node id) para alinhar implementação ao design.

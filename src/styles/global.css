@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+:root {
+	/* Colors */
+	--bg-dark: #0e1213;
+	--bg-surface: #161c1d;
+	--text-main: #ffffff;
+	--text-muted: #a0aec0;
+	--accent-cyan: #33e8ff;
+	--accent-blue: #007bff;
+	/* Barra ao lado de títulos (h2) */
+	--heading-accent-bar-bg: #3BEDFF;
+
+	/* Layout */
+	--header-h: 5rem;
+	--container-max: 1280px;
+	--gutter: 1.5rem;
+
+	/* Font sizes */
+	--fs-xs: 0.8125rem;   /* 13px */
+	--fs-sm: 0.9375rem;   /* 15px */
+	--fs-base: 1rem;      /* 16px */
+	--fs-lg: clamp(1.25rem, 2.5vw, 1.75rem);   /* subheadings */
+	--fs-xl: clamp(1.5rem, 5vw, 2.5rem);       /* headings (mobile) */
+	--fs-2xl: clamp(2.5rem, 6vw, 4.5rem);      /* headings (hero accent) */
+
+	/* Features — “Por que escolher a Six Tech?” (Figma: 36 / 16 / 14) */
+	--features-title-size: 2.25rem; /* 36px */
+	--features-card-title-size: 1rem; /* 16px */
+	--features-body-size: 0.875rem; /* 14px */
+	--features-title-line-height: 1.2;
+	--features-body-line-height: 1.6;
+
+	/* Testimonials — Figma */
+	--font-roboto: "Roboto", system-ui, sans-serif;
+	--testimonials-title-size: 2.25rem; /* 36px */
+	--testimonials-quote-size: 1.125rem; /* 18px */
+	--testimonials-author-size: 1rem; /* 16px */
+	--testimonials-card-title-size: 2rem; /* 32px */
+	--testimonials-card-body-size: 1.375rem; /* 22px — Roboto */
+}
+
+/* Bloco inicial: header sobre o fundo do hero; rola com a página (não fixed) */
+.page-hero {
+	position: relative;
+}
+
+.page-hero .site-header {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 100;
+}
+
+/* Reusable container — limits content width and centers it */
+.container {
+	width: 100%;
+	max-width: var(--container-max);
+	margin-inline: auto;
+	padding-inline: var(--gutter);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	background: var(--bg-dark);
+}
+
+body {
+	margin: 0;
+	font-family: 'Inter', system-ui, sans-serif;
+	font-weight: 400;
+	background: var(--bg-dark);
+	color: var(--text-main);
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+.font-roboto {
+	font-family: var(--font-roboto);
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Barra decorativa ao lado de títulos (mesmo padrão em toda a página) */
+span.heading-accent-bar {
+	display: inline-block;
+	flex-shrink: 0;
+	width: 15px;
+	height: 4px;
+	min-width: 15px;
+	min-height: 4px;
+	/* Garante a cor sobre preflight/camadas do Tailwind */
+	background: var(--heading-accent-bar-bg) !important;
+}
+
+/* 1rem após o fim do texto quando a barra vem inline no mesmo título */
+.heading-accent-bar--inline {
+	margin-left: 1rem;
+	vertical-align: baseline;
+}
+
+/* global UI elements - Button */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	font-family: inherit;
+	font-size: var(--fs-base);
+	font-weight: 400;
+	border-radius: 999px;
+	padding: 0.65rem 1.35rem;
+	transition:
+		background 0.2s,
+		color 0.2s,
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+
+.btn-primary {
+	background: var(--text-main);
+	color: var(--bg-dark);
+	border: 1px solid transparent;
+	flex-shrink: 0;
+	font-weight: 500;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+	background: rgba(255, 255, 255, 0.85);
+	box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+.btn-ghost {
+	background: transparent;
+	color: var(--text-main);
+	border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+	background: rgba(255, 255, 255, 0.12);
+	border-color: var(--text-main);
+}
+
+.btn:focus-visible {
+	outline: 2px solid var(--accent-cyan);
+	outline-offset: 3px;
+}

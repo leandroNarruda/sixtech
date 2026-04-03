@@ -1,0 +1,114 @@
+---
+const navLinks = [
+	{ href: "#", label: "Home" },
+	{ href: "#quem-somos", label: "Quem somos" },
+	{ href: "#servicos", label: "Serviços" },
+	{ href: "#portfolio", label: "Portfólio" },
+	{ href: "#contato", label: "Contato" },
+];
+---
+
+<header class="site-header">
+	<div class="container site-header__inner">
+		<a class="site-header__logo" href="#" aria-label="sixtech — início">
+			<img
+				src="/images/logo.png"
+				width="192"
+				height="36"
+				alt="sixtech"
+			/>
+		</a>
+
+		<nav class="site-header__nav" aria-label="Principal">
+			<ul class="site-header__list">
+				{
+					navLinks.map(({ href, label }) => (
+						<li class="site-header__item">
+							<a class="site-header__link" href={href}>
+								{label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div class="site-header__actions">
+			<a class="site-header__cta" href="#contato">Solicite uma proposta</a>
+		</div>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		padding: 2rem 1.25rem;
+	}
+
+	.site-header__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.site-header__logo {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		text-decoration: none;
+	}
+
+	.site-header__nav {
+		display: flex;
+	}
+
+	.site-header__list {
+		margin: 0;
+		display: flex;
+		list-style: none;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		column-gap: 1.25rem;
+		row-gap: 0.375rem;
+		border-radius: 9999px;
+		border: 1px solid #d1d5db;
+		padding: 0.55rem 1.75rem;
+	}
+
+	.site-header__link {
+		font-size: 1rem;
+		font-weight: 500;
+		white-space: nowrap;
+		color: #fff;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.site-header__link:hover,
+	.site-header__link:focus-visible {
+		color: #fff;
+	}
+
+	.site-header__actions {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.site-header__cta {
+		background: #1e3a8a;
+		color: #fff;
+		font-size: 1rem;
+		font-weight: 700;
+		padding: 0.5rem 1rem;
+		border-radius: 31px;
+	}
+
+	.site-header__cta:hover,
+	.site-header__cta:focus-visible {
+		background: #1e40af;
+		box-shadow: 0 4px 20px rgba(30, 58, 138, 0.35);
+	}
+</style>

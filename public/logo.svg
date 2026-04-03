@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 36" fill="none" aria-hidden="true">
+  <text
+    x="0"
+    y="26"
+    font-family="Inter, system-ui, sans-serif"
+    font-size="24"
+    font-weight="500"
+    fill="none"
+    stroke="#FFFFFF"
+    stroke-width="1.15"
+  >sixtech.</text>
+  <rect x="158" y="14" width="32" height="5" rx="1" fill="#33E8FF" />
+</svg>

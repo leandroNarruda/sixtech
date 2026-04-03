@@ -1,0 +1,52 @@
+---
+import type { ClientEntry } from "./clientStrip";
+
+interface Props {
+	client: ClientEntry;
+}
+
+const { client: c } = Astro.props;
+
+const slotStyle =
+	c.scale != null
+		? {
+				transform: `scale(${c.scale})`,
+				transformOrigin: "center center",
+			}
+		: undefined;
+---
+
+<div class:list={["client-strip__logo-slot", c.slotClass]} style={slotStyle}>
+	<img
+		class:list={["client-strip__logo-img", !c.color && "client-strip__logo-img--mono"]}
+		src={c.src}
+		alt=""
+		loading="eager"
+		decoding="async"
+	/>
+</div>
+
+<style>
+	.client-strip__logo-slot {
+		display: flex;
+		height: clamp(1.875rem, 4.375vw, 2.8125rem);
+		width: clamp(5.3125rem, 16.25vw, 9.375rem);
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.client-strip__logo-img {
+		display: block;
+		height: auto;
+		width: auto;
+		max-height: 100%;
+		max-width: 100%;
+		object-fit: contain;
+		opacity: 0.95;
+	}
+
+	.client-strip__logo-img--mono {
+		filter: brightness(0) invert(1);
+	}
+</style>

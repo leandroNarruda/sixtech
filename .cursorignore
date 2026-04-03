@@ -1,0 +1,7 @@
+# Dependências e artefatos de build
+node_modules/
+dist/
+
+# Dumps grandes do Figma (não são código-fonte do site)
+figma_structure.json
+figma_component_48_146.json

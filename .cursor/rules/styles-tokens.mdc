@@ -1,0 +1,17 @@
+---
+description: Tokens CSS e Tailwind — global.css e uso em Astro
+globs: "**/*.{css,astro}"
+alwaysApply: false
+---
+
+# Estilos e tokens
+
+- **Tailwind v4**: `@import "tailwindcss"` já está em [global.css](src/styles/global.css). Não duplicar esse import em outros arquivos CSS salvo necessidade clara.
+- **Tokens**: preferir variáveis `:root` do projeto em vez de cores hex soltas:
+  - Fundo: `--bg-dark`, `--bg-surface`
+  - Texto: `--text-main`, `--text-muted`
+  - Destaques: `--accent-cyan`, `--accent-blue`
+  - Layout: `--container-max`, `--gutter`, `--header-h`
+  - Tipografia: `--fs-*` e variáveis por seção (ex.: `--features-*`, `--testimonials-*`)
+- **Largura de conteúdo**: usar a classe utilitária `.container` (max-width + padding) definida em `global.css` para alinhar com o restante do site.
+- Novos tokens: adicionar em `:root` em `global.css` e reutilizar em componentes.

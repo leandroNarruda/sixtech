@@ -1,0 +1,298 @@
+---
+// Testimonials.astro — alinhado ao layout Figma (duas colunas + card)
+const avatarSrc = "/images/testimonial-avatar.jpg";
+const aspasSrc = "/icons/aspas.svg";
+
+const testimonials = [
+	{
+		quote:
+			"Desenvolvemos em parceria com a Six Tech alguns projetos que trouxeram resultados expressivos ao negócio. Ressalto o desenvolvimento de um sistema (SAS – Sales Administration System) que suporta os principais processos comerciais. A Six Tech foi a parceira escolhida nesse projeto por sua expertise tecnológica, flexibilidade e conceito Agile nos desenvolvimentos.",
+		author: "Leandro Brito",
+		company: "Grupo Volvo",
+	},
+	{
+		quote:
+			"Decidimos migrar nosso suporte e programação do Sistema Gerar para a Six Tech. E temos essa decisão como bem acertada, pois os profissionais da SixTech são facilitadores para que nosso sistema seja cada vez mais inteligente e eficaz para a obtenção dos resultados. Nossa parceria vai além do Sistema Gerar, já os contratamos para desenvolverem novos sistemas que ajudam na resolução das nossas demandas.",
+		author: "Ronny Essert",
+		company: "Grupo Gerar",
+	},
+];
+---
+
+<section id="portfolio" class="testimonials">
+	<div class="container testimonials__container">
+		<div class="testimonials__grid">
+			<!-- Coluna esquerda: depoimento -->
+			<div class="testimonials__col-left">
+				<h2 class="testimonials__title">
+					Quem confia na Six Tech<span
+						class="heading-accent-bar heading-accent-bar--inline"
+						aria-hidden="true"
+					></span>
+				</h2>
+
+				<div class="testimonials__carousel" data-testimonials-carousel>
+					<div class="testimonials__quote-row">
+						<img
+							src={aspasSrc}
+							alt=""
+							width="607"
+							decoding="async"
+							loading="lazy"
+							class="testimonials__aspas"
+							aria-hidden="true"
+						/>
+						<img
+							src={avatarSrc}
+							alt=""
+							width="195"
+							height="195"
+							class="testimonials__avatar"
+							loading="lazy"
+							decoding="async"
+						/>
+						<div class="testimonials__quote-body" aria-live="polite">
+							<p id="testimonial-quote" class="testimonials__quote">
+								{testimonials[0].quote}
+							</p>
+							<p id="testimonial-author" class="testimonials__author">
+								{testimonials[0].author} - {testimonials[0].company}
+							</p>
+						</div>
+					</div>
+
+					<div class="testimonials__controls">
+						<button
+							type="button"
+							id="testimonial-prev"
+							class="testimonials__nav-btn testimonials__nav-btn--prev"
+							aria-label="Depoimento anterior"
+						>
+							<img
+								src="/icons/arrow-left.svg"
+								alt=""
+								width="16"
+								height="15"
+								class="testimonials__nav-icon"
+								aria-hidden="true"
+							/>
+						</button>
+						<button
+							type="button"
+							id="testimonial-next"
+							class="testimonials__nav-btn testimonials__nav-btn--next"
+							aria-label="Próximo depoimento"
+						>
+							<img
+								src="/icons/arrow-right.svg"
+								alt=""
+								width="16"
+								height="15"
+								class="testimonials__nav-icon"
+								aria-hidden="true"
+							/>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Coluna direita: card -->
+			<div class="testimonials__card">
+				<h3 class="testimonials__card-title">
+					Transformando negócios, conquistando confiança.
+				</h3>
+				<p class="testimonials__card-body font-roboto">
+					Convertemos visões em inovações tecnológicas que geram confiança e aceleram resultados.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script define:vars={{ testimonials }}>
+	function initTestimonialsCarousel() {
+		const quoteEl = document.getElementById('testimonial-quote');
+		const authorEl = document.getElementById('testimonial-author');
+		const prev = document.getElementById('testimonial-prev');
+		const next = document.getElementById('testimonial-next');
+		if (!quoteEl || !authorEl || !prev || !next || !testimonials?.length) return;
+
+		let index = 0;
+		const total = testimonials.length;
+
+		function show(i) {
+			const t = testimonials[i];
+			quoteEl.textContent = t.quote;
+			authorEl.textContent = `${t.author} - ${t.company}`;
+		}
+
+		prev.addEventListener('click', () => {
+			index = (index - 1 + total) % total;
+			show(index);
+		});
+		next.addEventListener('click', () => {
+			index = (index + 1) % total;
+			show(index);
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initTestimonialsCarousel);
+	} else {
+		initTestimonialsCarousel();
+	}
+</script>
+
+<style>
+	.testimonials {
+		position: relative;
+		overflow: hidden;
+		/* Espaçamento vertical alinhado a seções largas (desktop) */
+		padding-block: 12rem;
+	}
+
+	.testimonials__container {
+		position: relative;
+		z-index: 10;
+	}
+
+	.testimonials__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(280px, 420px);
+		align-items: start;
+		column-gap: 4rem;
+	}
+
+	.testimonials__col-left {
+		text-align: left;
+	}
+
+	.testimonials__title {
+		margin: 0 0 5rem;
+		font-size: var(--testimonials-title-size);
+		font-weight: 700;
+		line-height: 1.25;
+		color: #fff;
+	}
+
+	.testimonials__carousel {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.testimonials__quote-row {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 2rem;
+		min-height: 17rem;
+	}
+
+	.testimonials__aspas {
+		pointer-events: none;
+		position: absolute;
+		bottom: 55px;
+		left: -100px;
+	}
+
+	.testimonials__avatar {
+		flex-shrink: 0;
+		border-radius: 9999px;
+		border: 2px solid rgba(255, 255, 255, 0.1);
+		object-fit: cover;
+	}
+
+	.testimonials__quote-body {
+		min-width: 0;
+		flex: 1 1 auto;
+	}
+
+	.testimonials__quote {
+		margin: 0;
+		font-size: var(--testimonials-quote-size);
+		font-weight: 400;
+		line-height: 1.625;
+		color: #fff;
+	}
+
+	.testimonials__author {
+		margin: .5rem 0 0;
+		font-size: var(--testimonials-author-size);
+		font-weight: 700;
+		color: var(--accent-blue);
+	}
+
+	.testimonials__controls {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.75rem;
+		padding-top: 0.5rem;
+	}
+
+	.testimonials__nav-btn {
+		display: inline-flex;
+		height: 2.75rem;
+		width: 2.75rem;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		border-radius: 9999px;
+		border: none;
+		cursor: pointer;
+		transition: opacity 0.2s;
+	}
+
+	.testimonials .testimonials__nav-btn--prev {
+		background-color: #e5e7eb;
+	}
+
+	.testimonials .testimonials__nav-btn--next {
+		background-color: #2563eb;
+	}
+
+	.testimonials__nav-btn:hover {
+		opacity: 0.9;
+	}
+
+	.testimonials__nav-btn:focus-visible {
+		outline: 2px solid var(--accent-cyan);
+		outline-offset: 2px;
+	}
+
+	.testimonials__nav-icon {
+		display: block;
+		width: 1rem;
+		height: auto;
+	}
+
+	.testimonials__card {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		min-height: 280px;
+		border-radius: 2.5rem;
+		/* border: 1px solid rgba(255, 255, 255, 0.06); */
+		padding: 3rem 2.5rem;
+		text-align: left;
+		box-shadow: 0 24px 48px -32px rgba(0, 0, 0, 0.5);
+		/* background-color: #1A2223; */
+	}
+
+	.testimonials__card-title {
+		margin: 0;
+		font-size: var(--testimonials-card-title-size);
+		font-weight: 400;
+		line-height: 1.25;
+		color: #D1D5DB;
+	}
+
+	.testimonials__card-body {
+		margin: 1.25rem 0 0;
+		font-size: var(--testimonials-card-body-size);
+		font-weight: 400;
+		line-height: 1.625;
+		color: #D1D5DB;
+	}
+</style>

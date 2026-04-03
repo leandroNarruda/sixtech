@@ -1,0 +1,222 @@
+---
+type FeatureCard =
+	| {
+			title: string;
+			iconSrc: string;
+			desc: string;
+	  }
+	| {
+			title: string;
+			iconSrc: string;
+			intro: string;
+			bullets: string[];
+			closing: string;
+	  };
+
+const features: FeatureCard[] = [
+	{
+		title: "Atendimento próximo e personalizado",
+		desc: "Você fala diretamente com quem entende do assunto. Nossa liderança acompanha cada projeto de ponta a ponta, garantindo agilidade, clareza e parceria de verdade.",
+		iconSrc: "/icons/aperto_de_mao.svg",
+	},
+	{
+		title: "30 anos de experiência",
+		desc: "Desde 1996, entregamos soluções tecnológicas para empresas de todos os portes — de startups a multinacionais. Nosso histórico é sólido, com projetos complexos e resultados consistentes.",
+		iconSrc: "/icons/medalha.svg",
+	},
+	{
+		title: "Resultados que fazem diferença",
+		intro: "Nossas soluções geram impacto mensurável:",
+		bullets: [
+			"mais eficiência",
+			"redução de custos",
+			"processos mais inteligentes",
+			"decisões baseadas em dados",
+		],
+		closing: "Transformamos desafios em oportunidades de crescimento.",
+		iconSrc: "/icons/cifrao_com_check.svg",
+	},
+];
+---
+
+<section id="quem-somos" class="features">
+	<div class="container">
+		<div class="features__panel">
+			<!-- Textura inferior (linhas diagonais discretas) -->
+			<div
+				class="features__texture"
+				aria-hidden="true"
+				style="background: repeating-linear-gradient(-42deg, transparent, transparent 10px, rgba(255,255,255,0.04) 10px, rgba(255,255,255,0.04) 11px); mask-image: linear-gradient(to top, black 0%, transparent 85%); -webkit-mask-image: linear-gradient(to top, black 0%, transparent 85%);"
+			/>
+
+			<h2 class="features__title">
+				Por que escolher a Six Tech?<span
+					class="heading-accent-bar heading-accent-bar--inline"
+					aria-hidden="true"
+				></span>
+			</h2>
+
+			<div class="features__grid">
+				{
+					features.map((item) => (
+						<article class="features__card">
+							<div class="features__icon-wrap" aria-hidden="true">
+								<img
+									src={item.iconSrc}
+									alt=""
+									width="40"
+									height="40"
+									class="features__icon"
+									loading="lazy"
+									decoding="async"
+								/>
+							</div>
+							<h3 class="features__card-title">
+								{item.title}
+							</h3>
+
+							<div class="features__card-content">
+							{"desc" in item ? (
+								<p class="features__text">
+									{item.desc}
+								</p>
+							) : (
+								<div class="features__stack">
+									<p class="features__text">{item.intro}</p>
+									<ul class="features__list">
+										{item.bullets.map((b) => (
+											<li class="features__list-item">{b}</li>
+										))}
+									</ul>
+									<p class="features__text">{item.closing}</p>
+								</div>
+							)}
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.features {
+		position: relative;
+		padding-top: 9.5rem;
+	}
+
+	.features__panel {
+		position: relative;
+		overflow: hidden;
+		border-radius: 2rem;
+		background: var(--bg-surface);
+		padding: 5rem;
+	}
+
+	.features__texture {
+		pointer-events: none;
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 11rem;
+		opacity: 0.35;
+	}
+
+	.features__title {
+		position: relative;
+		z-index: 1;
+		margin: 0 0 3.5rem;
+		text-align: left;
+		font-size: var(--features-title-size);
+		font-weight: 700;
+		line-height: var(--features-title-line-height);
+		letter-spacing: -0.025em;
+		color: var(--text-main);
+	}
+
+	.features__grid {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+	}
+
+	.features__card {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		border-radius: 1.5rem;
+		background: #1A2223;
+		padding: 2.5rem;
+	}
+
+	.features__card:hover {
+		transform: translateY(-0.25rem);
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.6);
+	}
+
+	.features__icon-wrap {
+		margin-bottom: 1rem;
+		flex-shrink: 0;
+		filter: drop-shadow(0 8px 20px -6px rgba(59, 130, 246, 0.45));
+	}
+
+	.features__icon {
+		display: block;
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	.features__card-title {
+		margin: 0 0 0.75rem;
+		font-size: var(--features-card-title-size);
+		font-weight: 700;
+		line-height: 1.375;
+		color: var(--text-main);
+	}
+
+	.features__text {
+		margin: 0;
+		font-size: var(--features-body-size);
+		font-weight: 400;
+		line-height: var(--features-body-line-height);
+		color: #D1D5DB;
+		font-family: "Roboto", system-ui, sans-serif;
+		font-size: .875rem;
+	}
+
+	.features__stack {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		font-size: var(--features-body-size);
+		font-weight: 400;
+		line-height: var(--features-body-line-height);
+		color: #D1D5DB;
+	}
+
+	.features__list {
+		margin: 0;
+		padding-left: 1.25rem;
+		list-style-type: disc;
+	}
+
+	.features__list-item::marker {
+		color: #D1D5DB;
+	}
+
+	.features__list-item {
+		padding-left: 0.125rem;
+	}
+
+	.features__list-item {
+		margin-top: 0.375rem;
+	}
+	.features__card-content {
+		margin-top: 4.5rem;
+	}
+</style>

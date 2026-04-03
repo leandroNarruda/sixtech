@@ -1,0 +1,39 @@
+---
+import type { ClientEntry } from "./clientStrip";
+import ClientStripLogo from "./ClientStripLogo.astro";
+
+interface Props {
+	clients: ClientEntry[];
+}
+
+const { clients } = Astro.props;
+---
+
+<div class="client-strip__track-inner">
+	<div class="client-strip__segment">
+		{clients.map((c) => <ClientStripLogo client={c} />)}
+	</div>
+	<div class="client-strip__segment client-strip__segment--duplicate">
+		{clients.map((c) => <ClientStripLogo client={c} />)}
+	</div>
+</div>
+
+<style>
+	.client-strip__track-inner {
+		display: flex;
+		width: max-content;
+		flex-wrap: nowrap;
+		gap: 0;
+	}
+
+	.client-strip__segment {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		column-gap: 3.5rem;
+	}
+
+	.client-strip__segment--duplicate {
+		padding-left: 3.5rem;
+	}
+</style>
