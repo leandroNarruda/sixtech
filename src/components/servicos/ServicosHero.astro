@@ -1,0 +1,102 @@
+---
+---
+
+<section class="servicos-hero" aria-labelledby="servicos-hero-heading">
+	<div class="servicos-hero__bg" aria-hidden="true">
+		<img
+			class="servicos-hero__bg-img"
+			src="/images/servicos/hero-background.jpg"
+			width="1280"
+			height="800"
+			alt=""
+			loading="eager"
+			decoding="async"
+		/>
+	</div>
+	<div class="servicos-hero__readability" aria-hidden="true"></div>
+	<div class="servicos-hero__shell container">
+		<div class="servicos-hero__inner">
+			<h1 id="servicos-hero-heading" class="servicos-hero__title">
+				Nossos Serviços
+			</h1>
+			<p class="servicos-hero__lead font-inter">
+				Soluções completas em tecnologia para empresas que precisam crescer com eficiência.
+			</p>
+		</div>
+	</div>
+</section>
+
+<style>
+	.servicos-hero {
+		position: relative;
+		display: flex;
+		overflow: hidden;
+		min-height: 100vh;
+		align-items: center;
+		background: var(--color-figma-primary);
+		padding-top: calc(var(--header-h) + 2rem);
+		padding-bottom: 3rem;
+	}
+
+	.servicos-hero__bg {
+		pointer-events: none;
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+	}
+
+	.servicos-hero__bg-img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 72% 42%;
+	}
+
+	.servicos-hero__readability {
+		pointer-events: none;
+		position: absolute;
+		z-index: 0;
+		inset: 0;
+		background: linear-gradient(
+			100deg,
+			rgba(30, 58, 138, 0.88) 0%,
+			rgba(30, 58, 138, 0.45) 52%,
+			rgba(30, 58, 138, 0.12) 100%
+		);
+	}
+
+	.servicos-hero__shell {
+		position: relative;
+		z-index: 1;
+	}
+
+	.servicos-hero__inner {
+		display: flex;
+		width: 100%;
+		max-width: 45.125rem; /* 722px — bloco no Figma (152:603) */
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2rem; /* 32px */
+	}
+
+	.servicos-hero__title {
+		margin: 0;
+		font-family: inherit;
+		font-size: clamp(1.75rem, 4vw, 3rem); /* 48px desktop */
+		font-weight: 700;
+		line-height: 1.1;
+		text-align: left;
+		text-transform: uppercase;
+		color: var(--text-main);
+	}
+
+	.servicos-hero__lead {
+		margin: 0;
+		max-width: 45.125rem;
+		font-size: clamp(1.125rem, 3vw, 2rem); /* 32px desktop */
+		font-weight: 400;
+		line-height: normal;
+		color: var(--text-main);
+	}
+</style>

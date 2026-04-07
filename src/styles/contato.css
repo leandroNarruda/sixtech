@@ -1,0 +1,11 @@
+/* Página Contato — hero alinhado ao frame Figma (152:802) */
+
+.page-contato .site-header {
+	padding: 2rem 0;
+}
+
+.page-contato__main {
+	position: relative;
+	z-index: 1;
+	background: var(--color-figma-secondary);
+}

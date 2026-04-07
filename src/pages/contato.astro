@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContatoHero from '../components/contato/ContatoHero.astro';
+import ContatoForm from '../components/contato/ContatoForm.astro';
+import ContatoInformacoes from '../components/contato/ContatoInformacoes.astro';
+import '../styles/contato.css';
+---
+
+<Layout
+	title="sixtech — Contato"
+	description="Fale com a Six Tech. Esclareça dúvidas, compartilhe ideias ou explore parcerias em tecnologia."
+>
+	<div class="page-hero page-contato">
+		<Header active="contato" />
+		<ContatoHero />
+	</div>
+	<main class="page-contato__main" id="conteudo-principal">
+		<ContatoForm />
+		<ContatoInformacoes />
+	</main>
+	<Footer />
+</Layout>

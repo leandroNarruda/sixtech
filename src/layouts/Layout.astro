@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import WhatsAppFloating from '../components/WhatsAppFloating.astro';
 
 interface Props {
 	title: string;
@@ -26,5 +27,6 @@ const { title, description = "sixtech — Transformamos ideias em sistemas que i
 	</head>
 	<body>
 		<slot />
+		<WhatsAppFloating />
 	</body>
 </html>

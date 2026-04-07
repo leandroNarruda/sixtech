@@ -10,9 +10,9 @@ const { active } = Astro.props;
 const navLinks: { href: string; label: string; key: HeaderActiveNav }[] = [
 	{ href: '/', label: 'Home', key: 'home' },
 	{ href: '/quem-somos', label: 'Quem somos', key: 'quem-somos' },
-	{ href: '/#servicos', label: 'Serviços', key: 'servicos' },
-	{ href: '/#portfolio', label: 'Portfólio', key: 'portfolio' },
-	{ href: '/#contato', label: 'Contato', key: 'contato' },
+	{ href: '/servicos', label: 'Serviços', key: 'servicos' },
+	{ href: '/portfolio', label: 'Portfólio', key: 'portfolio' },
+	{ href: '/contato', label: 'Contato', key: 'contato' },
 ];
 
 const drawerId = 'site-header-drawer';
@@ -49,7 +49,7 @@ const menuBtnId = 'site-header-menu-btn';
 		</nav>
 
 		<div class="site-header__actions site-header__actions--desktop">
-			<a class="site-header__cta" href="/#contato">Solicite uma proposta</a>
+			<a class="site-header__cta" href="/contato">Solicite uma proposta</a>
 		</div>
 
 		<button
@@ -102,7 +102,7 @@ const menuBtnId = 'site-header-menu-btn';
 				}
 			</ul>
 		</nav>
-		<a class="site-header__drawer-cta" href="/#contato" data-drawer-link>Solicite uma proposta</a>
+		<a class="site-header__drawer-cta" href="/contato" data-drawer-link>Solicite uma proposta</a>
 	</div>
 </header>
 
@@ -228,7 +228,13 @@ const menuBtnId = 'site-header-menu-btn';
 	}
 
 	.site-header__link--active {
-		font-weight: 500;
+		font-weight: 700;
+		color: var(--text-ice);
+	}
+
+	.site-header__link--active:hover,
+	.site-header__link--active:focus-visible {
+		color: var(--text-ice);
 	}
 
 	.site-header__actions--desktop {
@@ -338,7 +344,9 @@ const menuBtnId = 'site-header-menu-btn';
 		font-weight: 500;
 		color: var(--text-main);
 		text-decoration: none;
-		transition: background 0.2s;
+		transition:
+			background 0.2s,
+			color 0.2s;
 	}
 
 	.site-header__drawer-link:hover,
@@ -347,7 +355,8 @@ const menuBtnId = 'site-header-menu-btn';
 	}
 
 	.site-header__drawer-link--active {
-		color: var(--color-figma-accent);
+		font-weight: 700;
+		color: var(--text-ice);
 	}
 
 	.site-header__drawer-cta {

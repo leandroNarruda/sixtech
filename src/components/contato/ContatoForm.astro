@@ -1,0 +1,274 @@
+---
+---
+
+<section class="contato-form-section" aria-labelledby="contato-form-title">
+	<div class="container contato-form-section__shell">
+		<h2 id="contato-form-title" class="visually-hidden">Formulário de contato</h2>
+		<form
+			class="contato-form"
+			name="contato"
+			method="POST"
+			data-netlify="true"
+			netlify-honeypot="bot-field"
+			action="/contato"
+		>
+			<input type="hidden" name="form-name" value="contato" />
+
+			<p class="visually-hidden">
+				<label>
+					Não preencha se for humano:
+					<input name="bot-field" tabindex="-1" autocomplete="off" />
+				</label>
+			</p>
+
+			<div class="contato-form__field">
+				<label class="visually-hidden" for="contato-nome">Nome completo</label>
+				<input
+					id="contato-nome"
+					class="contato-form__input"
+					type="text"
+					name="nome"
+					autocomplete="name"
+					placeholder="Nome Completo"
+					required
+				/>
+			</div>
+
+			<div class="contato-form__field">
+				<label class="visually-hidden" for="contato-email">E-mail</label>
+				<input
+					id="contato-email"
+					class="contato-form__input"
+					type="email"
+					name="email"
+					autocomplete="email"
+					inputmode="email"
+					placeholder="E-mail"
+					required
+				/>
+			</div>
+
+			<div class="contato-form__field">
+				<label class="visually-hidden" for="contato-telefone">Telefone</label>
+				<input
+					id="contato-telefone"
+					class="contato-form__input"
+					type="tel"
+					name="telefone"
+					autocomplete="tel"
+					inputmode="tel"
+					placeholder="Telefone"
+					required
+				/>
+			</div>
+
+			<div class="contato-form__field">
+				<label class="visually-hidden" for="contato-mensagem">Descrição do projeto</label>
+				<textarea
+					id="contato-mensagem"
+					class="contato-form__textarea"
+					name="mensagem"
+					rows="5"
+					placeholder="Descreva seu projeto"
+					required
+				></textarea>
+			</div>
+
+			<div class="contato-form__field contato-form__field--checkbox">
+				<input
+					id="contato-privacidade"
+					class="contato-form__checkbox"
+					type="checkbox"
+					name="privacidade"
+					value="aceito"
+					required
+				/>
+				<label class="contato-form__checkbox-label" for="contato-privacidade">
+					Aceito política de privacidade
+				</label>
+			</div>
+
+			<div class="contato-form__actions">
+				<button type="submit" class="btn btn-blue contato-form__submit">Enviar</button>
+			</div>
+		</form>
+	</div>
+</section>
+
+<style>
+	.contato-form-section {
+		--contato-field-bg: #222d2f;
+		--contato-field-border: #2a393b;
+		--contato-field-text: var(--color-figma-gray);
+	}
+
+	.contato-form-section__shell {
+		display: flex;
+		justify-content: center;
+		padding-block: 8.94rem 9.31rem;
+	}
+
+	@media (max-width: 767px) {
+		.contato-form-section__shell {
+			padding-block: 3.75rem;
+		}
+	}
+
+	.contato-form {
+		display: flex;
+		width: 100%;
+		max-width: 46rem; /* 736px — Figma (160:351) */
+		flex-direction: column;
+		align-items: stretch;
+		gap: 1.6875rem; /* 27px */
+		border-radius: 3rem; /* 48px */
+		background: var(--color-figma-surface);
+		padding: clamp(1.75rem, 5vw, 3.5rem); /* 56px desktop */
+		font-family: "Inter", system-ui, sans-serif;
+	}
+
+	.contato-form__field {
+		margin: 0;
+	}
+
+	.contato-form__input {
+		box-sizing: border-box;
+		width: 100%;
+		height: 3.5rem; /* 56px */
+		border-radius: 5rem; /* 80px */
+		border: 1px solid var(--contato-field-border);
+		background: var(--contato-field-bg);
+		padding: 1.125rem 2rem; /* 18px 32px */
+		font: inherit;
+		font-size: var(--fs-base);
+		font-weight: 400;
+		line-height: normal;
+		color: var(--text-main);
+		transition:
+			border-color 0.2s,
+			box-shadow 0.2s;
+	}
+
+	.contato-form__input::placeholder {
+		color: var(--contato-field-text);
+	}
+
+	.contato-form__input:hover {
+		border-color: rgba(209, 213, 219, 0.35);
+	}
+
+	.contato-form__input:focus-visible {
+		border-color: var(--accent-cyan);
+		outline: none;
+		box-shadow: 0 0 0 2px rgba(51, 232, 255, 0.25);
+	}
+
+	.contato-form__textarea {
+		box-sizing: border-box;
+		width: 100%;
+		min-height: 10rem; /* 160px */
+		resize: vertical;
+		border-radius: 1.5rem; /* 24px */
+		border: 1px solid var(--contato-field-border);
+		background: var(--contato-field-bg);
+		padding: 1.5rem 2rem; /* 24px 32px */
+		font: inherit;
+		font-size: var(--fs-base);
+		font-weight: 400;
+		line-height: 1.45;
+		color: var(--text-main);
+		transition:
+			border-color 0.2s,
+			box-shadow 0.2s;
+	}
+
+	.contato-form__textarea::placeholder {
+		color: var(--contato-field-text);
+	}
+
+	.contato-form__textarea:hover {
+		border-color: rgba(209, 213, 219, 0.35);
+	}
+
+	.contato-form__textarea:focus-visible {
+		border-color: var(--accent-cyan);
+		outline: none;
+		box-shadow: 0 0 0 2px rgba(51, 232, 255, 0.25);
+	}
+
+	.contato-form__field--checkbox {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem; /* 8px — Figma */
+	}
+
+	/* Checkbox: sem appearance:none o SO desenha o controle e ignora border-radius/background */
+	.contato-form__checkbox {
+		appearance: none;
+		-webkit-appearance: none;
+		position: relative;
+		flex-shrink: 0;
+		box-sizing: border-box;
+		width: 1.5rem;
+		height: 1.5rem;
+		margin: 0;
+		border-radius: 0.25rem; /* 4px — Figma */
+		border: 1px solid var(--contato-field-border);
+		background-color: var(--contato-field-bg);
+		cursor: pointer;
+	}
+
+	.contato-form__checkbox:checked {
+		border-color: var(--color-figma-primary);
+		background-color: var(--color-figma-primary);
+	}
+
+	.contato-form__checkbox:checked::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 0.375rem; /* ~6px — perna curta do ✓ */
+		height: 0.6875rem; /* ~11px — perna longa */
+		border: 2.5px solid var(--text-main);
+		border-top: 0;
+		border-left: 0;
+		transform: translate(-50%, -58%) rotate(45deg);
+	}
+
+	.contato-form__checkbox:focus-visible {
+		outline: 2px solid var(--accent-cyan);
+		outline-offset: 2px;
+	}
+
+	.contato-form__checkbox-label {
+		font-size: var(--fs-base);
+		font-weight: 400;
+		line-height: normal;
+		color: var(--contato-field-text);
+		cursor: pointer;
+	}
+
+	.contato-form__actions {
+		display: flex;
+		align-items: center;
+	}
+
+	.contato-form__submit {
+		border: none;
+		cursor: pointer;
+		font-family: inherit;
+	}
+
+	/* Figma Contato mobile (184:1574–1580): texto dos campos e checkbox 12px; Enviar 16px — .btn-blue */
+	@media (max-width: 767px) {
+		.contato-form__input,
+		.contato-form__textarea {
+			font-size: 0.75rem; /* 12px */
+		}
+
+		.contato-form__checkbox-label {
+			font-size: 0.75rem; /* 12px */
+		}
+	}
+</style>

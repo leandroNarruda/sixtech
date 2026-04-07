@@ -1,0 +1,160 @@
+---
+import HeadingAccentBar from "../HeadingAccentBar.astro";
+import { contactInfo } from "../../data/contact";
+---
+
+<section class="contato-info" aria-labelledby="contato-info-heading">
+	<div class="container contato-info__inner">
+		<div class="contato-info__text">
+			<h2 id="contato-info-heading" class="contato-info__title heading-with-accent">
+				Informações<HeadingAccentBar />
+			</h2>
+			<div class="contato-info__details font-inter">
+				<p class="contato-info__line">{contactInfo.addressLine}</p>
+				<p class="contato-info__line">
+					<a href={contactInfo.phones[0].href} class="contato-info__link">{contactInfo.phones[0].label}</a>
+					<span class="contato-info__sep" aria-hidden="true"> | </span>
+					<a href={contactInfo.phones[1].href} class="contato-info__link">{contactInfo.phones[1].label}</a>
+				</p>
+				<p class="contato-info__line">
+					<a href={contactInfo.email.href} class="contato-info__link">{contactInfo.email.label}</a>
+				</p>
+			</div>
+		</div>
+		<div class="contato-info__map">
+			<iframe
+				class="contato-info__map-frame"
+				title="Localização Six Tech no Google Maps"
+				src={contactInfo.googleMapsEmbedSrc}
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+				allowfullscreen
+			></iframe>
+		</div>
+	</div>
+</section>
+
+<style>
+	.contato-info {
+		padding-block: clamp(3rem, 8vw, 5.5rem);
+	}
+
+	.contato-info__inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: clamp(1.25rem, 2.5vw, 1.4375rem); /* ~23px — Figma entre colunas */
+	}
+
+	.contato-info__text {
+		display: flex;
+		flex: 1 1 18rem;
+		max-width: 34.625rem; /* 554px — Figma */
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2.6875rem; /* 43px — Figma */
+	}
+
+	.contato-info__title {
+		margin: 0;
+		font-size: clamp(1.75rem, 4vw, 2.5rem); /* 40px desktop — Figma */
+		font-weight: 700;
+		line-height: 1.2;
+		color: var(--text-main);
+		letter-spacing: -0.02em;
+	}
+
+	.contato-info__details {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		font-size: 1.125rem; /* 18px — Figma */
+		font-weight: 400;
+		line-height: normal;
+		color: var(--color-figma-gray);
+	}
+
+	.contato-info__line {
+		margin: 0;
+	}
+
+	.contato-info__line + .contato-info__line {
+		margin-top: 0.25rem;
+	}
+
+	.contato-info__sep {
+		color: var(--color-figma-gray);
+	}
+
+	.contato-info__link {
+		color: inherit;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.contato-info__link:hover,
+	.contato-info__link:focus-visible {
+		color: var(--text-main);
+	}
+
+	.contato-info__link:focus-visible {
+		outline: 2px solid var(--accent-cyan);
+		outline-offset: 2px;
+	}
+
+	.contato-info__map {
+		flex: 1 1 18rem;
+		width: 100%;
+		max-width: 33.9375rem; /* 543px — Figma */
+		overflow: hidden;
+		border-radius: 1.5rem; /* 24px — Figma */
+		background: var(--color-figma-card);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+	}
+
+	.contato-info__map-frame {
+		display: block;
+		width: 100%;
+		height: 22.75rem; /* 364px — Figma */
+		border: none;
+	}
+
+	@media (max-width: 767px) {
+		.contato-info__inner {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		/* Mapa: iframe preenche o retângulo (evita faixa escura por flex-grow ou altura ≠ iframe) */
+		.contato-info__map {
+			flex: 0 0 auto;
+			position: relative;
+			aspect-ratio: 1 / 1;
+			max-height: 22.75rem; /* 364px — Figma */
+		}
+
+		.contato-info__map-frame {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			min-height: 0;
+		}
+
+		.contato-info__text {
+			flex: 1 1 auto;
+			margin-bottom: 2rem;
+		}
+
+		/* Figma Contato mobile (184:1585–1587): título 32px, linhas 12px */
+		.contato-info__title {
+			font-size: 2rem; /* 32px */
+		}
+
+		.contato-info__details {
+			font-size: 0.75rem; /* 12px */
+		}
+	}
+</style>

@@ -1,0 +1,246 @@
+---
+export interface Props {
+	title: string;
+	description: string;
+	badgeText: string;
+	buttonText: string;
+	buttonHref?: string;
+	imageSrc: string;
+	imageAlt: string;
+	/** true = imagem à direita (texto à esquerda) */
+	reverse?: boolean;
+	/** transparent = fundo da página; surface/card = faixas do Figma */
+	bgColor?: "transparent" | "surface" | "card";
+}
+
+const {
+	title,
+	description,
+	badgeText,
+	buttonText,
+	buttonHref = "#contato",
+	imageSrc,
+	imageAlt,
+	reverse = false,
+	bgColor = "transparent",
+} = Astro.props;
+
+const titleLines = title.split("\n").filter(Boolean);
+
+function slugify(value: string): string {
+	return value
+		.toLowerCase()
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "")
+		.replace(/ç/g, "c")
+		.replace(/ñ/g, "n")
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/^-+|-+$/g, "");
+}
+
+const headingSlug = slugify(titleLines.join("-"));
+
+const sectionClass = [
+	"service-detail-row",
+	`service-detail-row--bg-${bgColor}`,
+	reverse ? "service-detail-row--reverse" : "",
+]
+	.filter(Boolean)
+	.join(" ");
+---
+
+<section class={sectionClass} aria-labelledby={`service-detail-title-${headingSlug}`}>
+	<div class="container service-detail-row__inner">
+		<div class="service-detail-row__media">
+			<div class="service-detail-row__frame">
+				<img
+					class="service-detail-row__img"
+					src={imageSrc}
+					alt={imageAlt}
+					loading="lazy"
+					decoding="async"
+					width="544"
+					height="389"
+				/>
+			</div>
+		</div>
+
+		<div class="service-detail-row__content">
+			<div class="service-detail-row__text-block">
+				<h2 class="service-detail-row__title" id={`service-detail-title-${headingSlug}`}>
+					{titleLines.map((line, i) => (
+						<>
+							{line}
+							{i < titleLines.length - 1 && <br />}
+						</>
+					))}
+				</h2>
+				<p class="service-detail-row__description">{description}</p>
+				<p class="service-detail-row__badge">{badgeText}</p>
+			</div>
+			<a href={buttonHref} class="btn-blue service-detail-row__cta">
+				{buttonText}
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.service-detail-row {
+		--service-detail-gap: clamp(2rem, 6vw, 7.875rem); /* ~126px */
+		--service-detail-pad-band: clamp(2.5rem, 8vw, 5rem); /* 80px — faixas surface/card */
+	}
+
+	/* Linhas sem faixa: espaçamento vertical vem do empilhamento (.service-detail-rows) */
+	.service-detail-row--bg-transparent {
+		background: transparent;
+		padding-block: 0;
+	}
+
+	.service-detail-row--bg-surface {
+		background: var(--color-figma-surface);
+		padding-block: var(--service-detail-pad-band);
+	}
+
+	.service-detail-row--bg-card {
+		background: var(--color-figma-card);
+		padding-block: var(--service-detail-pad-band);
+	}
+
+	.service-detail-row__inner {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: var(--service-detail-gap);
+	}
+
+	.service-detail-row--reverse .service-detail-row__inner {
+		flex-direction: row-reverse;
+	}
+
+	.service-detail-row__media {
+		flex: 0 1 34rem; /* ~544px */
+		min-width: 0;
+	}
+
+	.service-detail-row__frame {
+		position: relative;
+		width: 100%;
+		border-radius: 1.5rem; /* 24px */
+		overflow: hidden;
+		aspect-ratio: 544 / 389;
+	}
+
+	.service-detail-row__img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.service-detail-row__content {
+		flex: 0 1 27.9375rem; /* ~447px */
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		gap: clamp(2rem, 5vw, 3.75rem); /* ~60px entre bloco e CTA */
+		min-width: 0;
+	}
+
+	.service-detail-row__text-block {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.1875rem; /* ~19px */
+		width: 100%;
+	}
+
+	.service-detail-row__title {
+		margin: 0;
+		font-family: inherit;
+		font-size: clamp(2rem, 4vw, 2.5rem); /* 40px */
+		font-weight: 700;
+		line-height: 1.15;
+		color: var(--text-main);
+	}
+
+	.service-detail-row__description {
+		margin: 0;
+		font-size: var(--fs-base);
+		font-weight: 400;
+		line-height: 1.5;
+		color: var(--color-figma-gray);
+	}
+
+	.service-detail-row__badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0.25rem 0.75rem;
+		border: 1px solid var(--color-figma-accent);
+		border-radius: 5rem;
+		font-size: var(--fs-base);
+		font-weight: 600;
+		color: var(--color-figma-gray);
+		align-self: flex-start;
+	}
+
+	.service-detail-row__cta {
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 767px) {
+		.service-detail-row__inner {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 2.5rem; /* Figma mobile: 40px entre mídia e conteúdo */
+		}
+
+		.service-detail-row--reverse .service-detail-row__inner {
+			flex-direction: column;
+		}
+
+		/* Mobile: imagem primeiro (Figma costuma priorizar mídia no topo) */
+		.service-detail-row--reverse .service-detail-row__media {
+			order: -1;
+		}
+
+		.service-detail-row:not(.service-detail-row--reverse) .service-detail-row__media {
+			order: -1;
+		}
+
+		.service-detail-row__media {
+			flex: 1 1 auto;
+			width: 100%;
+		}
+
+		.service-detail-row__content {
+			flex: 1 1 auto;
+			width: 100%;
+			gap: 1.875rem; /* Figma mobile: 30px entre bloco de texto e CTA */
+		}
+
+		.service-detail-row__text-block {
+			gap: 0.75rem; /* Figma mobile: 12px entre título, descrição e badge */
+		}
+
+		.service-detail-row__badge {
+			font-size: 0.75rem; /* Figma mobile: 12px */
+		}
+
+		.service-detail-row__title {
+			font-size: 2rem;
+		}
+	}
+</style>
+
+<!-- Empilhar várias linhas na página Serviços: gap ~140px entre blocos (Figma) -->
+<style is:global>
+	.service-detail-rows {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(4rem, 10vw, 8.75rem);
+	}
+</style>

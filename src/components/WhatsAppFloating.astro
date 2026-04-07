@@ -1,0 +1,77 @@
+---
+import { contactInfo } from "../data/contact";
+
+const { href } = contactInfo.whatsapp;
+---
+
+<a
+	class="wa-float"
+	href={href}
+	target="_blank"
+	rel="noopener noreferrer"
+	aria-label="Conversar no WhatsApp"
+>
+	<img
+		class="wa-float__icon"
+		src="/icons/whatsapp.svg"
+		width="40"
+		height="40"
+		alt=""
+		aria-hidden="true"
+		decoding="async"
+	/>
+</a>
+
+<style>
+	.wa-float {
+		position: fixed;
+		z-index: 210;
+		/* Hero alto (~100vh): sem min() o fixed ficava abaixo da área visível. */
+		top: min(
+			calc(var(--page-hero-height, 0px) + 4.31rem),
+			calc(100vh - 2.5rem - 1rem)
+		);
+		right: 1.2rem;
+		display: flex;
+		width: 2.5rem;
+		height: 2.5rem;
+		align-items: center;
+		justify-content: center;
+		line-height: 0;
+	}
+
+	.wa-float:focus-visible {
+		outline: 2px solid var(--accent-cyan);
+		outline-offset: 3px;
+		border-radius: 0.25rem;
+	}
+
+	.wa-float__icon {
+		display: block;
+		width: 2.5rem;
+		height: 2.5rem;
+		object-fit: contain;
+	}
+</style>
+
+<script>
+	function setPageHeroHeight() {
+		const el = document.querySelector(".page-hero");
+		const h = el ? el.getBoundingClientRect().height : 0;
+		document.documentElement.style.setProperty("--page-hero-height", `${Math.round(h)}px`);
+	}
+
+	setPageHeroHeight();
+	window.addEventListener("resize", setPageHeroHeight);
+	document.fonts?.ready?.then(setPageHeroHeight);
+
+	requestAnimationFrame(() => {
+		requestAnimationFrame(setPageHeroHeight);
+	});
+
+	const hero = document.querySelector(".page-hero");
+	if (hero && typeof ResizeObserver !== "undefined") {
+		const ro = new ResizeObserver(setPageHeroHeight);
+		ro.observe(hero);
+	}
+</script>

@@ -1,0 +1,10 @@
+/* Página Portfólio — hero alinhado ao frame Serviços */
+
+.page-portfolio .site-header {
+	padding: 2rem 0;
+}
+
+.page-portfolio__main {
+	position: relative;
+	z-index: 1;
+}

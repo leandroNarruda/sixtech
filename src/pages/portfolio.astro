@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PortfolioHero from '../components/portfolio/PortfolioHero.astro';
+import PortfolioSection from '../components/portfolio/PortfolioSection.astro';
+import PortfolioClientsSection from '../components/portfolio/PortfolioClientsSection.astro';
+import '../styles/portfolio.css';
+---
+
+<Layout
+	title="sixtech — Portfólio"
+	description="Casos de sucesso e projetos da Six Tech. Parceria e inovação em sistemas."
+>
+	<div class="page-hero page-portfolio">
+		<Header active="portfolio" />
+		<PortfolioHero />
+	</div>
+	<main class="page-portfolio__main">
+		<PortfolioSection />
+		<PortfolioClientsSection />
+	</main>
+	<Footer />
+</Layout>

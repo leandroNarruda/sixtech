@@ -1,0 +1,389 @@
+---
+import PortfolioCard from './PortfolioCard.astro';
+import { portfolioCards } from '../../data/portfolio';
+---
+
+<section class="portfolio-section" aria-labelledby="portfolio-cta-heading">
+	<div class="portfolio-section__surface">
+		<div class="portfolio-section__scroll-wrap">
+			<!-- Carousel Wrapper -->
+			<div class="portfolio-carousel-wrapper">
+				<button class="carousel-nav-btn prev" aria-label="Projetos Anteriores" type="button" hidden>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+				</button>
+
+				<div class="portfolio-section__track" role="list">
+					<!-- Spacer to create the initial offset -->
+					<div class="portfolio-section__spacer" aria-hidden="true"></div>
+
+					{portfolioCards.map((item) => (
+						<div class="portfolio-section__item" role="listitem">
+							<PortfolioCard {...item} />
+						</div>
+					))}
+				</div>
+
+				<button class="carousel-nav-btn next" aria-label="Próximos Projetos" type="button" hidden>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+				</button>
+			</div>
+		</div>
+		<div class="portfolio-section__cta container">
+			<h2 id="portfolio-cta-heading" class="portfolio-section__cta-title">
+				Quer um projeto assim?
+			</h2>
+			<a href="/#contato" class="btn btn-blue">Solicite Proposta</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.portfolio-section {
+		position: relative;
+		margin: 0;
+		padding: 0;
+	}
+
+	.portfolio-section__surface {
+		background: var(--bg-surface, #161c1d);
+		padding-block: 8.75rem 5rem;
+		overflow: hidden; /* Prevent horizontal scroll from wrapper elements */
+	}
+
+	.portfolio-section__scroll-wrap {
+		position: relative;
+	}
+
+	.portfolio-carousel-wrapper {
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
+
+	.carousel-nav-btn {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 10;
+		width: 3.5rem;
+		height: 3.5rem;
+		border-radius: 50%;
+		background: rgba(22, 28, 29, 0.7);
+		backdrop-filter: blur(12px);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		color: var(--text-main, #fff);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	/*
+	 * O atributo HTML `hidden` precisa vencer `display: flex` acima.
+	 * Sem !important, a regra local sobrescreve o [hidden] do preflight (mesma especificidade, ordem depois).
+	 */
+	.carousel-nav-btn[hidden],
+	.carousel-nav-btn.carousel-nav-btn--off {
+		display: none !important;
+	}
+
+	.carousel-nav-btn:hover {
+		background: var(--accent-cyan, #33e8ff);
+		color: #000;
+		transform: translateY(-50%) scale(1.05);
+		border-color: var(--accent-cyan, #33e8ff);
+		box-shadow: 0 0 20px rgba(51, 232, 255, 0.4);
+	}
+
+	.carousel-nav-btn:active {
+		transform: translateY(-50%) scale(0.95);
+	}
+
+	.carousel-nav-btn.prev {
+		left: 1.5rem;
+	}
+
+	.carousel-nav-btn.next {
+		right: 1.5rem;
+	}
+
+	@media (max-width: 767px) {
+		.carousel-nav-btn {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+
+		.carousel-nav-btn.prev {
+			left: 0.5rem;
+		}
+
+		.carousel-nav-btn.next {
+			right: 0.5rem;
+		}
+	}
+
+	.portfolio-section__track {
+		display: flex;
+		gap: 1.375rem; /* ~22px */
+		padding-bottom: 1rem;
+		/* padding-left: max(var(--page-gutter), calc((100vw - var(--container-max)) / 2 + var(--page-gutter))); */
+		padding-right: max(var(--page-gutter), calc((100vw - var(--container-max)) / 2 + var(--page-gutter)));
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		scroll-snap-type: x proximity;
+		align-items: stretch;
+		width: 100%;
+
+		/* Ocultar scrollbar */
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* IE/Edge */
+	}
+
+	.portfolio-section__track::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
+
+	.portfolio-section__track:focus-visible {
+		outline: 2px solid var(--accent-cyan);
+		outline-offset: 4px;
+	}
+
+	.portfolio-section__item {
+		flex: 0 0 auto;
+		scroll-snap-align: start;
+		display: flex;
+		align-items: stretch;
+	}
+
+	.portfolio-section__spacer {
+		flex: 0 0 auto;
+		width: var(--carousel-offset, 0);
+		scroll-snap-align: start;
+	}
+
+	@media (min-width: 768px) {
+		.portfolio-section__spacer {
+			--carousel-offset: 10vw; /* width of one card */
+		}
+	}
+
+	@media (min-width: 768px) {
+		.portfolio-section__track {
+			gap: 1.375rem;
+			justify-content: flex-start;
+			flex-wrap: nowrap;
+		}
+	}
+
+	/**
+	 * Mobile: um card por vez, centralizado; gap uniforme entre slides (sem spacer 10vw).
+	 * scroll-padding alinhado ao padding para o snap coincidir com o centro da área visível.
+	 */
+	@media (max-width: 767px) {
+		.portfolio-section__track {
+			--portfolio-slide-w: min(22.375rem, calc(100vw - 2 * var(--page-gutter)));
+			gap: 0.75rem;
+			padding-inline: max(var(--page-gutter), calc((100vw - var(--portfolio-slide-w)) / 2));
+			scroll-padding-inline: max(var(--page-gutter), calc((100vw - var(--portfolio-slide-w)) / 2));
+			scroll-snap-type: x mandatory;
+		}
+
+		.portfolio-section__item {
+			flex: 0 0 var(--portfolio-slide-w);
+			width: var(--portfolio-slide-w);
+			max-width: var(--portfolio-slide-w);
+			scroll-snap-align: center;
+			scroll-snap-stop: always;
+		}
+
+		.portfolio-section__spacer {
+			display: none;
+		}
+	}
+
+	.portfolio-section__cta {
+		display: flex;
+		max-width: var(--container-max);
+		flex-direction: column;
+		align-items: center;
+		gap: 4rem; /* ~64px Figma */
+		margin-inline: auto;
+		margin-top: clamp(2.5rem, 5vw, 4rem);
+		padding-inline: var(--page-gutter);
+		text-align: center;
+	}
+
+	.portfolio-section__cta-title {
+		margin: 0;
+		max-width: 28rem;
+		font-family: inherit;
+		font-size: clamp(1.25rem, 3vw, 2rem); /* ~32px desktop */
+		font-weight: 400;
+		line-height: normal;
+		color: var(--text-main);
+	}
+</style>
+
+<script>
+	const wrappers = document.querySelectorAll('.portfolio-carousel-wrapper');
+
+	wrappers.forEach((wrapper) => {
+		const track = wrapper.querySelector('.portfolio-section__track') as HTMLElement;
+		const prevBtn = wrapper.querySelector('.carousel-nav-btn.prev') as HTMLButtonElement;
+		const nextBtn = wrapper.querySelector('.carousel-nav-btn.next') as HTMLButtonElement;
+
+		if (!track) return;
+
+		const isMobileCarousel = () => window.matchMedia('(max-width: 767px)').matches;
+
+		const getItems = (): HTMLElement[] =>
+			Array.from(track.querySelectorAll('.portfolio-section__item')) as HTMLElement[];
+
+		/** Índice do card cujo centro está mais próximo do centro do track (para snap central no mobile). */
+		const getNearestItemIndex = (): number => {
+			const items = getItems();
+			if (!items.length) return 0;
+			const tr = track.getBoundingClientRect();
+			const centerX = tr.left + tr.width / 2;
+			let best = 0;
+			let bestDist = Infinity;
+			items.forEach((el, i) => {
+				const r = el.getBoundingClientRect();
+				const cx = r.left + r.width / 2;
+				const d = Math.abs(cx - centerX);
+				if (d < bestDist) {
+					bestDist = d;
+					best = i;
+				}
+			});
+			return best;
+		};
+
+		// --- Scroll Buttons Logic ---
+		const scrollAmount = () => {
+			const item = track.querySelector('.portfolio-section__item') as HTMLElement;
+			if (item) {
+				const gap = parseFloat(getComputedStyle(track).gap) || 0;
+				const itemsToScroll = window.innerWidth >= 768 ? 2 : 1;
+				return (item.offsetWidth + gap) * itemsToScroll;
+			}
+			return track.clientWidth * 0.8;
+		};
+
+		const scrollTrack = (direction: 'prev' | 'next') => {
+			if (isMobileCarousel()) {
+				const items = getItems();
+				if (!items.length) return;
+				const idx = getNearestItemIndex();
+				const delta = direction === 'next' ? 1 : -1;
+				const target = Math.min(items.length - 1, Math.max(0, idx + delta));
+				items[target]?.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
+				return;
+			}
+
+			const amount = scrollAmount();
+			const newScrollPosition = track.scrollLeft + (direction === 'next' ? amount : -amount);
+
+			track.scrollTo({
+				left: newScrollPosition,
+				behavior: 'smooth'
+			});
+		};
+
+		if (prevBtn) {
+			// Seta Esquerda (<) vai rolar para os próximos (cards movem para a esquerda)
+			prevBtn.addEventListener('click', () => scrollTrack('next'));
+		}
+
+		if (nextBtn) {
+			// Seta Direita (>) vai rolar para os anteriores (cards movem para a direita)
+			nextBtn.addEventListener('click', () => scrollTrack('prev'));
+		}
+
+		const setNavShown = (btn: HTMLButtonElement, shown: boolean) => {
+			btn.hidden = !shown;
+			btn.classList.toggle('carousel-nav-btn--off', !shown);
+			if (shown) btn.removeAttribute('aria-hidden');
+			else btn.setAttribute('aria-hidden', 'true');
+		};
+
+		// Só leitura — nunca escrever em scrollLeft aqui (rodando em cada `scroll`),
+		// senão o momentum / scroll suave quebra.
+		const updateButtonsState = () => {
+			if (!prevBtn || !nextBtn) return;
+
+			const maxScrollLeft = Math.max(0, track.scrollWidth - track.clientWidth);
+			if (maxScrollLeft <= 1) {
+				setNavShown(prevBtn, false);
+				setNavShown(nextBtn, false);
+				return;
+			}
+
+			if (isMobileCarousel()) {
+				const items = getItems();
+				if (!items.length) return;
+				const idx = getNearestItemIndex();
+				setNavShown(prevBtn, idx < items.length - 1);
+				setNavShown(nextBtn, idx > 0);
+				return;
+			}
+
+			const sl = track.scrollLeft;
+
+			// Fim “útil”: último card inteiro na área visível (antes do padding vazio à direita).
+			// Só maxScrollLeft faria o usuário rolar até o fim do padding — fim de curso tardio.
+			const items = track.querySelectorAll('.portfolio-section__item');
+			const lastItem = items[items.length - 1] as HTMLElement | undefined;
+			let isAtEnd = sl >= maxScrollLeft - 1;
+			if (lastItem) {
+				const tr = track.getBoundingClientRect();
+				const lr = lastItem.getBoundingClientRect();
+				const cs = getComputedStyle(track);
+				const br = parseFloat(cs.borderRightWidth) || 0;
+				const pr = parseFloat(cs.paddingRight) || 0;
+				const innerRight = tr.right - br - pr;
+				const endInsetRight = 20; /* respiro antes do vazio / botão */
+				if (lr.right <= innerRight - endInsetRight) {
+					isAtEnd = true;
+				}
+			}
+
+			// “Voltar”: scrollLeft costuma ser 0 no início, mas snap/layout podem reportar > 0
+			// sem haver rolagem útil. O spacer é o primeiro bloco do eixo: se ainda está
+			// encostado no início do conteúdo visível, não mostramos a seta (só leitura).
+			const spacer = track.querySelector('.portfolio-section__spacer');
+			let canGoBack = sl > 0.5;
+			if (spacer) {
+				const tr = track.getBoundingClientRect();
+				const sr = spacer.getBoundingClientRect();
+				const pl = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+				const contentLeft = tr.left + track.clientLeft + pl;
+				const spacerFlushStart = sr.left >= contentLeft - 2;
+				if (spacerFlushStart) canGoBack = false;
+			}
+
+			setNavShown(prevBtn, !isAtEnd);
+			setNavShown(nextBtn, canGoBack);
+		};
+
+		const scheduleUpdate = () => {
+			requestAnimationFrame(() => {
+				updateButtonsState();
+				requestAnimationFrame(updateButtonsState);
+			});
+		};
+
+		track.addEventListener('scroll', updateButtonsState, { passive: true });
+		track.addEventListener('scrollend', updateButtonsState, { passive: true });
+		window.addEventListener('resize', scheduleUpdate, { passive: true });
+
+		const ro = new ResizeObserver(scheduleUpdate);
+		ro.observe(track);
+
+		scheduleUpdate();
+		window.addEventListener('load', scheduleUpdate, { passive: true });
+
+	});
+</script>

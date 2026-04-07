@@ -1,0 +1,11 @@
+/* Página Serviços — alinhada ao frame Figma (node 152:594) */
+
+.page-servicos-main {
+	background: var(--color-figma-secondary);
+	padding-block: clamp(2.5rem, 6vw, 5rem);
+	padding-bottom: 0rem;
+}
+
+.page-servicos .site-header {
+	padding: 2rem 0;
+}

@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ServicosHero from '../components/servicos/ServicosHero.astro';
+import ServiceDetailRow from '../components/ServiceDetailRow.astro';
+import { servicesDetails } from '../data/servicesDetails';
+import '../styles/servicos.css';
+---
+
+<Layout
+	title="sixtech — Serviços"
+	description="Soluções completas em TI: sistemas sob medida, apps mobile, integrações com IA e consultoria. Six Tech, Curitiba."
+>
+	<div class="page-hero page-servicos">
+		<Header active="servicos" />
+		<ServicosHero />
+	</div>
+	<main class="page-servicos-main">
+		<div class="service-detail-rows">
+			{
+				servicesDetails.map((item) => (
+					<ServiceDetailRow
+						title={item.title}
+						description={item.description}
+						badgeText={item.badgeText}
+						buttonText={item.buttonText}
+						buttonHref={item.buttonHref}
+						imageSrc={item.imageSrc}
+						imageAlt={item.imageAlt}
+						reverse={item.reverse}
+						bgColor={item.bgColor}
+					/>
+				))
+			}
+		</div>
+	</main>
+	<Footer />
+</Layout>
