@@ -4,7 +4,6 @@ import type { Lang } from '../i18n/ui';
 
 const lang = (Astro.currentLocale ?? 'pt') as Lang;
 const t = useTranslations(lang);
-const formAction = lang === 'en' ? '/en/contact' : '/contato';
 ---
 
 <div
@@ -34,15 +33,7 @@ const formAction = lang === 'en' ? '/en/contact' : '/contato';
 
 		<h2 id="contato-modal-title" class="contato-modal__title">{t('modal.title')}</h2>
 
-		<form
-			class="contato-modal__form"
-			name="contato"
-			method="POST"
-			data-netlify="true"
-			netlify-honeypot="bot-field"
-			action={formAction}
-		>
-			<input type="hidden" name="form-name" value="contato" />
+		<form class="contato-modal__form" id="contato-modal-form" novalidate>
 
 			<p class="visually-hidden">
 				<label>
@@ -121,6 +112,8 @@ const formAction = lang === 'en' ? '/en/contact' : '/contato';
 			<div class="contato-modal__actions">
 				<button type="submit" class="btn btn-blue contato-modal__submit">{t('contato.form.submit')}</button>
 			</div>
+
+			<div class="contato-modal__feedback" id="contato-modal-feedback" hidden aria-live="polite"></div>
 		</form>
 	</div>
 </div>
@@ -168,6 +161,45 @@ const formAction = lang === 'en' ? '/en/contact' : '/contato';
 		// Expose globally
 		(window as any).openContatoModal = openModal;
 		(window as any).closeContatoModal = closeModal;
+
+		// Form submission
+		const form = document.getElementById('contato-modal-form') as HTMLFormElement | null;
+		const feedbackEl = document.getElementById('contato-modal-feedback') as HTMLElement | null;
+
+		form?.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+			if (btn) btn.disabled = true;
+			if (feedbackEl) {
+				feedbackEl.hidden = true;
+				feedbackEl.className = 'contato-modal__feedback';
+			}
+
+			try {
+				const res = await fetch('/api/contato', { method: 'POST', body: new FormData(form) });
+				const json = await res.json() as { ok: boolean; error?: string };
+
+				if (json.ok) {
+					form.reset();
+					showModalFeedback('Mensagem enviada! Entraremos em contato em breve.', 'success');
+					setTimeout(() => closeModal(), 3000);
+				} else {
+					showModalFeedback(json.error ?? 'Ocorreu um erro. Tente novamente.', 'error');
+				}
+			} catch {
+				showModalFeedback('Erro de conexão. Verifique sua internet e tente novamente.', 'error');
+			} finally {
+				if (btn) btn.disabled = false;
+			}
+		});
+
+		function showModalFeedback(msg: string, type: 'success' | 'error') {
+			if (!feedbackEl) return;
+			feedbackEl.textContent = msg;
+			feedbackEl.classList.add(`contato-modal__feedback--${type}`);
+			feedbackEl.hidden = false;
+		}
 	}
 </script>
 
@@ -408,5 +440,30 @@ const formAction = lang === 'en' ? '/en/contact' : '/contato';
 		.contato-modal__checkbox-label {
 			font-size: 0.75rem;
 		}
+	}
+
+	.contato-modal__feedback {
+		padding: 0.75rem 1rem;
+		border-radius: 0.625rem;
+		font-size: var(--fs-base);
+		font-weight: 500;
+		text-align: center;
+	}
+
+	.contato-modal__feedback--success {
+		background: rgba(51, 232, 255, 0.12);
+		color: var(--accent-cyan);
+		border: 1px solid rgba(51, 232, 255, 0.3);
+	}
+
+	.contato-modal__feedback--error {
+		background: rgba(239, 68, 68, 0.12);
+		color: #f87171;
+		border: 1px solid rgba(239, 68, 68, 0.3);
+	}
+
+	.contato-modal__submit:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
 	}
 </style>
