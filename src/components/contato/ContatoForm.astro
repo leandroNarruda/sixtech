@@ -4,21 +4,12 @@ import type { Lang } from '../../i18n/ui';
 
 const lang = (Astro.currentLocale ?? 'pt') as Lang;
 const t = useTranslations(lang);
-const formAction = lang === 'en' ? '/en/contact' : '/contato';
 ---
 
 <section class="contato-form-section" aria-labelledby="contato-form-title">
 	<div class="container contato-form-section__shell">
 		<h2 id="contato-form-title" class="visually-hidden">{t('contato.form.title')}</h2>
-		<form
-			class="contato-form"
-			name="contato"
-			method="POST"
-			data-netlify="true"
-			netlify-honeypot="bot-field"
-			action={formAction}
-		>
-			<input type="hidden" name="form-name" value="contato" />
+		<form class="contato-form" id="contato-form" novalidate>
 
 			<p class="visually-hidden">
 				<label>
@@ -97,6 +88,8 @@ const formAction = lang === 'en' ? '/en/contact' : '/contato';
 			<div class="contato-form__actions">
 				<button type="submit" class="btn btn-blue contato-form__submit">{t('contato.form.submit')}</button>
 			</div>
+
+			<div class="contato-form__feedback" id="contato-form-feedback" hidden aria-live="polite"></div>
 		</form>
 	</div>
 </section>
@@ -277,4 +270,68 @@ const formAction = lang === 'en' ? '/en/contact' : '/contato';
 			font-size: 0.75rem; /* 12px */
 		}
 	}
+
+	.contato-form__feedback {
+		padding: 0.875rem 1.25rem;
+		border-radius: 0.75rem;
+		font-size: var(--fs-base);
+		font-weight: 500;
+		text-align: center;
+	}
+
+	.contato-form__feedback--success {
+		background: rgba(51, 232, 255, 0.12);
+		color: var(--accent-cyan);
+		border: 1px solid rgba(51, 232, 255, 0.3);
+	}
+
+	.contato-form__feedback--error {
+		background: rgba(239, 68, 68, 0.12);
+		color: #f87171;
+		border: 1px solid rgba(239, 68, 68, 0.3);
+	}
+
+	.contato-form__submit:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
 </style>
+
+<script>
+	const form = document.getElementById('contato-form') as HTMLFormElement | null;
+	const feedback = document.getElementById('contato-form-feedback') as HTMLElement | null;
+
+	form?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+		if (btn) btn.disabled = true;
+		if (feedback) {
+			feedback.hidden = true;
+			feedback.className = 'contato-form__feedback';
+		}
+
+		try {
+			const res = await fetch('/api/contato', { method: 'POST', body: new FormData(form) });
+			const json = await res.json() as { ok: boolean; error?: string };
+
+			if (json.ok) {
+				form.reset();
+				showFeedback('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+			} else {
+				showFeedback(json.error ?? 'Ocorreu um erro. Tente novamente.', 'error');
+			}
+		} catch {
+			showFeedback('Erro de conexão. Verifique sua internet e tente novamente.', 'error');
+		} finally {
+			if (btn) btn.disabled = false;
+		}
+	});
+
+	function showFeedback(msg: string, type: 'success' | 'error') {
+		if (!feedback) return;
+		feedback.textContent = msg;
+		feedback.classList.add(`contato-form__feedback--${type}`);
+		feedback.hidden = false;
+	}
+</script>
