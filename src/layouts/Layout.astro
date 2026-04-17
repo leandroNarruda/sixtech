@@ -1,21 +1,39 @@
 ---
 import '../styles/global.css';
 import WhatsAppFloating from '../components/WhatsAppFloating.astro';
+import ContatoModal from '../components/ContatoModal.astro';
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import { getAlternateUrl } from '../i18n/routes';
 
 interface Props {
 	title: string;
 	description?: string;
 }
 
-const { title, description = "sixtech — Transformamos ideias em sistemas que impulsionam negócios." } = Astro.props;
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
+const htmlLang = t('layout.htmlLang');
+
+const { title, description = t('layout.defaultDescription') } = Astro.props;
+
+const canonicalPt = Astro.site
+	? new URL(getAlternateUrl(Astro.url.pathname, 'pt'), Astro.site).href
+	: getAlternateUrl(Astro.url.pathname, 'pt');
+const canonicalEn = Astro.site
+	? new URL(getAlternateUrl(Astro.url.pathname, 'en'), Astro.site).href
+	: getAlternateUrl(Astro.url.pathname, 'en');
 ---
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang={htmlLang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
+		<link rel="alternate" hreflang="pt-BR" href={canonicalPt} />
+		<link rel="alternate" hreflang="en" href={canonicalEn} />
+		<link rel="alternate" hreflang="x-default" href={canonicalPt} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -28,5 +46,6 @@ const { title, description = "sixtech — Transformamos ideias em sistemas que i
 	<body>
 		<slot />
 		<WhatsAppFloating />
+		<ContatoModal />
 	</body>
 </html>

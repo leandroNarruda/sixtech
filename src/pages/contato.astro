@@ -5,12 +5,17 @@ import Footer from '../components/Footer.astro';
 import ContatoHero from '../components/contato/ContatoHero.astro';
 import ContatoForm from '../components/contato/ContatoForm.astro';
 import ContatoInformacoes from '../components/contato/ContatoInformacoes.astro';
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
 import '../styles/contato.css';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
 <Layout
-	title="sixtech — Contato"
-	description="Fale com a Six Tech. Esclareça dúvidas, compartilhe ideias ou explore parcerias em tecnologia."
+	title={t('page.contato.title')}
+	description={t('page.contato.description')}
 >
 	<div class="page-hero page-contato">
 		<Header active="contato" />

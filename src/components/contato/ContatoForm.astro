@@ -1,41 +1,47 @@
 ---
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
+const formAction = lang === 'en' ? '/en/contact' : '/contato';
 ---
 
 <section class="contato-form-section" aria-labelledby="contato-form-title">
 	<div class="container contato-form-section__shell">
-		<h2 id="contato-form-title" class="visually-hidden">Formulário de contato</h2>
+		<h2 id="contato-form-title" class="visually-hidden">{t('contato.form.title')}</h2>
 		<form
 			class="contato-form"
 			name="contato"
 			method="POST"
 			data-netlify="true"
 			netlify-honeypot="bot-field"
-			action="/contato"
+			action={formAction}
 		>
 			<input type="hidden" name="form-name" value="contato" />
 
 			<p class="visually-hidden">
 				<label>
-					Não preencha se for humano:
+					{t('contato.form.honeypot')}
 					<input name="bot-field" tabindex="-1" autocomplete="off" />
 				</label>
 			</p>
 
 			<div class="contato-form__field">
-				<label class="visually-hidden" for="contato-nome">Nome completo</label>
+				<label class="visually-hidden" for="contato-nome">{t('contato.form.name.label')}</label>
 				<input
 					id="contato-nome"
 					class="contato-form__input"
 					type="text"
 					name="nome"
 					autocomplete="name"
-					placeholder="Nome Completo"
+					placeholder={t('contato.form.name.placeholder')}
 					required
 				/>
 			</div>
 
 			<div class="contato-form__field">
-				<label class="visually-hidden" for="contato-email">E-mail</label>
+				<label class="visually-hidden" for="contato-email">{t('contato.form.email.label')}</label>
 				<input
 					id="contato-email"
 					class="contato-form__input"
@@ -43,13 +49,13 @@
 					name="email"
 					autocomplete="email"
 					inputmode="email"
-					placeholder="E-mail"
+					placeholder={t('contato.form.email.placeholder')}
 					required
 				/>
 			</div>
 
 			<div class="contato-form__field">
-				<label class="visually-hidden" for="contato-telefone">Telefone</label>
+				<label class="visually-hidden" for="contato-telefone">{t('contato.form.phone.label')}</label>
 				<input
 					id="contato-telefone"
 					class="contato-form__input"
@@ -57,19 +63,19 @@
 					name="telefone"
 					autocomplete="tel"
 					inputmode="tel"
-					placeholder="Telefone"
+					placeholder={t('contato.form.phone.placeholder')}
 					required
 				/>
 			</div>
 
 			<div class="contato-form__field">
-				<label class="visually-hidden" for="contato-mensagem">Descrição do projeto</label>
+				<label class="visually-hidden" for="contato-mensagem">{t('contato.form.message.label')}</label>
 				<textarea
 					id="contato-mensagem"
 					class="contato-form__textarea"
 					name="mensagem"
 					rows="5"
-					placeholder="Descreva seu projeto"
+					placeholder={t('contato.form.message.placeholder')}
 					required
 				></textarea>
 			</div>
@@ -84,12 +90,12 @@
 					required
 				/>
 				<label class="contato-form__checkbox-label" for="contato-privacidade">
-					Aceito política de privacidade
+					{t('contato.form.privacy')}
 				</label>
 			</div>
 
 			<div class="contato-form__actions">
-				<button type="submit" class="btn btn-blue contato-form__submit">Enviar</button>
+				<button type="submit" class="btn btn-blue contato-form__submit">{t('contato.form.submit')}</button>
 			</div>
 		</form>
 	</div>

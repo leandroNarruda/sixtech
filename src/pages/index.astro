@@ -8,9 +8,14 @@ import Testimonials from '../components/Testimonials.astro';
 import ClientStrip from '../components/ClientStrip.astro';
 import CallToAction from '../components/CallToAction.astro';
 import Footer from '../components/Footer.astro';
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
-<Layout title="sixtech — Ideias em sistemas">
+<Layout title={t('page.home.title')} description={t('page.home.description')}>
 	<div class="page-hero">
 		<Header active="home" />
 		<Hero />
@@ -20,11 +25,10 @@ import Footer from '../components/Footer.astro';
 		<WhyChooseSixTech />
 		<Testimonials />
 		<ClientStrip />
-		<CallToAction 
-			title="Pronto para inovar?"
-			text="Agende uma conversa hoje e descubra como podemos ajudar!"
-			buttonText="Agende uma conversa"
-			buttonHref="#contato"
+		<CallToAction
+			title={t('cta.home.title')}
+			text={t('cta.home.text')}
+			buttonText={t('cta.home.btn')}
 		/>
 	</main>
 	<Footer />

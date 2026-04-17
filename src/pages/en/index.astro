@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import WhyChooseSixTech from '../../components/WhyChooseSixTech.astro';
+import Services from '../../components/Services.astro';
+import Testimonials from '../../components/Testimonials.astro';
+import ClientStrip from '../../components/ClientStrip.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = useTranslations(lang);
+---
+
+<Layout title={t('page.home.title')} description={t('page.home.description')}>
+	<div class="page-hero">
+		<Header active="home" />
+		<Hero />
+	</div>
+	<main>
+		<Services />
+		<WhyChooseSixTech />
+		<Testimonials />
+		<ClientStrip />
+		<CallToAction
+			title={t('cta.home.title')}
+			text={t('cta.home.text')}
+			buttonText={t('cta.home.btn')}
+		/>
+	</main>
+	<Footer />
+</Layout>

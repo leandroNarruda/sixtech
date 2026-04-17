@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import QuemSomosHero from '../../components/quem-somos/QuemSomosHero.astro';
+import QuemSomosMissionVision from '../../components/quem-somos/QuemSomosMissionVision.astro';
+import WhyChooseSixTech from '../../components/WhyChooseSixTech.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+import '../../styles/quem-somos.css';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = useTranslations(lang);
+---
+
+<Layout
+	title={t('page.qs.title')}
+	description={t('page.qs.description')}
+>
+	<div class="page-hero page-quem-somos">
+		<Header active="quem-somos" />
+		<QuemSomosHero />
+	</div>
+	<main class="page-quem-somos-main">
+		<div class="qs-stack">
+			<QuemSomosMissionVision />
+			<WhyChooseSixTech sectionId="por-que-sixtech" />
+			<CallToAction
+				title={t('cta.qs.title')}
+				text={t('cta.qs.text')}
+				buttonText={t('cta.qs.btn')}
+			/>
+		</div>
+	</main>
+	<Footer />
+</Layout>

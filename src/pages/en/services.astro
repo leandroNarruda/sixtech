@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServicosHero from '../../components/servicos/ServicosHero.astro';
+import ServiceDetailRow from '../../components/ServiceDetailRow.astro';
+import { getServicesDetails } from '../../data/servicesDetails';
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+import '../../styles/servicos.css';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = useTranslations(lang);
+const servicesDetails = getServicesDetails(lang);
+---
+
+<Layout
+	title={t('page.servicos.title')}
+	description={t('page.servicos.description')}
+>
+	<div class="page-hero page-servicos">
+		<Header active="servicos" />
+		<ServicosHero />
+	</div>
+	<main class="page-servicos-main">
+		<div class="service-detail-rows">
+			{
+				servicesDetails.map((item) => (
+					<ServiceDetailRow
+						title={item.title}
+						description={item.description}
+						badgeText={item.badgeText}
+						buttonText={item.buttonText}
+						imageSrc={item.imageSrc}
+						imageAlt={item.imageAlt}
+						reverse={item.reverse}
+						bgColor={item.bgColor}
+					/>
+				))
+			}
+		</div>
+	</main>
+	<Footer />
+</Layout>

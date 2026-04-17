@@ -4,13 +4,19 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ServicosHero from '../components/servicos/ServicosHero.astro';
 import ServiceDetailRow from '../components/ServiceDetailRow.astro';
-import { servicesDetails } from '../data/servicesDetails';
+import { getServicesDetails } from '../data/servicesDetails';
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
 import '../styles/servicos.css';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
+const servicesDetails = getServicesDetails(lang);
 ---
 
 <Layout
-	title="sixtech — Serviços"
-	description="Soluções completas em TI: sistemas sob medida, apps mobile, integrações com IA e consultoria. Six Tech, Curitiba."
+	title={t('page.servicos.title')}
+	description={t('page.servicos.description')}
 >
 	<div class="page-hero page-servicos">
 		<Header active="servicos" />
@@ -25,7 +31,6 @@ import '../styles/servicos.css';
 						description={item.description}
 						badgeText={item.badgeText}
 						buttonText={item.buttonText}
-						buttonHref={item.buttonHref}
 						imageSrc={item.imageSrc}
 						imageAlt={item.imageAlt}
 						reverse={item.reverse}

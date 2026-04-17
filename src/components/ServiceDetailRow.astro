@@ -4,7 +4,6 @@ export interface Props {
 	description: string;
 	badgeText: string;
 	buttonText: string;
-	buttonHref?: string;
 	imageSrc: string;
 	imageAlt: string;
 	/** true = imagem à direita (texto à esquerda) */
@@ -18,7 +17,6 @@ const {
 	description,
 	badgeText,
 	buttonText,
-	buttonHref = "#contato",
 	imageSrc,
 	imageAlt,
 	reverse = false,
@@ -78,9 +76,9 @@ const sectionClass = [
 				<p class="service-detail-row__description">{description}</p>
 				<p class="service-detail-row__badge">{badgeText}</p>
 			</div>
-			<a href={buttonHref} class="btn-blue service-detail-row__cta">
+			<button class="btn-blue service-detail-row__cta" data-modal-contato>
 				{buttonText}
-			</a>
+			</button>
 		</div>
 	</div>
 </section>

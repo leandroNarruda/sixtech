@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ContatoHero from '../../components/contato/ContatoHero.astro';
+import ContatoForm from '../../components/contato/ContatoForm.astro';
+import ContatoInformacoes from '../../components/contato/ContatoInformacoes.astro';
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+import '../../styles/contato.css';
+
+const lang = (Astro.currentLocale ?? 'en') as Lang;
+const t = useTranslations(lang);
+---
+
+<Layout
+	title={t('page.contato.title')}
+	description={t('page.contato.description')}
+>
+	<div class="page-hero page-contato">
+		<Header active="contato" />
+		<ContatoHero />
+	</div>
+	<main class="page-contato__main" id="conteudo-principal">
+		<ContatoForm />
+		<ContatoInformacoes />
+	</main>
+	<Footer />
+</Layout>

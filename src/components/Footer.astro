@@ -1,18 +1,29 @@
 ---
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+import { getAlternateUrl } from '../i18n/routes';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
+const isEn = lang === 'en';
+
 const links = [
-	{ href: "/", label: "Home" },
-	{ href: "/quem-somos", label: "Quem somos" },
-	{ href: "/servicos", label: "Serviços" },
-	{ href: "/portfolio", label: "Portfólio" },
-	{ href: "/contato", label: "Contato" },
+	{ href: isEn ? '/en' : '/', label: t('header.nav.home') },
+	{ href: isEn ? '/en/about' : '/quem-somos', label: t('header.nav.quemSomos') },
+	{ href: isEn ? '/en/services' : '/servicos', label: t('header.nav.servicos') },
+	{ href: isEn ? '/en/portfolio' : '/portfolio', label: t('header.nav.portfolio') },
+	{ href: isEn ? '/en/contact' : '/contato', label: t('header.nav.contato') },
 ];
+
+const ptUrl = getAlternateUrl(Astro.url.pathname, 'pt');
+const enUrl = getAlternateUrl(Astro.url.pathname, 'en');
 ---
 
 <footer id="contato" class="footer">
 	<div class="container footer__grid">
 		<!-- Coluna 1: logo -->
 		<div class="footer__brand">
-			<a href="/" aria-label="sixtech — início" class="footer__logo-link">
+			<a href={isEn ? '/en' : '/'} aria-label={t('footer.logoAria')} class="footer__logo-link">
 				<img
 					src="/images/quem-somos/logo.png"
 					alt="sixtech"
@@ -25,7 +36,7 @@ const links = [
 			</a>
 		</div>
 
-		<nav class="footer__nav" aria-label="Rodapé">
+		<nav class="footer__nav" aria-label={t('footer.navAria')}>
 			<ul class="footer__nav-list">
 				{links.map(({ href, label }) => (
 					<li>
@@ -117,13 +128,25 @@ const links = [
 						/>
 					</a>
 				</div>
-				<div class="footer__lang">
-					<button type="button" class="footer__lang-btn footer__lang-btn--active">
+				<div class="footer__lang" aria-label={t('footer.langLabel')}>
+					<a
+						href={ptUrl}
+						class:list={['footer__lang-btn', lang === 'pt' ? 'footer__lang-btn--active' : 'footer__lang-btn--inactive']}
+						aria-current={lang === 'pt' ? 'true' : undefined}
+						hreflang="pt"
+						lang="pt"
+					>
 						PT
-					</button>
-					<button type="button" class="footer__lang-btn footer__lang-btn--inactive">
+					</a>
+					<a
+						href={enUrl}
+						class:list={['footer__lang-btn', lang === 'en' ? 'footer__lang-btn--active' : 'footer__lang-btn--inactive']}
+						aria-current={lang === 'en' ? 'true' : undefined}
+						hreflang="en"
+						lang="en"
+					>
 						EN
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>

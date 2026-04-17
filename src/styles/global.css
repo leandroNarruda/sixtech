@@ -121,7 +121,8 @@ body {
 	overflow-x: hidden;
 }
 
-body.nav-open {
+body.nav-open,
+body.modal-open {
 	overflow: hidden;
 }
 
@@ -236,14 +237,16 @@ span.heading-accent-bar {
 	cursor: pointer;
 	transition:
 		background 0.2s,
+		color 0.2s,
 		box-shadow 0.2s,
 		transform 0.15s;
 }
 
 .btn-blue:hover,
 .btn-blue:focus-visible {
-	background: #1e40af;
-	box-shadow: 0 4px 20px rgba(30, 58, 138, 0.35);
+	background: var(--heading-accent-bar-bg); /* #3BEDFF — Figma hover */
+	color: var(--color-figma-primary);        /* #1E3A8A — inverte o texto */
+	box-shadow: 0 4px 20px rgba(59, 237, 255, 0.3);
 }
 
 .btn-blue:focus-visible {

@@ -1,4 +1,9 @@
 ---
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
 <section class="contato-hero" aria-labelledby="contato-hero-heading">
@@ -17,10 +22,10 @@
 	<div class="contato-hero__shell container">
 		<div class="contato-hero__inner">
 			<h1 id="contato-hero-heading" class="contato-hero__title">
-				Entre em contato
+				{t('contato.hero.title')}
 			</h1>
 			<p class="contato-hero__lead font-inter">
-				Estamos prontos para ouvir suas ideias, tirar dúvidas e ajudar sua empresa a inovar com tecnologia.
+				{t('contato.hero.lead')}
 			</p>
 		</div>
 	</div>

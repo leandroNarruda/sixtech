@@ -1,4 +1,7 @@
 ---
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+
 export type HeaderActiveNav = 'home' | 'quem-somos' | 'servicos' | 'portfolio' | 'contato';
 
 interface Props {
@@ -6,22 +9,26 @@ interface Props {
 }
 
 const { active } = Astro.props;
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
+const isEn = lang === 'en';
 
 const navLinks: { href: string; label: string; key: HeaderActiveNav }[] = [
-	{ href: '/', label: 'Home', key: 'home' },
-	{ href: '/quem-somos', label: 'Quem somos', key: 'quem-somos' },
-	{ href: '/servicos', label: 'Serviços', key: 'servicos' },
-	{ href: '/portfolio', label: 'Portfólio', key: 'portfolio' },
-	{ href: '/contato', label: 'Contato', key: 'contato' },
+	{ href: isEn ? '/en' : '/', label: t('header.nav.home'), key: 'home' },
+	{ href: isEn ? '/en/about' : '/quem-somos', label: t('header.nav.quemSomos'), key: 'quem-somos' },
+	{ href: isEn ? '/en/services' : '/servicos', label: t('header.nav.servicos'), key: 'servicos' },
+	{ href: isEn ? '/en/portfolio' : '/portfolio', label: t('header.nav.portfolio'), key: 'portfolio' },
+	{ href: isEn ? '/en/contact' : '/contato', label: t('header.nav.contato'), key: 'contato' },
 ];
 
+const ctaHref = isEn ? '/en/contact' : '/contato';
 const drawerId = 'site-header-drawer';
 const menuBtnId = 'site-header-menu-btn';
 ---
 
 <header class="site-header">
 	<div class="container site-header__inner">
-		<a class="site-header__logo" href="/" aria-label="sixtech — início">
+		<a class="site-header__logo" href={isEn ? '/en' : '/'} aria-label={t('header.logoAria')}>
 			<img
 				src="/images/quem-somos/logo.png"
 				width="192"
@@ -30,7 +37,7 @@ const menuBtnId = 'site-header-menu-btn';
 			/>
 		</a>
 
-		<nav class="site-header__nav site-header__nav--desktop" aria-label="Principal">
+		<nav class="site-header__nav site-header__nav--desktop" aria-label={t('header.navAria')}>
 			<ul class="site-header__list">
 				{
 					navLinks.map(({ href, label, key }) => (
@@ -49,7 +56,7 @@ const menuBtnId = 'site-header-menu-btn';
 		</nav>
 
 		<div class="site-header__actions site-header__actions--desktop">
-			<a class="site-header__cta" href="/contato">Solicite uma proposta</a>
+			<a class="site-header__cta" href={ctaHref}>{t('header.cta')}</a>
 		</div>
 
 		<button
@@ -58,7 +65,7 @@ const menuBtnId = 'site-header-menu-btn';
 			id={menuBtnId}
 			aria-expanded="false"
 			aria-controls={drawerId}
-			aria-label="Abrir menu de navegação"
+			aria-label={t('header.menuOpen')}
 		>
 			<span class="site-header__menu-bar" aria-hidden="true"></span>
 			<span class="site-header__menu-bar" aria-hidden="true"></span>
@@ -78,10 +85,10 @@ const menuBtnId = 'site-header-menu-btn';
 		id={drawerId}
 		role="dialog"
 		aria-modal="true"
-		aria-label="Menu principal"
+		aria-label={t('header.navAria')}
 		hidden
 	>
-		<nav class="site-header__drawer-nav" aria-label="Principal">
+		<nav class="site-header__drawer-nav" aria-label={t('header.navAria')}>
 			<ul class="site-header__drawer-list">
 				{
 					navLinks.map(({ href, label, key }) => (
@@ -102,7 +109,7 @@ const menuBtnId = 'site-header-menu-btn';
 				}
 			</ul>
 		</nav>
-		<a class="site-header__drawer-cta" href="/contato" data-drawer-link>Solicite uma proposta</a>
+		<a class="site-header__drawer-cta" href={ctaHref} data-drawer-link>{t('header.cta')}</a>
 	</div>
 </header>
 
@@ -224,7 +231,8 @@ const menuBtnId = 'site-header-menu-btn';
 
 	.site-header__link:hover,
 	.site-header__link:focus-visible {
-		color: var(--text-main);
+		background: var(--heading-accent-bar-bg);
+		color: var(--color-figma-primary);
 	}
 
 	.site-header__link--active {
@@ -254,13 +262,15 @@ const menuBtnId = 'site-header-menu-btn';
 		text-decoration: none;
 		transition:
 			background 0.2s,
+			color 0.2s,
 			box-shadow 0.2s;
 	}
 
 	.site-header__cta:hover,
 	.site-header__cta:focus-visible {
-		background: #1e40af;
-		box-shadow: 0 4px 20px rgba(30, 58, 138, 0.35);
+		background: var(--heading-accent-bar-bg);
+		color: var(--color-figma-primary);
+		box-shadow: 0 4px 20px rgba(59, 237, 255, 0.3);
 	}
 
 	.site-header__menu-btn {
@@ -351,7 +361,8 @@ const menuBtnId = 'site-header-menu-btn';
 
 	.site-header__drawer-link:hover,
 	.site-header__drawer-link:focus-visible {
-		background: rgba(255, 255, 255, 0.06);
+		background: var(--heading-accent-bar-bg);
+		color: var(--color-figma-primary);
 	}
 
 	.site-header__drawer-link--active {
@@ -373,12 +384,15 @@ const menuBtnId = 'site-header-menu-btn';
 		text-decoration: none;
 		transition:
 			background 0.2s,
+			color 0.2s,
 			box-shadow 0.2s;
 	}
 
 	.site-header__drawer-cta:hover,
 	.site-header__drawer-cta:focus-visible {
-		background: #1e40af;
+		background: var(--heading-accent-bar-bg);
+		color: var(--color-figma-primary);
+		box-shadow: 0 4px 20px rgba(59, 237, 255, 0.3);
 	}
 
 	@media (max-width: 767px) {

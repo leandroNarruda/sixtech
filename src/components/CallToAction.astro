@@ -5,14 +5,12 @@ interface Props {
 	title: string;
 	text: string;
 	buttonText: string;
-	buttonHref?: string;
 }
 
 const {
 	title,
 	text,
 	buttonText,
-	buttonHref = "#contato"
 } = Astro.props;
 ---
 
@@ -27,9 +25,7 @@ const {
 			</p>
 		</div>
 
-		<a href={buttonHref} class="btn-blue">
-			{buttonText}
-		</a>
+		<button type="button" class="btn-blue" data-modal-contato>{buttonText}</button>
 	</div>
 </section>
 

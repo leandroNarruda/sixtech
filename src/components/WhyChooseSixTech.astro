@@ -1,14 +1,19 @@
 ---
 import HeadingAccentBar from "./HeadingAccentBar.astro";
 import type { FeatureCard } from "../data/whyChooseSixTech";
-import { whyChooseSixTechFeatures } from "../data/whyChooseSixTech";
+import { getWhyChooseFeatures } from "../data/whyChooseSixTech";
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
 
 interface Props {
 	features?: FeatureCard[];
 	sectionId?: string;
 }
 
-const { features = whyChooseSixTechFeatures, sectionId = "quem-somos" } = Astro.props;
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
+
+const { features = getWhyChooseFeatures(lang), sectionId = "quem-somos" } = Astro.props;
 ---
 
 <section id={sectionId} class="features">
@@ -21,7 +26,7 @@ const { features = whyChooseSixTechFeatures, sectionId = "quem-somos" } = Astro.
 			/>
 
 			<h2 class="features__title heading-with-accent">
-				Por que escolher a Six Tech?<HeadingAccentBar />
+				{t('why.heading')}<HeadingAccentBar />
 			</h2>
 
 			<div class="features__grid">
@@ -123,18 +128,31 @@ const { features = whyChooseSixTechFeatures, sectionId = "quem-somos" } = Astro.
 		border-radius: 2rem; /* 32px — cards Figma */
 		background: var(--color-figma-card);
 		padding: 2.5rem;
+		border: 1px solid transparent;
+		box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+		transition:
+			transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+			box-shadow 0.35s ease,
+			border-color 0.35s ease;
+		will-change: transform, box-shadow;
 	}
 
 	.features__card:hover {
-		transform: translateY(-0.25rem);
-		border-color: rgba(255, 255, 255, 0.12);
-		box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.6);
+		transform: translateY(-0.375rem);
+		border-color: rgba(59, 130, 246, 0.25);
+		box-shadow: 0 0 30px 0 rgba(59, 130, 246, 0.5);
 	}
 
 	.features__icon-wrap {
 		margin-bottom: 1rem;
 		flex-shrink: 0;
 		filter: drop-shadow(0 8px 20px -6px rgba(59, 130, 246, 0.45));
+		transition: filter 0.35s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.features__card:hover .features__icon-wrap {
+		filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.75));
+		transform: scale(1.12);
 	}
 
 	.features__icon {
@@ -194,7 +212,7 @@ const { features = whyChooseSixTechFeatures, sectionId = "quem-somos" } = Astro.
 		.features {
 			position: relative;
 			z-index: 2;
-			/* Espaço claro após “O que fazemos” — evita o painel encostar/sobrepor a seção anterior */
+			/* Espaço claro após "O que fazemos" — evita o painel encostar/sobrepor a seção anterior */
 			padding-top: clamp(7rem, 24vw, 10rem);
 		}
 
@@ -219,6 +237,11 @@ const { features = whyChooseSixTechFeatures, sectionId = "quem-somos" } = Astro.
 		}
 
 		.features__card:hover {
+			transform: none;
+			box-shadow: 0 0 20px 0 rgba(59, 130, 246, 0.4);
+		}
+
+		.features__card:hover .features__icon-wrap {
 			transform: none;
 		}
 

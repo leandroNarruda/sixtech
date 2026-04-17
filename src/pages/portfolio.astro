@@ -5,12 +5,17 @@ import Footer from '../components/Footer.astro';
 import PortfolioHero from '../components/portfolio/PortfolioHero.astro';
 import PortfolioSection from '../components/portfolio/PortfolioSection.astro';
 import PortfolioClientsSection from '../components/portfolio/PortfolioClientsSection.astro';
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
 import '../styles/portfolio.css';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
 <Layout
-	title="sixtech — Portfólio"
-	description="Casos de sucesso e projetos da Six Tech. Parceria e inovação em sistemas."
+	title={t('page.portfolio.title')}
+	description={t('page.portfolio.description')}
 >
 	<div class="page-hero page-portfolio">
 		<Header active="portfolio" />

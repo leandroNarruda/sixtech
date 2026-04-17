@@ -1,5 +1,10 @@
 ---
 import HeadingAccentBar from "./HeadingAccentBar.astro";
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
 <section id="servicos" class="services">
@@ -9,33 +14,33 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 		<div class="services__col-left">
 			<div class="services__title-row">
 				<h2 class="services__heading heading-with-accent" id="services-heading">
-					O que fazemos<HeadingAccentBar />
+					{t('services.heading')}<HeadingAccentBar />
 				</h2>
 			</div>
 
 			<div class="services__intro">
 				<p class="services__lead">
-					Criamos soluções tecnológicas sob medida para empresas que precisam ir além do básico.
+					{t('services.lead1')}
 				</p>
 				<p class="services__lead">
-					Desenvolvemos sistemas, aplicativos e integrações inteligentes que resolvem problemas reais.
+					{t('services.lead2')}
 				</p>
 			</div>
 
-			<ul class="services__list" aria-label="Nossos serviços">
+			<ul class="services__list" aria-label={t('services.listAriaLabel')}>
 				<li>
 					<button type="button" class="services__badge active" data-index="0">
-						Integrações entre sistemas e IA.
+						{t('services.badge0')}
 					</button>
 				</li>
 				<li>
 					<button type="button" class="services__badge" data-index="1">
-						Consultoria em TI para definir tecnologias ideais.
+						{t('services.badge1')}
 					</button>
 				</li>
 				<li>
 					<button type="button" class="services__badge" data-index="2">
-						Apps mobile (Android/iOS) e soluções web
+						{t('services.badge2')}
 					</button>
 				</li>
 			</ul>
@@ -45,16 +50,42 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 		<div class="services__col-right">
 			<div class="services__media">
 				<div class="services__media-frame">
-					<img
-						src="/images/o_que_fazemos.png"
-						alt="Integramos sistemas e IA para impulsionar sua inovação"
-						class="services__img"
-						loading="lazy"
-					/>
-					<div class="services__media-gradient" aria-hidden="true"></div>
-					<p class="services__caption">
-						Integramos sistemas e IA para impulsionar sua inovação.
-					</p>
+					<div class="services__slide active" data-slide="0">
+						<img
+							src="/images/services/integracoes-ia.jpg"
+							alt={t('services.slide0.alt')}
+							class="services__img"
+							loading="lazy"
+						/>
+						<div class="services__media-gradient" aria-hidden="true"></div>
+						<p class="services__caption">
+							{t('services.caption0')}
+						</p>
+					</div>
+					<div class="services__slide" data-slide="1">
+						<img
+							src="/images/services/consultoria-ti.jpg"
+							alt={t('services.slide1.alt')}
+							class="services__img"
+							loading="lazy"
+						/>
+						<div class="services__media-gradient" aria-hidden="true"></div>
+						<p class="services__caption">
+							{t('services.caption1')}
+						</p>
+					</div>
+					<div class="services__slide" data-slide="2">
+						<img
+							src="/images/services/apps-mobile.jpg"
+							alt={t('services.slide2.alt')}
+							class="services__img"
+							loading="lazy"
+						/>
+						<div class="services__media-gradient" aria-hidden="true"></div>
+						<p class="services__caption">
+							{t('services.caption2')}
+						</p>
+					</div>
 				</div>
 			</div>
 
@@ -67,7 +98,7 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 		<button
 			type="button"
 			class="services__nav-btn services__nav-btn--prev"
-			aria-label="Anterior"
+			aria-label={t('services.prev')}
 			id="services-prev"
 		>
 			<span class="services__nav-icon services__nav-icon--left" aria-hidden="true"></span>
@@ -75,7 +106,7 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 		<button
 			type="button"
 			class="services__nav-btn services__nav-btn--next"
-			aria-label="Próximo"
+			aria-label={t('services.next')}
 			id="services-next"
 		>
 			<span class="services__nav-icon services__nav-icon--right" aria-hidden="true"></span>
@@ -160,7 +191,7 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 	}
 
 	.services__badge:hover {
-		border-color: #fff;
+		border-color: var(--accent-cyan);
 		color: #fff;
 	}
 
@@ -190,9 +221,21 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 		position: relative;
 		overflow: hidden;
 		border-radius: 1.5rem;
-		min-height: 260px;
 		flex: 1 1 auto;
-		min-height: 0;
+		min-height: 320px;
+	}
+
+	.services__slide {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		pointer-events: none;
+	}
+
+	.services__slide.active {
+		opacity: 1;
+		pointer-events: auto;
 	}
 
 	.services__img {
@@ -270,6 +313,7 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 	}
 
 	.services__nav-btn:hover {
+		background-color: var(--accent-cyan) !important;
 		transform: scale(1.08);
 	}
 
@@ -322,7 +366,7 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 			font-weight: 600;
 		}
 
-		/* Evita coluna flex “esticando” e quebrando o contexto da legenda absoluta */
+		/* Evita coluna flex "esticando" e quebrando o contexto da legenda absoluta */
 		.services__col-right {
 			flex: 0 0 auto;
 		}
@@ -363,3 +407,21 @@ import HeadingAccentBar from "./HeadingAccentBar.astro";
 		}
 	}
 </style>
+
+<script>
+	const badges = document.querySelectorAll<HTMLButtonElement>('.services__badge');
+	const slides = document.querySelectorAll<HTMLElement>('.services__slide');
+	let current = 0;
+
+	function goTo(index: number) {
+		badges[current].classList.remove('active');
+		slides[current].classList.remove('active');
+		current = ((index % slides.length) + slides.length) % slides.length;
+		badges[current].classList.add('active');
+		slides[current].classList.add('active');
+	}
+
+	badges.forEach((btn, i) => btn.addEventListener('click', () => goTo(i)));
+	document.getElementById('services-prev')?.addEventListener('click', () => goTo(current - 1));
+	document.getElementById('services-next')?.addEventListener('click', () => goTo(current + 1));
+</script>

@@ -1,21 +1,26 @@
 ---
 /**
- * Seção “Nossos clientes” → CTA “Junte-se a eles” (Figma node 152:792–152:799).
+ * Seção "Nossos clientes" → CTA "Junte-se a eles" (Figma node 152:792–152:799).
  * Logos: `public/companies` via `clientStrip.ts`.
  */
 import HeadingAccentBar from "../HeadingAccentBar.astro";
 import ClientStripLogo from "../ClientStripLogo.astro";
 import { clients } from "../../data/clientStrip";
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
 <section class="portfolio-clients" aria-labelledby="portfolio-clients-heading">
 	<div class="portfolio-clients__inner container">
 		<header class="portfolio-clients__intro">
 			<h2 id="portfolio-clients-heading" class="portfolio-clients__title heading-with-accent">
-				Nossos Clientes<HeadingAccentBar />
+				{t('portfolio.clients.heading')}<HeadingAccentBar />
 			</h2>
 			<p class="portfolio-clients__lead">
-				Orgulhosos de parcerias com empresas que transformamos.
+				{t('portfolio.clients.lead')}
 			</p>
 		</header>
 
@@ -29,9 +34,9 @@ import { clients } from "../../data/clientStrip";
 
 		<div class="portfolio-clients__cta-block">
 			<p class="portfolio-clients__cta-text">
-				Conheça quem já utilizou nossas soluções para crescer.
+				{t('portfolio.clients.ctaText')}
 			</p>
-			<a href="/#contato" class="btn btn-blue">Junte-se a eles</a>
+			<button type="button" class="btn btn-blue" data-modal-contato>{t('portfolio.clients.ctaBtn')}</button>
 		</div>
 	</div>
 </section>

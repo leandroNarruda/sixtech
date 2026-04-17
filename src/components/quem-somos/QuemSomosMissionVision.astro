@@ -1,5 +1,10 @@
 ---
 import HeadingAccentBar from "../HeadingAccentBar.astro";
+import { useTranslations } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
 <section class="qs-mv" aria-labelledby="qs-mission-heading">
@@ -18,20 +23,18 @@ import HeadingAccentBar from "../HeadingAccentBar.astro";
 		<div class="qs-mv__copy">
 			<div class="qs-mv__block">
 				<h2 id="qs-mission-heading" class="qs-mv__title heading-with-accent">
-					Nossa missão<HeadingAccentBar />
+					{t('qs.mv.missionHeading')}<HeadingAccentBar />
 				</h2>
 				<p class="qs-mv__text">
-					Impulsionar empresas por meio de tecnologia inteligente, criando soluções que aumentam eficiência,
-					reduzem custos e geram vantagem competitiva.
+					{t('qs.mv.missionText')}
 				</p>
 			</div>
 			<div class="qs-mv__block qs-mv__block--vision">
 				<h2 class="qs-mv__title heading-with-accent">
-					Nossa visão<HeadingAccentBar />
+					{t('qs.mv.visionHeading')}<HeadingAccentBar />
 				</h2>
 				<p class="qs-mv__text">
-					Ser referência em parcerias de TI, desenvolvendo sistemas que transformam desafios em oportunidades de
-					crescimento.
+					{t('qs.mv.visionText')}
 				</p>
 			</div>
 		</div>

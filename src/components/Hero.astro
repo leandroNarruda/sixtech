@@ -1,4 +1,9 @@
 ---
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
@@ -6,11 +11,11 @@
 	<div class="hero__content container">
 		<div class="hero__stack">
 			<h1 id="hero-heading" class="hero__title">
-				<span class="hero__line hero__line--light">Transformamos</span>
-				<span class="hero__line hero__line--accent">Ideias em sistemas</span>
-				<span class="hero__line hero__line--body">que impulsionam negócios</span>
+				<span class="hero__line hero__line--light">{t('hero.line1')}</span>
+				<span class="hero__line hero__line--accent">{t('hero.line2')}</span>
+				<span class="hero__line hero__line--body">{t('hero.line3')}</span>
 			</h1>
-			<a class="hero__cta" href="#contato">Solicite uma proposta gratuita</a>
+			<button type="button" class="hero__cta" data-modal-contato>{t('hero.cta')}</button>
 		</div>
 	</div>
 </section>
@@ -88,8 +93,11 @@
 		padding: 0.5rem 1rem;
 		border-radius: 5rem;
 		border: 1px solid #fff;
+		background: transparent;
 		color: #fff;
 		text-decoration: none;
+		cursor: pointer;
+		font-family: inherit;
 		transition:
 			background 0.2s,
 			color 0.2s;
@@ -97,7 +105,7 @@
 
 	.hero__cta:hover,
 	.hero__cta:focus-visible {
-		background: rgba(255, 255, 255, 0.12);
+		background: var(--color-figma-primary);
 	}
 
 	.hero__cta:focus-visible {

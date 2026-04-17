@@ -1,8 +1,14 @@
 ---
 import HeadingAccentBar from "./HeadingAccentBar.astro";
+import { useTranslations } from '../i18n/ui';
+import type { Lang } from '../i18n/ui';
+
 // Testimonials.astro — alinhado ao layout Figma (duas colunas + card)
 const avatarSrc = "/images/testimonial-avatar.jpg";
 const aspasSrc = "/icons/aspas.svg";
+
+const lang = (Astro.currentLocale ?? 'pt') as Lang;
+const t = useTranslations(lang);
 
 const testimonials = [
 	{
@@ -26,7 +32,7 @@ const testimonials = [
 			<!-- Coluna esquerda: depoimento -->
 			<div class="testimonials__col-left">
 				<h2 class="testimonials__title heading-with-accent">
-					Quem confia na Six Tech<HeadingAccentBar />
+					{t('testimonials.heading')}<HeadingAccentBar />
 				</h2>
 
 				<div class="testimonials__carousel" data-testimonials-carousel>
@@ -64,7 +70,7 @@ const testimonials = [
 							type="button"
 							id="testimonial-prev"
 							class="testimonials__nav-btn testimonials__nav-btn--prev"
-							aria-label="Depoimento anterior"
+							aria-label={t('testimonials.prev')}
 						>
 							<img
 								src="/icons/arrow-left.svg"
@@ -79,7 +85,7 @@ const testimonials = [
 							type="button"
 							id="testimonial-next"
 							class="testimonials__nav-btn testimonials__nav-btn--next"
-							aria-label="Próximo depoimento"
+							aria-label={t('testimonials.next')}
 						>
 							<img
 								src="/icons/arrow-right.svg"
@@ -97,17 +103,17 @@ const testimonials = [
 			<!-- Coluna direita: card -->
 			<div class="testimonials__card">
 				<h3 class="testimonials__card-title">
-					Transformando negócios, conquistando confiança.
+					{t('testimonials.card.title')}
 				</h3>
 				<p class="testimonials__card-body font-roboto">
-					Convertemos visões em inovações tecnológicas que geram confiança e aceleram resultados.
+					{t('testimonials.card.body')}
 				</p>
 			</div>
 		</div>
 	</div>
 </section>
 
-<script define:vars={{ testimonials }}>
+<script is:inline define:vars={{ testimonials }}>
 	function initTestimonialsCarousel() {
 		const quoteEl = document.getElementById('testimonial-quote');
 		const authorEl = document.getElementById('testimonial-author');
