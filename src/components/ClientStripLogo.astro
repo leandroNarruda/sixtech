@@ -18,7 +18,7 @@ const slotStyle =
 
 <div class:list={["client-strip__logo-slot", c.slotClass]} style={slotStyle}>
 	<img
-		class:list={["client-strip__logo-img", !c.color && "client-strip__logo-img--mono"]}
+		class="client-strip__logo-img"
 		src={c.src}
 		alt=""
 		loading="eager"
@@ -43,10 +43,7 @@ const slotStyle =
 		max-height: 100%;
 		max-width: 100%;
 		object-fit: contain;
-		opacity: 0.95;
-	}
-
-	.client-strip__logo-img--mono {
 		filter: brightness(0) invert(1);
+		opacity: 0.95;
 	}
 </style>
