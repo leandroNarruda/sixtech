@@ -4,7 +4,6 @@ import { useTranslations } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
 
 // Testimonials.astro — alinhado ao layout Figma (duas colunas + card)
-const avatarSrc = "/images/testimonial-avatar.jpg";
 const aspasSrc = "/icons/aspas.svg";
 
 const lang = (Astro.currentLocale ?? 'pt') as Lang;
@@ -16,12 +15,14 @@ const testimonials = [
 			"Desenvolvemos em parceria com a Six Tech alguns projetos que trouxeram resultados expressivos ao negócio. Ressalto o desenvolvimento de um sistema (SAS – Sales Administration System) que suporta os principais processos comerciais. A Six Tech foi a parceira escolhida nesse projeto por sua expertise tecnológica, flexibilidade e conceito Agile nos desenvolvimentos.",
 		author: "Leandro Brito",
 		company: "Grupo Volvo",
+		avatarSrc: "/images/testimonials/leandro.jpeg",
 	},
 	{
 		quote:
 			"Decidimos migrar nosso suporte e programação do Sistema Gerar para a Six Tech. E temos essa decisão como bem acertada, pois os profissionais da SixTech são facilitadores para que nosso sistema seja cada vez mais inteligente e eficaz para a obtenção dos resultados. Nossa parceria vai além do Sistema Gerar, já os contratamos para desenvolverem novos sistemas que ajudam na resolução das nossas demandas.",
 		author: "Ronny Essert",
 		company: "Grupo Gerar",
+		avatarSrc: "/images/testimonials/ronny.jpeg",
 	},
 ];
 ---
@@ -47,7 +48,8 @@ const testimonials = [
 							aria-hidden="true"
 						/>
 						<img
-							src={avatarSrc}
+							id="testimonial-avatar"
+							src={testimonials[0].avatarSrc}
 							alt=""
 							width="195"
 							height="195"
@@ -117,17 +119,31 @@ const testimonials = [
 	function initTestimonialsCarousel() {
 		const quoteEl = document.getElementById('testimonial-quote');
 		const authorEl = document.getElementById('testimonial-author');
+		const avatarEl = document.getElementById('testimonial-avatar');
 		const prev = document.getElementById('testimonial-prev');
 		const next = document.getElementById('testimonial-next');
-		if (!quoteEl || !authorEl || !prev || !next || !testimonials?.length) return;
+		if (!quoteEl || !authorEl || !avatarEl || !prev || !next || !testimonials?.length) return;
 
 		let index = 0;
 		const total = testimonials.length;
+		const quoteBodyEl = quoteEl.closest('.testimonials__quote-body');
 
 		function show(i) {
 			const t = testimonials[i];
 			quoteEl.textContent = t.quote;
 			authorEl.textContent = `${t.author} - ${t.company}`;
+			avatarEl.src = t.avatarSrc;
+		}
+
+		// Fixa a altura no maior depoimento para evitar layout shift
+		if (quoteBodyEl) {
+			let maxH = 0;
+			testimonials.forEach((_t, i) => {
+				show(i);
+				maxH = Math.max(maxH, quoteBodyEl.scrollHeight);
+			});
+			quoteBodyEl.style.minHeight = maxH + 'px';
+			show(0);
 		}
 
 		prev.addEventListener('click', () => {
@@ -197,7 +213,7 @@ const testimonials = [
 	.testimonials__aspas {
 		pointer-events: none;
 		position: absolute;
-		bottom: 55px;
+		bottom: 110px;
 		left: -100px;
 	}
 

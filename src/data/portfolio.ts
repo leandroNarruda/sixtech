@@ -1,9 +1,3 @@
-/**
- * Cards da seção de portfólio (abaixo do hero).
- * Gradientes alinhados ao frame Figma (node 152:742+).
- * Imagens: usar assets em /public/images/portfolio/ quando disponíveis;
- * hoje reutilizamos imagens de serviços como placeholder visual.
- */
 import type { Lang } from '../i18n/ui';
 
 export type PortfolioCardGradient = {
@@ -15,7 +9,6 @@ export type PortfolioCardData = {
 	id: string;
 	title: string;
 	description: string;
-	/** Caminho público da imagem de capa */
 	imageSrc: string;
 	imageAlt: string;
 	gradient: PortfolioCardGradient;
@@ -25,14 +18,10 @@ export type PortfolioCardData = {
 type CardBase = Pick<PortfolioCardData, 'id' | 'imageSrc' | 'gradient'> & { variant?: 'default' | 'green' };
 
 const cardsBase: CardBase[] = [
-	{ id: 'agronegocio-1', imageSrc: '/images/services/sistemas-sob-medida.jpg', gradient: { from: '#11384f', to: '#2780b5' } },
-	{ id: 'app-varejo', imageSrc: '/images/services/apps-mobile.jpg', gradient: { from: '#e45226', to: '#7e2d15' } },
-	{ id: 'integracao-multinacional', imageSrc: '/images/services/integracoes-ia.jpg', gradient: { from: '#facd45', to: '#947929' } },
-	{ id: 'agronegocio-2', imageSrc: '/images/services/consultoria-ti.jpg', gradient: { from: '#11384f', to: '#2780b5' } },
-	{ id: 'app-varejo-2', imageSrc: '/images/services/apps-mobile.jpg', gradient: { from: '#e45226', to: '#7e2d15' } },
-	{ id: 'integracao-multinacional-2', imageSrc: '/images/services/integracoes-ia.jpg', gradient: { from: '#facd45', to: '#947929' } },
-	{ id: 'agronegocio-3', imageSrc: '/images/services/sistemas-sob-medida.jpg', gradient: { from: '#11384f', to: '#2780b5' } },
-	{ id: 'agronegocio-green', imageSrc: '/images/services/consultoria-ti.jpg', gradient: { from: '#17d86a', to: '#0c7238' }, variant: 'green' },
+	{ id: 'gestao-obras',      imageSrc: '/images/portfolio/incontrol.jpeg',      gradient: { from: '#17d86a', to: '#0c7238' }, variant: 'green' },
+	{ id: 'eosolar',           imageSrc: '/images/portfolio/mapa.jpeg',          gradient: { from: '#facd45', to: '#947929' } },
+	{ id: 'emergencia',        imageSrc: '/images/portfolio/emergencia.jpeg',    gradient: { from: '#7e1010', to: '#c0392b' } },
+	{ id: 'braco-robotico',    imageSrc: '/images/portfolio/braco-robotico.png', gradient: { from: '#11384f', to: '#2780b5' } },
 ];
 
 type CardTranslation = Pick<PortfolioCardData, 'title' | 'description' | 'imageAlt'>;
@@ -40,86 +29,46 @@ type CardTranslation = Pick<PortfolioCardData, 'title' | 'description' | 'imageA
 const cardsTranslations: Record<Lang, CardTranslation[]> = {
 	pt: [
 		{
-			title: 'Sistema de Gestão para Agronegócio',
-			description: 'Plataforma com IA para predição de processos, integrando dados climáticos e operacionais. Tecnologias: IA, IoT, Web/Mobile',
-			imageAlt: 'Interface do sistema de gestão para agronegócio',
+			title: 'Sistema de Gerenciamento de Obras',
+			description: 'Plataforma para gerenciar de forma visual (3D) o cronograma físico financeiro de obras.',
+			imageAlt: 'Plataforma de gerenciamento visual 3D de obras',
 		},
 		{
-			title: 'App Mobile para Varejo',
-			description: 'App híbrido para gestão de estoque e vendas. Tecnologias: Android/iOS, integrações API.',
-			imageAlt: 'Aplicativo mobile para varejo',
+			title: 'Plataforma Eosolar',
+			description: 'Atlas Digital Interativo que reúne de forma inédita os estudos e informações sobre o potencial de geração de energia renovável (eólica e solar) do Maranhão.',
+			imageAlt: 'Atlas digital interativo de energia renovável do Maranhão',
 		},
 		{
-			title: 'Integração de Sistemas para Multinacional',
-			description: 'Conexão de ERPs com IA para automação',
-			imageAlt: 'Integração de sistemas corporativos',
+			title: 'Sistema para Emergências Médicas',
+			description: 'Plataforma para atendimento de emergências médicas onde o usuário liga para a central, esta diagnostica o tipo de ocorrência e envia o atendimento adequado.',
+			imageAlt: 'Plataforma de atendimento de emergências médicas',
 		},
 		{
-			title: 'Sistema de Gestão para Agronegócio 2',
-			description: 'Plataforma com IA para predição de processos, integrando dados climáticos e operacionais.',
-			imageAlt: 'Painel do sistema de gestão para agronegócio',
-		},
-		{
-			title: 'App Mobile para Varejo 2',
-			description: 'App híbrido para gestão de estoque e vendas. Tecnologias: Android/iOS, integrações API.',
-			imageAlt: 'Aplicativo mobile para varejo',
-		},
-		{
-			title: 'Integração de Sistemas 2',
-			description: 'Conexão de ERPs com IA para automação e melhoria de performance.',
-			imageAlt: 'Integração de sistemas corporativos',
-		},
-		{
-			title: 'Sistema de Gestão 3',
-			description: 'Plataforma com IA para predição de processos.',
-			imageAlt: 'Painel do sistema',
-		},
-		{
-			title: 'Sistema de Gestão para Agronegócio',
-			description: 'Plataforma com IA para predição de processos, integrando dados climáticos e operacionais. Tecnologias: IA, IoT, Web/Mobile',
-			imageAlt: 'Painel do sistema de gestão para agronegócio',
+			title: 'Braço Robótico',
+			description: 'Interface para controle de braço robótico utilizado para poda de árvores.',
+			imageAlt: 'Interface de controle do braço robótico para poda de árvores',
 		},
 	],
 	en: [
 		{
-			title: 'Agricultural Management System',
-			description: 'AI-powered platform for process prediction, integrating climate and operational data. Technologies: AI, IoT, Web/Mobile',
-			imageAlt: 'Agricultural management system interface',
+			title: 'Construction Management System',
+			description: 'Platform for visually managing (3D) the physical and financial schedule of construction projects.',
+			imageAlt: 'Visual 3D construction project management platform',
 		},
 		{
-			title: 'Retail Mobile App',
-			description: 'Hybrid app for inventory and sales management. Technologies: Android/iOS, API integrations.',
-			imageAlt: 'Retail mobile application',
+			title: 'Eosolar Platform',
+			description: 'Interactive Digital Atlas that uniquely compiles studies and information on the renewable energy generation potential (wind and solar) of Maranhão.',
+			imageAlt: 'Interactive digital atlas of renewable energy in Maranhão',
 		},
 		{
-			title: 'System Integration for Multinational',
-			description: 'ERP connection with AI for automation',
-			imageAlt: 'Corporate system integration',
+			title: 'Medical Emergency System',
+			description: 'Platform for handling medical emergencies where the user calls the center, which diagnoses the type of occurrence and dispatches the appropriate response.',
+			imageAlt: 'Medical emergency response platform',
 		},
 		{
-			title: 'Agricultural Management System 2',
-			description: 'AI-powered platform for process prediction, integrating climate and operational data.',
-			imageAlt: 'Agricultural management system dashboard',
-		},
-		{
-			title: 'Retail Mobile App 2',
-			description: 'Hybrid app for inventory and sales management. Technologies: Android/iOS, API integrations.',
-			imageAlt: 'Retail mobile application',
-		},
-		{
-			title: 'System Integration 2',
-			description: 'ERP connection with AI for automation and performance improvement.',
-			imageAlt: 'Corporate system integration',
-		},
-		{
-			title: 'Management System 3',
-			description: 'AI-powered platform for process prediction.',
-			imageAlt: 'System dashboard',
-		},
-		{
-			title: 'Agricultural Management System',
-			description: 'AI-powered platform for process prediction, integrating climate and operational data. Technologies: AI, IoT, Web/Mobile',
-			imageAlt: 'Agricultural management system dashboard',
+			title: 'Robotic Arm',
+			description: 'Interface for controlling a robotic arm used for tree pruning.',
+			imageAlt: 'Robotic arm control interface for tree pruning',
 		},
 	],
 };
