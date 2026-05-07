@@ -4,8 +4,7 @@
 export const contactInfo = {
 	addressLine: "Rua Visconde do Rio Branco, 1488 - Centro, Curitiba-PR",
 	phones: [
-		{ label: "(41) 3015-2535", href: "tel:+554130152535" },
-		{ label: "(41) 9 9973.9575", href: "tel:+5541999739575" },
+		{ label: "(41) 9 9973-9575", href: "tel:+5541999739575" },
 	],
 	email: {
 		label: "comercial@sixtech.com.br",

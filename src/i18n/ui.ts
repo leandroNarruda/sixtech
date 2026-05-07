@@ -58,7 +58,7 @@ export const ui = {
 		// QuemSomos Hero
 		'qs.hero.line1': 'Somos a',
 		'qs.hero.line2': 'Six Tech',
-		'qs.hero.line3': 'Desenvolvimento de sistemas com quase 30 anos de experiência',
+		'qs.hero.line3': 'Desenvolvimento de sistemas com 30 anos de experiência',
 		'qs.hero.lead1': 'Somos uma empresa curitibana especializada em criar soluções tecnológicas sob medida. Desde 1996, atuamos como parceiros estratégicos, ajudando empresas a inovar, reduzir custos e transformar processos em resultados reais.',
 		'qs.hero.lead2.plain': 'Nosso foco é simples:',
 		'qs.hero.lead2.bold': 'entregar tecnologia que resolve problemas de verdade',
@@ -192,7 +192,7 @@ export const ui = {
 		// QuemSomos Hero
 		'qs.hero.line1': 'We are',
 		'qs.hero.line2': 'Six Tech',
-		'qs.hero.line3': 'Systems development with nearly 30 years of experience',
+		'qs.hero.line3': 'Systems development with 30 years of experience',
 		'qs.hero.lead1': 'We are a Curitiba-based company specializing in custom technology solutions. Since 1996, we have acted as strategic partners, helping businesses innovate, reduce costs, and transform processes into real results.',
 		'qs.hero.lead2.plain': 'Our focus is simple:',
 		'qs.hero.lead2.bold': 'deliver technology that truly solves problems',
