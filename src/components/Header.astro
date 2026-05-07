@@ -57,7 +57,7 @@ const menuBtnId = 'site-header-menu-btn';
 		</nav>
 
 		<div class:list={['site-header__actions', 'site-header__actions--desktop', { 'site-header__actions--hidden': hideCta }]}>
-			<a class="site-header__cta" href={ctaHref}>{t('header.cta')}</a>
+			<button type="button" class="site-header__cta" data-modal-contato>{t('header.cta')}</button>
 		</div>
 
 		<button
@@ -266,6 +266,8 @@ const menuBtnId = 'site-header-menu-btn';
 		padding: 0.5rem 1rem;
 		border-radius: 1.9375rem; /* 31px */
 		text-decoration: none;
+		cursor: pointer;
+		border: none;
 		transition:
 			background 0.2s,
 			color 0.2s,

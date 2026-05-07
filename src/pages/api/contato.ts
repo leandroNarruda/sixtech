@@ -15,9 +15,7 @@ export const POST: APIRoute = async ({ request }) => {
   const email = data.get('email')?.toString().trim() ?? '';
   const telefone = data.get('telefone')?.toString().trim() ?? '';
   const mensagem = data.get('mensagem')?.toString().trim() ?? '';
-  const privacidade = data.get('privacidade')?.toString() ?? '';
-
-  if (!nome || !email || !telefone || !mensagem || privacidade !== 'aceito') {
+  if (!nome || !email || !telefone || !mensagem) {
     return new Response(JSON.stringify({ ok: false, error: 'Campos obrigatórios ausentes.' }), {
       status: 400,
     });

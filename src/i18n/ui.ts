@@ -105,7 +105,6 @@ export const ui = {
 		'contato.form.phone.placeholder': 'Telefone',
 		'contato.form.message.label': 'Descrição do projeto',
 		'contato.form.message.placeholder': 'Descreva seu projeto',
-		'contato.form.privacy': 'Aceito política de privacidade',
 		'contato.form.submit': 'Enviar',
 
 		// Contato Modal
@@ -239,7 +238,6 @@ export const ui = {
 		'contato.form.phone.placeholder': 'Phone',
 		'contato.form.message.label': 'Project description',
 		'contato.form.message.placeholder': 'Describe your project',
-		'contato.form.privacy': 'I accept the privacy policy',
 		'contato.form.submit': 'Send',
 
 		// Contato Modal
