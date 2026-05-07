@@ -105,7 +105,7 @@ export const ui = {
 		'contato.form.phone.placeholder': 'Telefone',
 		'contato.form.message.label': 'Descrição do projeto',
 		'contato.form.message.placeholder': 'Descreva seu projeto',
-		'contato.form.message.placeholder.page': 'Descreva como podemos te ajudar',
+		'contato.form.message.placeholder.page': 'Descreva como podemos te ajudar...',
 		'contato.form.submit': 'Enviar',
 
 		// Contato Modal
@@ -239,7 +239,7 @@ export const ui = {
 		'contato.form.phone.placeholder': 'Phone',
 		'contato.form.message.label': 'Project description',
 		'contato.form.message.placeholder': 'Describe your project',
-		'contato.form.message.placeholder.page': 'Describe how we can help you',
+		'contato.form.message.placeholder.page': 'Describe how we can help you...',
 		'contato.form.submit': 'Send',
 
 		// Contato Modal
