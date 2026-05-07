@@ -6,9 +6,10 @@ export type HeaderActiveNav = 'home' | 'quem-somos' | 'servicos' | 'portfolio' |
 
 interface Props {
 	active?: HeaderActiveNav;
+	hideCta?: boolean;
 }
 
-const { active } = Astro.props;
+const { active, hideCta = false } = Astro.props;
 const lang = (Astro.currentLocale ?? 'pt') as Lang;
 const t = useTranslations(lang);
 const isEn = lang === 'en';
@@ -55,7 +56,7 @@ const menuBtnId = 'site-header-menu-btn';
 			</ul>
 		</nav>
 
-		<div class="site-header__actions site-header__actions--desktop">
+		<div class:list={['site-header__actions', 'site-header__actions--desktop', { 'site-header__actions--hidden': hideCta }]}>
 			<a class="site-header__cta" href={ctaHref}>{t('header.cta')}</a>
 		</div>
 
@@ -243,6 +244,11 @@ const menuBtnId = 'site-header-menu-btn';
 	.site-header__link--active:hover,
 	.site-header__link--active:focus-visible {
 		color: var(--text-ice);
+	}
+
+	.site-header__actions--hidden {
+		visibility: hidden;
+		pointer-events: none;
 	}
 
 	.site-header__actions--desktop {
