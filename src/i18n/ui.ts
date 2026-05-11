@@ -66,9 +66,9 @@ export const ui = {
 
 		// QuemSomos Mission/Vision
 		'qs.mv.missionHeading': 'Nossa missão',
-		'qs.mv.missionText': 'Impulsionar empresas por meio de tecnologia inteligente, criando soluções que aumentam eficiência, reduzem custos e geram vantagem competitiva.',
+		'qs.mv.missionText': 'Atender clientes corporativos com serviços inovadores em desenvolvimento de software',
 		'qs.mv.visionHeading': 'Nossa visão',
-		'qs.mv.visionText': 'Ser referência em parcerias de TI, desenvolvendo sistemas que transformam desafios em oportunidades de crescimento.',
+		'qs.mv.visionText': 'Estar entre as principais referências de TI do Brasil.',
 
 		// Servicos Hero
 		'servicos.hero.title': 'Nossos Serviços',
@@ -200,9 +200,9 @@ export const ui = {
 
 		// QuemSomos Mission/Vision
 		'qs.mv.missionHeading': 'Our mission',
-		'qs.mv.missionText': 'To empower businesses through intelligent technology, creating solutions that increase efficiency, reduce costs, and generate competitive advantage.',
+		'qs.mv.missionText': 'To serve corporate clients with innovative software development services.',
 		'qs.mv.visionHeading': 'Our vision',
-		'qs.mv.visionText': 'To be the reference in IT partnerships, developing systems that turn challenges into growth opportunities.',
+		'qs.mv.visionText': 'To be among the leading IT references in Brazil.',
 
 		// Servicos Hero
 		'servicos.hero.title': 'Our Services',
