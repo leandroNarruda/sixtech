@@ -120,7 +120,7 @@ export const ui = {
 		// CallToAction (quem somos)
 		'cta.qs.title': 'Venha nos conhecer!',
 		'cta.qs.text': 'Agende uma conversa on-line e descubra como nossa trajetória de inovação pode impulsionar suas soluções!',
-		'cta.qs.btn': 'Conheça a SixTech',
+		'cta.qs.btn': 'Conheça a Six Tech',
 
 		// Page titles / descriptions
 		'page.home.title': 'sixtech — Ideias em sistemas',
@@ -254,7 +254,7 @@ export const ui = {
 		// CallToAction (quem somos)
 		'cta.qs.title': 'Come meet us!',
 		'cta.qs.text': 'Schedule an online conversation and discover how our history of innovation can power your solutions!',
-		'cta.qs.btn': 'Meet SixTech',
+		'cta.qs.btn': 'Meet Six Tech',
 
 		// Page titles / descriptions
 		'page.home.title': 'sixtech — Ideas into systems',
