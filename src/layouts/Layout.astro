@@ -5,6 +5,7 @@ import ContatoModal from '../components/ContatoModal.astro';
 import { useTranslations } from '../i18n/ui';
 import type { Lang } from '../i18n/ui';
 import { getAlternateUrl } from '../i18n/routes';
+import { contactInfo } from '../data/contact';
 
 interface Props {
 	title: string;
@@ -23,6 +24,53 @@ const canonicalPt = Astro.site
 const canonicalEn = Astro.site
 	? new URL(getAlternateUrl(Astro.url.pathname, 'en'), Astro.site).href
 	: getAlternateUrl(Astro.url.pathname, 'en');
+const canonicalCurrent = lang === 'pt' ? canonicalPt : canonicalEn;
+
+const brandImage = Astro.site
+	? new URL('/logo-simples.png', Astro.site).href
+	: '/logo-simples.png';
+const ogLocale = lang === 'pt' ? 'pt_BR' : 'en_US';
+const ogLocaleAlternate = lang === 'pt' ? 'en_US' : 'pt_BR';
+const primaryPhone = contactInfo.phones[0];
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'ProfessionalService',
+	'@id': Astro.site ? new URL('/#organization', Astro.site).href : '/#organization',
+	name: 'sixtech',
+	legalName: 'Six Tech',
+	url: Astro.site?.href ?? canonicalPt,
+	logo: brandImage,
+	image: brandImage,
+	description,
+	email: contactInfo.email.label,
+	telephone: primaryPhone?.href.replace('tel:', ''),
+	contactPoint: {
+		'@type': 'ContactPoint',
+		telephone: primaryPhone?.href.replace('tel:', ''),
+		email: contactInfo.email.label,
+		contactType: 'sales',
+		availableLanguage: ['pt-BR', 'en'],
+	},
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: 'Rua Visconde do Rio Branco, 1488',
+		addressLocality: 'Curitiba',
+		addressRegion: 'PR',
+		addressCountry: 'BR',
+	},
+	areaServed: [
+		{
+			'@type': 'Country',
+			name: 'Brasil',
+		},
+	],
+	knowsAbout: [
+		'Desenvolvimento de sistemas sob medida',
+		'Aplicativos mobile',
+		'Integrações com inteligência artificial',
+		'Consultoria em TI',
+	],
+};
 ---
 
 <!DOCTYPE html>
@@ -31,9 +79,27 @@ const canonicalEn = Astro.site
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
+		<meta property="og:site_name" content="sixtech" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalCurrent} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={brandImage} />
+		<meta property="og:locale" content={ogLocale} />
+		<meta property="og:locale:alternate" content={ogLocaleAlternate} />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={brandImage} />
+		<link rel="canonical" href={canonicalCurrent} />
 		<link rel="alternate" hreflang="pt-BR" href={canonicalPt} />
 		<link rel="alternate" hreflang="en" href={canonicalEn} />
 		<link rel="alternate" hreflang="x-default" href={canonicalPt} />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
+		<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -41,7 +107,7 @@ const canonicalEn = Astro.site
 			rel="stylesheet"
 		/>
 		<title>{title}</title>
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 	</head>
 	<body>
 		<slot />
