@@ -27,8 +27,8 @@ const canonicalEn = Astro.site
 const canonicalCurrent = lang === 'pt' ? canonicalPt : canonicalEn;
 
 const brandImage = Astro.site
-	? new URL('/logo-simples.png', Astro.site).href
-	: '/logo-simples.png';
+	? new URL('/logo-simples-clean.png', Astro.site).href
+	: '/logo-simples-clean.png';
 const ogLocale = lang === 'pt' ? 'pt_BR' : 'en_US';
 const ogLocaleAlternate = lang === 'pt' ? 'en_US' : 'pt_BR';
 const primaryPhone = contactInfo.phones[0];
