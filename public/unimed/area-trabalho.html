@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área de Trabalho - Unimed Curitiba</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="coop-header">
+    <div class="header-inner">
+      <div class="coop-left">
+        <a class="logo-box small" href="area-trabalho.html">
+          <div class="nome">Unimed &#10047;</div>
+          <div class="cidade">Curitiba</div>
+        </a>
+        <a class="pill" href="area-trabalho.html">Área de Trabalho</a>
+      </div>
+
+      <nav class="coop-nav">
+        <a href="#" onclick="return false">PAC – Meu Plano Unimed</a>
+        <a href="#" onclick="return false">A cooperativa</a>
+        <a href="#" onclick="return false">Programa Viva</a>
+        <a href="#" onclick="return false">Atendimento</a>
+        <a href="#" onclick="return false">Informações</a>
+      </nav>
+
+      <div class="header-right">
+        <span class="avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
+        <button class="search-icon" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <aside class="sidebar">
+      <button class="menu-btn" data-menu="movimentacoes">MOVIMENTAÇÕES <span>&rsaquo;</span></button>
+      <button class="menu-btn" data-menu="operacoes">OPERAÇÕES <span>&rsaquo;</span></button>
+      <button class="menu-btn selected" data-menu="solicitacoes">SOLICITAÇÕES DE LIBERAÇÕES <span>&rsaquo;</span></button>
+    </aside>
+
+    <section class="ws-content">
+      <div id="painel-solicitacoes">
+        <h2>Solicitações</h2>
+        <ul class="ws-links">
+          <li><a href="solicitacao.html">Solicitação Internamento Eletivo</a></li>
+          <li><a href="#" onclick="return false">Solicitação de Home Care</a></li>
+        </ul>
+      </div>
+      <p id="painel-vazio" class="ws-vazio hidden">Conteúdo em construção.</p>
+    </section>
+  </div>
+
+  <script>
+    document.querySelectorAll(".menu-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".menu-btn").forEach((b) => b.classList.remove("selected"))
+        btn.classList.add("selected")
+        const ehSolicitacoes = btn.dataset.menu === "solicitacoes"
+        document.getElementById("painel-solicitacoes").classList.toggle("hidden", !ehSolicitacoes)
+        document.getElementById("painel-vazio").classList.toggle("hidden", ehSolicitacoes)
+      })
+    })
+  </script>
+</body>
+</html>

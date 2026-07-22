@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/unimed",
+      "destination": "/unimed/login.html",
+      "permanent": false
+    },
+    {
+      "source": "/unimed/",
+      "destination": "/unimed/login.html",
+      "permanent": false
+    }
+  ]
+}

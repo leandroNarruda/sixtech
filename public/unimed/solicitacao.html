@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solicitação de Internamento - Unimed Curitiba</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="coop-header">
+    <div class="header-inner">
+      <div class="coop-left">
+        <a class="logo-box small" href="area-trabalho.html">
+          <div class="nome">Unimed &#10047;</div>
+          <div class="cidade">Curitiba</div>
+        </a>
+        <a class="pill" href="area-trabalho.html">Área de Trabalho</a>
+      </div>
+
+      <nav class="coop-nav">
+        <a href="#" onclick="return false">PAC – Meu Plano Unimed</a>
+        <a href="#" onclick="return false">A cooperativa</a>
+        <a href="#" onclick="return false">Programa Viva</a>
+        <a href="#" onclick="return false">Atendimento</a>
+        <a href="#" onclick="return false">Informações</a>
+      </nav>
+
+      <div class="header-right">
+        <span class="avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
+        <button class="search-icon" title="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- Tela de sucesso -->
+    <div class="success hidden" id="success">
+      <h1>Solicitação registrada!</h1>
+      <p>Nº da Solicitação: <strong id="num-solicitacao"></strong> (sequencial automático - mock)</p>
+      <button class="btn" onclick="location.reload()">Nova solicitação</button>
+    </div>
+
+    <div class="card" id="form-card">
+      <h1 class="form-title">Formulário de Solicitação de Internação</h1>
+
+      <!-- Steps -->
+      <div class="steps" id="steps">
+        <button type="button" class="step" data-n="1"><span class="n">1</span>Internação</button>
+        <span class="step-sep"></span>
+        <button type="button" class="step" data-n="2"><span class="n">2</span>Procedimentos</button>
+        <span class="step-sep"></span>
+        <button type="button" class="step" data-n="3"><span class="n">3</span>OPME</button>
+        <span class="step-sep"></span>
+        <button type="button" class="step" data-n="4"><span class="n">4</span>Quimioterapia</button>
+        <span class="step-sep"></span>
+        <button type="button" class="step" data-n="5"><span class="n">5</span>Medicamentos</button>
+        <span class="step-sep"></span>
+        <button type="button" class="step" data-n="6"><span class="n">6</span>Cooperado e Anexos</button>
+      </div>
+
+      <!-- ================= ABA 1 - Dados da Internação ================= -->
+      <section class="tab-pane" id="tab-1">
+        <div class="campo-guia">
+          <label>Nº Guia no Prestador</label>
+          <input value="Sequencial Automático" disabled />
+        </div>
+
+        <div class="row cols-3">
+          <div>
+            <label>Registro ANS</label>
+            <input value="304701" disabled />
+          </div>
+          <div style="grid-column: span 2">
+            <label>Etapa da Autorização</label>
+            <input value="Solicitação de autorização Prévia" disabled />
+          </div>
+        </div>
+
+        <div class="section-bar">Dados do Beneficiário</div>
+
+        <div class="row cols-121 end">
+          <div>
+            <label for="t1-cartao">Nº do cartão</label>
+            <input id="t1-cartao" />
+          </div>
+          <div>
+            <label for="t1-benef">Nome do Beneficiário</label>
+            <div class="search-wrap"><input id="t1-benef" autocomplete="off" /></div>
+          </div>
+          <div class="check-inline">
+            <input id="t1-rn" type="checkbox" />
+            <label for="t1-rn">Atendimento a RN?</label>
+          </div>
+        </div>
+
+        <div class="section-bar">Dados do Solicitante</div>
+
+        <div class="row cols-21111">
+          <div><label>Profissional solicitante</label><input value="Gassan Traya" disabled /></div>
+          <div><label>Conselho Profissional</label><input value="CRM" disabled /></div>
+          <div><label>Nº Conselho</label><input value="11111" disabled /></div>
+          <div><label>Estado</label><input value="PR" disabled /></div>
+          <div><label>CBO</label><input value="999999" disabled /></div>
+        </div>
+
+        <div class="section-bar">Dados do Hospital / Local Solicitado / Dados da internação</div>
+
+        <div class="row cols-121">
+          <div>
+            <label>Cód. na Operadora / CNPJ</label>
+            <input id="t1-prest-cod" disabled />
+          </div>
+          <div>
+            <label for="t1-prest">Nome Hospital / Local Solicitado</label>
+            <div class="search-wrap"><input id="t1-prest" placeholder="Busca pelo nome fantasia" autocomplete="off" /></div>
+          </div>
+          <div>
+            <label>Caráter de Atendimento</label>
+            <input value="Eletivo" disabled />
+          </div>
+        </div>
+
+        <div class="row cols-3">
+          <div>
+            <label for="t1-tipo">Tipo de internação</label>
+            <select id="t1-tipo">
+              <option value="">Selecione...</option>
+              <option value="cirurgica">Cirúrgica</option>
+              <option value="clinica">Clínica</option>
+            </select>
+          </div>
+          <div><label>Regime de internação</label><input value="Hospitalar" disabled /></div>
+          <div><label>Indicação de acidente</label><input value="Não Acidente" disabled /></div>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <label for="t1-indicacao">Indicação Clínica</label>
+          <textarea id="t1-indicacao" rows="4" placeholder="Campo obrigatório"></textarea>
+        </div>
+
+        <div class="row cols-3">
+          <div>
+            <label for="t1-cid1">CID 10 Principal</label>
+            <div class="search-wrap"><input id="t1-cid1" autocomplete="off" /></div>
+          </div>
+          <div>
+            <label for="t1-cid2">CID (2) Opcional</label>
+            <div class="search-wrap"><input id="t1-cid2" autocomplete="off" /></div>
+          </div>
+          <div>
+            <label for="t1-cid3">CID (3) Opcional</label>
+            <div class="search-wrap"><input id="t1-cid3" autocomplete="off" /></div>
+          </div>
+        </div>
+
+        <div class="error-box hidden" id="e1"></div>
+
+        <div class="tab-actions">
+          <span></span>
+          <button type="button" class="btn" id="t1-next">Avançar</button>
+        </div>
+      </section>
+
+      <!-- ================= ABA 2 - Procedimentos ================= -->
+      <section class="tab-pane hidden" id="tab-2">
+        <div class="section-bar">Procedimentos Solicitados</div>
+
+        <div id="proc-rows"></div>
+
+        <div class="confirm-box">
+          <p>Procedimento prevê utilização de OPME?</p>
+          <button type="button" class="btn-sim" id="opme-sim">SIM</button>
+          <button type="button" class="btn-nao" id="opme-nao">NÃO</button>
+        </div>
+
+        <div class="error-box hidden" id="e2"></div>
+
+        <div class="tab-actions">
+          <button type="button" class="btn outline" onclick="mostrarEtapa(1)">Voltar</button>
+          <button type="button" class="btn" id="t2-next">Avançar</button>
+        </div>
+      </section>
+
+      <!-- ================= ABA 3 - OPME ================= -->
+      <section class="tab-pane hidden" id="tab-3">
+        <div class="section-bar">OPME Solicitados</div>
+
+        <div id="opme-rows"></div>
+
+        <div class="check-inline" style="border-top:1px solid var(--border);padding-top:18px;margin-top:18px">
+          <input id="opme-nc" type="checkbox" />
+          <label for="opme-nc" style="font-weight:700">Possui OPME não cadastrado?</label>
+        </div>
+
+        <div id="nc-section" class="hidden">
+          <div class="section-bar">OPME Não Cadastrado</div>
+
+          <div class="row cols-3">
+            <div><label>Cód. OPME</label><input value="99999999" disabled /></div>
+            <div><label>Descrição OPME</label><input value="Código genérico" disabled /></div>
+            <div>
+              <label for="nc-qtde">Qtde. Solicitado</label>
+              <input id="nc-qtde" value="1" />
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <label for="nc-nome">Nome do OPME</label>
+            <textarea id="nc-nome" rows="3" placeholder="Informar o nome do OPME"></textarea>
+          </div>
+
+          <p class="subtitulo">Indicar 3 fornecedores</p>
+          <div class="fornecedores-nc">
+            <div class="campo-fornecedor">
+              <label for="nc-f1">Fornecedor</label>
+              <div class="search-wrap"><input id="nc-f1" autocomplete="off" /></div>
+            </div>
+            <div class="campo-fornecedor">
+              <label for="nc-f2">Fornecedor <span class="opcional">(opcional)</span></label>
+              <div class="search-wrap"><input id="nc-f2" autocomplete="off" /></div>
+            </div>
+            <div class="campo-fornecedor">
+              <label for="nc-f3">Fornecedor <span class="opcional">(opcional)</span></label>
+              <div class="search-wrap"><input id="nc-f3" autocomplete="off" /></div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <label for="nc-just">Justificativa OPME não cadastrado</label>
+            <textarea id="nc-just" rows="4"></textarea>
+          </div>
+        </div>
+
+        <!-- Campo 41 - Utilização de Quimioterápico -->
+        <div class="confirm-box">
+          <p>Procedimento prevê utilização de Quimioterápico?</p>
+          <button type="button" class="btn-sim" id="quimio-sim-opme">SIM</button>
+          <button type="button" class="btn-nao" id="quimio-nao-opme">NÃO</button>
+        </div>
+
+        <div class="error-box hidden" id="e3"></div>
+
+        <div class="tab-actions">
+          <button type="button" class="btn outline" onclick="mostrarEtapa(2)">Voltar</button>
+          <button type="button" class="btn" id="t3-next">Avançar</button>
+        </div>
+      </section>
+
+      <!-- ================= ABA 4 - Quimioterapia ================= -->
+      <section class="tab-pane hidden" id="tab-4">
+        <!-- Campo 41 - exibido aqui apenas para quem não passou pela aba OPME -->
+        <div class="confirm-box" id="quimio-confirm-4">
+          <p>Procedimento prevê utilização de Quimioterápico?</p>
+          <button type="button" class="btn-sim" id="quimio-sim">SIM</button>
+          <button type="button" class="btn-nao" id="quimio-nao">NÃO</button>
+        </div>
+
+        <div id="quimio-form" class="hidden">
+          <div class="section-bar">Quimioterapia – Diagnóstico Oncológico</div>
+
+          <div class="row cols-5">
+            <div><label for="q-peso">Peso (Kg)</label><input id="q-peso" placeholder="___,__" /></div>
+            <div><label for="q-altura">Altura (Cm)</label><input id="q-altura" placeholder="___,__" /></div>
+            <div><label for="q-sup">Superfície Corporal (m²)</label><input id="q-sup" placeholder="___,__" disabled /></div>
+            <div><label for="q-idade">Idade</label><input id="q-idade" /></div>
+            <div>
+              <label for="q-sexo">Sexo</label>
+              <select id="q-sexo">
+                <option value="">Selecione...</option>
+                <option>Masculino</option>
+                <option>Feminino</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row cols-4">
+            <div><label for="q-data">Data do diagnóstico</label><input id="q-data" type="date" /></div>
+            <div>
+              <label for="q-cid1">CID 10 Principal</label>
+              <div class="search-wrap"><input id="q-cid1" autocomplete="off" /></div>
+            </div>
+            <div>
+              <label for="q-cid2">CID (2) Opcional</label>
+              <div class="search-wrap"><input id="q-cid2" autocomplete="off" /></div>
+            </div>
+            <div>
+              <label for="q-cid3">CID (3) Opcional</label>
+              <div class="search-wrap"><input id="q-cid3" autocomplete="off" /></div>
+            </div>
+          </div>
+
+          <div class="row cols-4">
+            <div>
+              <label for="q-estadiamento">Estadiamento</label>
+              <select id="q-estadiamento">
+                <option value="">Selecione...</option>
+                <option>Estágio 0</option><option>Estágio I</option><option>Estágio II</option>
+                <option>Estágio III</option><option>Estágio IV</option>
+              </select>
+            </div>
+            <div>
+              <label for="q-tipo">Tipo de Quimioterapia</label>
+              <select id="q-tipo">
+                <option value="">Selecione...</option>
+                <option>Curativa</option><option>Adjuvante</option>
+                <option>Neoadjuvante</option><option>Paliativa</option>
+              </select>
+            </div>
+            <div>
+              <label for="q-finalidade">Finalidade</label>
+              <select id="q-finalidade">
+                <option value="">Selecione...</option>
+                <option>Adjuvante</option><option>Neoadjuvante</option><option>Exclusiva</option>
+                <option>Paliativa</option><option>Combinada</option>
+              </select>
+            </div>
+            <div>
+              <label for="q-tumor">Tumor</label>
+              <select id="q-tumor">
+                <option value="">Selecione...</option>
+                <option>T1</option><option>T2</option><option>T3</option><option>T4</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row cols-4">
+            <div>
+              <label for="q-nodulo">Nódulo</label>
+              <select id="q-nodulo">
+                <option value="">Selecione...</option>
+                <option>N0</option><option>N1</option><option>N2</option><option>N3</option>
+              </select>
+            </div>
+            <div>
+              <label for="q-metastase">Metástase</label>
+              <select id="q-metastase">
+                <option value="">Selecione...</option>
+                <option>M0</option><option>M1</option>
+              </select>
+            </div>
+            <div>
+              <label for="q-ecog">ECOG</label>
+              <select id="q-ecog">
+                <option value="">Selecione...</option>
+                <option>0</option><option>1</option><option>2</option>
+                <option>3</option><option>4</option><option>5</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <label for="q-plano">Plano Terapêutico</label>
+            <textarea id="q-plano" rows="5"></textarea>
+          </div>
+
+          <div class="row cols-2">
+            <div>
+              <label for="q-diag">Diagnóstico Cito/Histopatológico</label>
+              <textarea id="q-diag" rows="5"></textarea>
+            </div>
+            <div>
+              <label for="q-info">Informações relevantes <span class="opcional">(opcional)</span></label>
+              <textarea id="q-info" rows="5"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="error-box hidden" id="e4"></div>
+
+        <div class="tab-actions">
+          <button type="button" class="btn outline" id="t4-back">Voltar</button>
+          <button type="button" class="btn" id="t4-next">Avançar</button>
+        </div>
+      </section>
+
+      <!-- ================= ABA 5 - Medicamentos ================= -->
+      <section class="tab-pane hidden" id="tab-5">
+        <div class="section-bar">Medicamentos e Drogas solicitadas</div>
+
+        <div class="row cols-4">
+          <div><label for="m-data">Data prevista Administração</label><input id="m-data" type="date" /></div>
+          <div><label for="m-cod">Cód. Medicamento</label><input id="m-cod" /></div>
+          <div>
+            <label for="m-desc">Descrição</label>
+            <div class="search-wrap"><input id="m-desc" autocomplete="off" /></div>
+          </div>
+          <div><label for="m-doses">Doses</label><input id="m-doses" /></div>
+        </div>
+
+        <div class="row cols-3">
+          <div><label for="m-via">Via Administrada</label><input id="m-via" /></div>
+          <div><label for="m-freq">Frequência</label><input id="m-freq" /></div>
+          <div>
+            <label for="m-unidade">Unidade de Medida</label>
+            <select id="m-unidade">
+              <option value="">Selecione...</option>
+              <option>mg</option><option>g</option><option>mcg</option><option>mL</option>
+              <option>UI</option><option>Comprimido</option><option>Ampola</option><option>Frasco</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-bar">Tratamentos Anteriores</div>
+
+        <div class="row cols-2">
+          <div>
+            <label for="m-cirurgia">Cirurgia <span class="opcional">(opcional)</span></label>
+            <textarea id="m-cirurgia" rows="4"></textarea>
+          </div>
+          <div>
+            <label for="m-area">Área irradiada</label>
+            <textarea id="m-area" rows="4"></textarea>
+          </div>
+        </div>
+
+        <div class="row cols-2">
+          <div><label for="m-dt-real">Data de Realização</label><input id="m-dt-real" type="date" /></div>
+          <div><label for="m-dt-apl">Data de Aplicação</label><input id="m-dt-apl" type="date" /></div>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <label for="m-info">Informações relevantes <span class="opcional">(opcional)</span></label>
+          <textarea id="m-info" rows="4"></textarea>
+        </div>
+
+        <div class="row cols-4">
+          <div><label for="m-ciclos">Nº de ciclos Previstos</label><input id="m-ciclos" /></div>
+          <div><label for="m-ciclo-atual">Ciclo Atual</label><input id="m-ciclo-atual" /></div>
+          <div><label for="m-intervalo">Intervalo entre ciclos (em dias)</label><input id="m-intervalo" /></div>
+          <div><label for="m-dias">Dias Ciclo Atual</label><input id="m-dias" /></div>
+        </div>
+
+        <div class="error-box hidden" id="e5"></div>
+
+        <div class="tab-actions">
+          <button type="button" class="btn outline" onclick="mostrarEtapa(4)">Voltar</button>
+          <button type="button" class="btn" id="t5-next">Avançar</button>
+        </div>
+      </section>
+
+      <!-- ================= ABA 6 - Cooperado e Anexos ================= -->
+      <section class="tab-pane hidden" id="tab-6">
+        <div class="section-bar">Dados de contato do Cooperado</div>
+
+        <div class="row cols-3">
+          <div><label>Cooperado</label><input value="Gassan Traya" disabled /></div>
+          <div>
+            <label for="c-celular">Celular de contato</label>
+            <div class="search-wrap"><input id="c-celular" placeholder="(41) 99999-9999" autocomplete="off" /></div>
+          </div>
+          <div>
+            <label for="c-email">E-mail</label>
+            <div class="search-wrap"><input id="c-email" placeholder="abcde@fghij.com.br" autocomplete="off" /></div>
+          </div>
+        </div>
+
+        <div class="section-bar">Anexos Clínicos</div>
+
+        <div class="chips">
+          <span class="chip">Quimioterapia</span>
+          <span class="chip">Exames / Documentos</span>
+        </div>
+
+        <div class="note-box">
+          Anexar exames / documentos obrigatórios que comprovem a necessidade de
+          realização do procedimento
+        </div>
+
+        <input type="file" id="file-input" multiple class="hidden" />
+        <button type="button" class="attach-btn" id="attach-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"><path d="M12 16V5"/><path d="M6.5 10.5 12 5l5.5 5.5"/><path d="M4 20h16"/></svg> Anexar Arquivos</button>
+        <ul class="file-list" id="file-list"></ul>
+
+        <div class="error-box hidden" id="e6"></div>
+
+        <div class="tab-actions">
+          <button type="button" class="btn outline" id="t6-back">Voltar</button>
+          <button type="button" class="btn" id="t6-enviar">Enviar Solicitação</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
