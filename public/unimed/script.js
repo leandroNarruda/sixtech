@@ -165,11 +165,13 @@ let etapa = 1
 let maiorEtapa = 1
 let opmePrevisto = null // Campo 27
 let quimioPrevisto = null // Campo 41
+// Etapas efetivamente concluídas (validadas no Avançar) - recebem o check verde
+const completadas = new Set()
 
+// Abas condicionais ficam em cinza claro até a resposta ser SIM
 function etapaDesabilitada(n) {
   if (n === 3) return opmePrevisto !== "sim"
-  // Quimioterapia fora do fluxo quando respondida como NÃO no final da aba OPME
-  if (n === 4) return opmePrevisto === "sim" && quimioPrevisto === "nao"
+  if (n === 4) return quimioPrevisto !== "sim"
   if (n === 5) return quimioPrevisto !== "sim"
   return false
 }
@@ -183,9 +185,11 @@ function mostrarEtapa(n) {
   window.scrollTo({ top: 0, behavior: "smooth" })
 }
 
-function avancarPara(n) {
-  maiorEtapa = Math.max(maiorEtapa, n)
-  mostrarEtapa(n)
+// Marca a etapa de origem como concluída e navega para o destino
+function concluirEAvancar(origem, destino) {
+  completadas.add(origem)
+  maiorEtapa = Math.max(maiorEtapa, destino)
+  mostrarEtapa(destino)
 }
 
 function renderSteps() {
@@ -193,10 +197,11 @@ function renderSteps() {
     const n = Number(btn.dataset.n)
     const dis = etapaDesabilitada(n)
     const ativa = n === etapa
-    const done = !ativa && n <= maiorEtapa && !dis
+    // check verde apenas para etapas realmente concluídas (validadas)
+    const done = !ativa && completadas.has(n) && !dis
     btn.classList.toggle("active", ativa)
     btn.classList.toggle("done", done)
-    btn.classList.toggle("disabled", dis)
+    btn.classList.toggle("disabled", dis && !ativa)
     btn.disabled = dis || n > maiorEtapa || ativa
     btn.querySelector(".n").textContent = done ? "✓" : n
   })
@@ -244,7 +249,7 @@ $("#t1-next").addEventListener("click", () => {
   else if (/(.)\1{4,}/.test(ind) || /^(.)\1*$/.test(ind))
     erros.push('Campo 18 - Indicação Clínica não pode conter sequências de caracteres repetidos (ex.: ".....", "999999").')
 
-  if (mostrarErros("e1", erros)) avancarPara(2)
+  if (mostrarErros("e1", erros)) concluirEAvancar(1, 2)
 })
 
 /* ==================== Aba 2 - Procedimentos ==================== */
@@ -321,7 +326,7 @@ $("#opme-sim").addEventListener("click", () => {
 $("#opme-nao").addEventListener("click", () => {
   opmePrevisto = "nao"
   setConfirm($("#opme-sim"), $("#opme-nao"), opmePrevisto)
-  $("#t2-next").textContent = "Avançar"
+  $("#t2-next").textContent = "Avançar para Quimioterapia"
   $("#quimio-confirm-4").classList.remove("hidden")
   renderSteps()
 })
@@ -330,7 +335,7 @@ $("#t2-next").addEventListener("click", () => {
   const erros = validarProcedimentos()
   if (opmePrevisto === null) erros.push("Campo 27 - Informe se o procedimento prevê utilização de OPME.")
   if (!mostrarErros("e2", erros)) return
-  avancarPara(opmePrevisto === "sim" ? 3 : 4)
+  concluirEAvancar(2, opmePrevisto === "sim" ? 3 : 4)
 })
 
 /* ==================== Aba 3 - OPME ==================== */
@@ -409,7 +414,7 @@ $("#t3-next").addEventListener("click", () => {
   if (quimioPrevisto === null)
     erros.push("Campo 41 - Informe se o procedimento prevê utilização de Quimioterápico.")
 
-  if (mostrarErros("e3", erros)) avancarPara(quimioPrevisto === "sim" ? 4 : 6)
+  if (mostrarErros("e3", erros)) concluirEAvancar(3, quimioPrevisto === "sim" ? 4 : 6)
 })
 
 /* ==================== Aba 4 - Quimioterapia ==================== */
@@ -442,8 +447,10 @@ function setQuimio(valor) {
   setConfirm($("#quimio-sim"), $("#quimio-nao"), valor)
   setConfirm($("#quimio-sim-opme"), $("#quimio-nao-opme"), valor)
   $("#quimio-form").classList.toggle("hidden", valor !== "sim")
-  $("#t4-next").textContent = valor === "sim" ? "Avançar para Medicamentos" : "Avançar"
-  $("#t3-next").textContent = valor === "sim" ? "Avançar para Quimioterapia" : "Avançar"
+  $("#t4-next").textContent =
+    valor === "sim" ? "Avançar para Medicamentos" : "Avançar para Cooperado e Anexos"
+  $("#t3-next").textContent =
+    valor === "sim" ? "Avançar para Quimioterapia" : "Avançar para Cooperado e Anexos"
   mostrarErros("e4", [])
   renderSteps()
 }
@@ -471,7 +478,7 @@ $("#t4-next").addEventListener("click", () => {
     if (!$("#q-diag").value.trim()) erros.push("Campo 54 - Informe o diagnóstico cito/histopatológico.")
   }
   if (!mostrarErros("e4", erros)) return
-  avancarPara(quimioPrevisto === "sim" ? 5 : 6)
+  concluirEAvancar(4, quimioPrevisto === "sim" ? 5 : 6)
 })
 
 /* ==================== Aba 5 - Medicamentos ==================== */
@@ -503,7 +510,7 @@ $("#t5-next").addEventListener("click", () => {
   if (!$("#m-intervalo").value) erros.push("Campo 70 - Informe o intervalo entre ciclos (em dias).")
   if (!$("#m-dias").value) erros.push("Campo 71 - Informe os dias do ciclo atual.")
 
-  if (mostrarErros("e5", erros)) avancarPara(6)
+  if (mostrarErros("e5", erros)) concluirEAvancar(5, 6)
 })
 
 /* ==================== Aba 6 - Cooperado e Anexos ==================== */
